@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace ClassWarehouseLibrary
 {
-    class DataContext
+    public class DataContext
     {
         public List<Client> Clients { get; set; }
         public Dictionary<int, Product> Products { get; set; }

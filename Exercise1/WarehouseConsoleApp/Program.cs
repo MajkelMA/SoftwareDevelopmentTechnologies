@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ClassWarehouseLibrary;
 
 namespace WarehouseConsoleApp
 {
+    class AutoFill : IAutoFilling
+    {
+        void IAutoFilling.AutoFill(DataContext dataContext)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)

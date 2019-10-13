@@ -1,6 +1,6 @@
 ﻿namespace ClassWarehouseLibrary
 {
-    class InventoryStatus
+    public class InventoryStatus
     {
         public Product Good { get; set; }
         public int State { get; set; }

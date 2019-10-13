@@ -2,7 +2,7 @@
 
 namespace ClassWarehouseLibrary
 {
-    class Product
+    public class Product
     {
         public String Description { get; set; }
     

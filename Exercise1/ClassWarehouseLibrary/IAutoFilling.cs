@@ -1,7 +1,7 @@
 ﻿namespace ClassWarehouseLibrary
 {
-    interface IAutoFilling
+    public interface IAutoFilling
     {
-        void AutoFill();
+        void AutoFill(DataContext dataContext);
     }
 }
