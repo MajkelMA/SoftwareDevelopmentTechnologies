@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace ClassWarehouseLibrary
 {
-    class DataRepository
+    public class DataRepository
     {
         private DataContext _DataContext;
         private IAutoFilling _AutoFilling;

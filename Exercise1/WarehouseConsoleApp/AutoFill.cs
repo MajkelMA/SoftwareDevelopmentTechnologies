@@ -7,6 +7,7 @@ namespace WarehouseConsoleApp
 {
     class AutoFill : IAutoFilling
     {
+
         void IAutoFilling.AutoFill(DataContext dataContext)
         {
             List<Client> Clients = dataContext.Clients;
