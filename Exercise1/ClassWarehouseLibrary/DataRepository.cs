@@ -35,5 +35,31 @@ namespace ClassWarehouseLibrary
         {
             _DataContext.Clients.Remove(clientToDelete);
         }
+
+        public void AddProduct(Product product, int key)
+        {
+            _DataContext.Products.Add(key, product);
+        }
+
+        public Product GetProduct(int key)
+        {
+            return _DataContext.Products[key];
+        }
+
+        public Dictionary<int, Product> GetAllProducts()
+        {
+            return _DataContext.Products;
+        }
+
+        public void DeleteProduct(int key)
+        {
+            _DataContext.Products.Remove(key);
+        }
+
+        public void UpdateProduct(int key, Product newProductInfo)
+        {
+            _DataContext.Products[key] = newProductInfo;
+        }
+
     }
 }
