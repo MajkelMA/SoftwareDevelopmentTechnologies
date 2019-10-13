@@ -6,10 +6,12 @@ namespace ClassWarehouseLibrary
     class DataRepository
     {
         private DataContext _DataContext;
+        private IAutoFilling _AutoFilling;
 
-        public DataRepository(DataContext DataContext)
+        public DataRepository(DataContext DataContext, IAutoFilling autoFilling)
         {
             _DataContext = DataContext;
+            _AutoFilling = autoFilling;
         }
 
         public void AddClient(Client client)
