@@ -61,5 +61,30 @@ namespace ClassWarehouseLibrary
             _DataContext.Products[key] = newProductInfo;
         }
 
+        public void AddInventoryStatus(InventoryStatus inventoryStatus)
+        {
+            _DataContext.InventoryStatuses.Add(inventoryStatus);
+        }
+
+        public InventoryStatus GetInventoryStatus(int id)
+        {
+            return _DataContext.InventoryStatuses[id];
+        }
+
+        public List<InventoryStatus> GetAllInventoryStatuses()
+        {
+            return _DataContext.InventoryStatuses;
+        }
+
+        public void DeleteInventoryStatus(InventoryStatus inventoryStatus)
+        {
+            _DataContext.InventoryStatuses.Remove(inventoryStatus);
+        }
+
+        public void UpdateInventoryStatus(int id, InventoryStatus newInventoryStatusInfo)
+        {
+            _DataContext.InventoryStatuses[id] = newInventoryStatusInfo;
+        }
+
     }
 }
