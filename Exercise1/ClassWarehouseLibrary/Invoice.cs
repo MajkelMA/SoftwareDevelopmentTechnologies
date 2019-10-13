@@ -7,10 +7,10 @@ namespace ClassWarehouseLibrary
         public Client WarehouseClient { get; set; }
         public List<Product> Produscts { get; set; }
 
-        public Invoice(Client warehouseClient, List<Product> produscts)
+        public Invoice(Client warehouseClient, List<Product> products)
         {
             WarehouseClient = warehouseClient;
-            Produscts = produscts;
+            Produscts = products;
         }
     }
 }

@@ -12,12 +12,11 @@ namespace ClassWarehouseLibrary
         public String Lastname { get; set; }
         public DateTime Birthdey { get; set; }
 
-        public Client(string name, string lastname, DateTime birthdey, long id)
+        public Client(string name, string lastname, DateTime birthday)
         {
             Name = name;
             Lastname = lastname;
-            Birthdey = birthdey;
-            Id = id;
+            Birthdey = birthday;
         }
     }
 }

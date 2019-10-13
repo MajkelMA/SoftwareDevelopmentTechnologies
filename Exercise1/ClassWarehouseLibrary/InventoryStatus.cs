@@ -2,14 +2,14 @@
 {
     public class InventoryStatus
     {
-        public Product Good { get; set; }
+        public Product _Product { get; set; }
         public int State { get; set; }
         public float NettoPrice { get; set; }
         public float Tax { get; set; }
 
-        public InventoryStatus(Product good, int state, float nettoPrice, float tax)
+        public InventoryStatus(Product product, int state, float nettoPrice, float tax)
         {
-            Good = good;
+            _Product = product;
             State = state;
             NettoPrice = nettoPrice;
             Tax = tax;
