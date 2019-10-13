@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ClassWarehouseLibrary
 {
@@ -86,5 +87,29 @@ namespace ClassWarehouseLibrary
             _DataContext.InventoryStatuses[id] = newInventoryStatusInfo;
         }
 
+        public void AddInvoice(Invoice invoice)
+        {
+            _DataContext.Invoices.Add(invoice);
+        }
+
+        public Invoice GetInvoice(int id)
+        {
+            return _DataContext.Invoices[id];
+        }
+
+        public ObservableCollection<Invoice> GetAllInvoices()
+        {
+            return _DataContext.Invoices;
+        }
+
+        public void DeleteInvoice(Invoice invoice)
+        {
+            _DataContext.Invoices.Remove(invoice);
+        }
+
+        public void UpdateInvoice(int id, Invoice newInvoiceInfo)
+        {
+            _DataContext.Invoices[id] = newInvoiceInfo;
+        }
     }
 }
