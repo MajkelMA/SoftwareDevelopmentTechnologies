@@ -12,6 +12,7 @@ namespace ClassWarehouseLibrary
         {
             _DataContext = DataContext;
             _AutoFilling = autoFilling;
+            _AutoFilling.AutoFill(_DataContext);
         }
 
         public void AddClient(Client client)
