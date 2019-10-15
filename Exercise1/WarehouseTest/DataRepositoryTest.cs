@@ -97,7 +97,12 @@ namespace WarehouseTest
         [TestMethod]
         public void UpdateProductTest()
         {
-
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            Assert.AreEqual(dataRepository.GetProduct(0).Description, "Product0");
+            Product product = new Product("new product");
+            dataRepository.UpdateProduct(0, product);
+            Assert.AreEqual(dataRepository.GetProduct(0).Description, "new product");
         }
 
         [TestMethod]
