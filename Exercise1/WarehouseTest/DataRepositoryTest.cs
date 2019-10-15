@@ -108,7 +108,12 @@ namespace WarehouseTest
         [TestMethod]
         public void AddInventoryStatusTest()
         {
-
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillEmpty());
+            InventoryStatus inventoryStatus = new InventoryStatus(new Product("product"), 10, 10, 10);
+            Assert.AreEqual(0, dataRepository.GetAllInventoryStatuses().Count);
+            dataRepository.AddInventoryStatus(inventoryStatus);
+            Assert.AreEqual(1, dataRepository.GetAllInventoryStatuses().Count);
         }
 
         [TestMethod]
