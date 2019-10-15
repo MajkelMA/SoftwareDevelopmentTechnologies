@@ -30,7 +30,7 @@ namespace WarehouseTest
             Client testClient = _DataRepository.GetClient(0);
             Assert.AreEqual("Radoslaw", testClient.Name);
             Assert.AreEqual("Lapciak", testClient.Lastname);
-            Assert.AreEqual(new DateTime(1997, 9, 22), testClient.Birthdey);
+            Assert.AreEqual(new DateTime(1997, 9, 22), testClient.Birthday);
         }
 
         [TestMethod]
@@ -54,7 +54,11 @@ namespace WarehouseTest
         [TestMethod]
         public void AddProductTest()
         {
-
+            DataContext _DataContext = new DataContext();
+            DataRepository _DataRepository = new DataRepository(_DataContext, new AutoFillEmpty());
+            Assert.AreEqual(0, _DataContext.Products.Count);
+            _DataRepository.AddProduct(new Product("product"), 1);
+            Assert.AreEqual(1, _DataContext.Products.Count);
         }
 
         [TestMethod]
