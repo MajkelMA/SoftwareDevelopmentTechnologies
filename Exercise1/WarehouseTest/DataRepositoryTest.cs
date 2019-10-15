@@ -54,29 +54,44 @@ namespace WarehouseTest
         [TestMethod]
         public void AddProductTest()
         {
-            DataContext _DataContext = new DataContext();
-            DataRepository _DataRepository = new DataRepository(_DataContext, new AutoFillEmpty());
-            Assert.AreEqual(0, _DataContext.Products.Count);
-            _DataRepository.AddProduct(new Product("product"), 1);
-            Assert.AreEqual(1, _DataContext.Products.Count);
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillEmpty());
+            Assert.AreEqual(0, dataRepository.GetAllProducts().Count);
+            dataRepository.AddProduct(new Product("product"), 1);
+            Assert.AreEqual(1, dataRepository.GetAllProducts().Count);
         }
 
         [TestMethod]
         public void GetProductTest()
         {
-
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            Assert.AreEqual(2, dataRepository.GetAllProducts().Count);
+            Product product = dataRepository.GetProduct(0);
+            Assert.AreEqual("Product0", product.Description);
+            Assert.AreEqual(product.GetType(), typeof(Product));
         }
 
         [TestMethod]
         public void GetAllProductsTest()
         {
-
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            Assert.AreEqual(2, dataRepository.GetAllProducts().Count);
+            Assert.AreEqual(dataRepository.GetAllProducts().GetType(), typeof(System.Collections.Generic.Dictionary<int, Product>));
         }
 
         [TestMethod]
         public void DeleteProductTest()
         {
-
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillEmpty());
+            Assert.AreEqual(0, dataRepository.GetAllProducts().Count);
+            Product product = new Product("product");
+            dataRepository.AddProduct(product, 1);
+            Assert.AreEqual(1, dataRepository.GetAllProducts().Count);
+            dataRepository.DeleteProduct(1);
+            Assert.AreEqual(0, dataRepository.GetAllProducts().Count);
         }
 
         [TestMethod]
