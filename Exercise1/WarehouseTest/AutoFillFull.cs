@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace WarehouseConsoleApp
+namespace WarehouseTest
 {
-    class AutoFill : IAutoFilling
+    class AutoFillFull : IAutoFilling
     {
 
         void IAutoFilling.AutoFill(DataContext dataContext)

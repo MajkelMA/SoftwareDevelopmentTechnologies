@@ -1,7 +1,8 @@
 ﻿using System;
+using ClassWarehouseLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace WareHouseTests
+namespace WarehouseTest
 {
     [TestClass]
     public class DataRepositoryTest
@@ -14,13 +15,22 @@ namespace WareHouseTests
         [TestMethod]
         public void AddClientTest()
         {
-
+            DataContext _DataContext = new DataContext();
+            DataRepository _DataRepository = new DataRepository(_DataContext, new AutoFillEmpty());
+            Assert.AreEqual(0, _DataContext.Clients.Count);
+            _DataRepository.AddClient(new Client("Test", "Testowy", new DateTime(1999, 4, 12)));
+            Assert.AreEqual(1, _DataContext.Clients.Count);
         }
 
         [TestMethod]
         public void GetClientTest()
         {
-
+            DataContext _DataContext = new DataContext();
+            DataRepository _DataRepository = new DataRepository(_DataContext, new AutoFillFull());
+            Client testClient = _DataRepository.GetClient(0);
+            Assert.AreEqual("Radoslaw", testClient.Name);
+            Assert.AreEqual("Lapciak", testClient.Lastname);
+            Assert.AreEqual(new DateTime(1997, 9, 22), testClient.Birthdey);
         }
 
         [TestMethod]
