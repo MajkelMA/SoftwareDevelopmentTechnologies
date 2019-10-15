@@ -49,7 +49,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoFill.cs" />
+    <Compile Include="AutoFillEmpty.cs" />
+    <Compile Include="AutoFillFull.cs" />
     <Compile Include="DataRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
