@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace WareHouseTests
 {
     [TestClass]
-    public class DataRepositoryTests
+    public class DataRepositoryTest
     {
         [TestMethod]
         public void DataRepositoryConstructorTest()

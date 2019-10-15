@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassWarehouseLibrary", "Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseConsoleApp", "WarehouseConsoleApp\WarehouseConsoleApp.csproj", "{FAAC2D54-E4C6-4DE8-AD51-4A44C65E5AA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseTests", "WareHouseTests\WarehouseTests.csproj", "{3A2A0294-4979-4EAE-8250-05B9AFA56696}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseTest", "WarehouseTest\WarehouseTest.csproj", "{5C74B87C-2F9B-4E69-BB55-B0CC784FB041}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{FAAC2D54-E4C6-4DE8-AD51-4A44C65E5AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAAC2D54-E4C6-4DE8-AD51-4A44C65E5AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAAC2D54-E4C6-4DE8-AD51-4A44C65E5AA5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A2A0294-4979-4EAE-8250-05B9AFA56696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A2A0294-4979-4EAE-8250-05B9AFA56696}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A2A0294-4979-4EAE-8250-05B9AFA56696}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A2A0294-4979-4EAE-8250-05B9AFA56696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C74B87C-2F9B-4E69-BB55-B0CC784FB041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C74B87C-2F9B-4E69-BB55-B0CC784FB041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C74B87C-2F9B-4E69-BB55-B0CC784FB041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C74B87C-2F9B-4E69-BB55-B0CC784FB041}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
