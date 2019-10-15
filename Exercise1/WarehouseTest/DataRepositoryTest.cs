@@ -119,25 +119,54 @@ namespace WarehouseTest
         [TestMethod]
         public void GetInventoryStatusTest()
         {
-
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            InventoryStatus inventoryStatus = dataRepository.GetInventoryStatus(0);
+            Assert.AreEqual(inventoryStatus.Product.Description, "Product0");
+            Assert.AreEqual(inventoryStatus.State, 10);
+            Assert.AreEqual(inventoryStatus.NettoPrice, 100);
+            Assert.AreEqual(inventoryStatus.Tax, 15);
         }
 
         [TestMethod]
         public void GetAllInventoryStatusesTest()
         {
-
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            Assert.AreEqual(dataRepository.GetAllInventoryStatuses().Count, 2);
+            Assert.AreEqual(dataRepository.GetAllInventoryStatuses().GetType(), typeof(System.Collections.Generic.List<InventoryStatus>));
         }
 
         [TestMethod]
         public void DeleteInventoryStatusTest()
         {
-
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillEmpty());
+            Assert.AreEqual(0, dataRepository.GetAllInventoryStatuses().Count);
+            InventoryStatus inventoryStatus = new InventoryStatus(new Product("product"), 10, 10, 10);
+            dataRepository.AddInventoryStatus(inventoryStatus);
+            Assert.AreEqual(1, dataRepository.GetAllInventoryStatuses().Count);
+            dataRepository.DeleteInventoryStatus(inventoryStatus);
+            Assert.AreEqual(0, dataRepository.GetAllInventoryStatuses().Count);
         }
 
         [TestMethod]
         public void UpdateInventoryStatusTest()
         {
-
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            InventoryStatus inventoryStatus = dataRepository.GetInventoryStatus(0);
+            Assert.AreEqual(inventoryStatus.Product.Description, "Product0");
+            Assert.AreEqual(inventoryStatus.State, 10);
+            Assert.AreEqual(inventoryStatus.NettoPrice, 100);
+            Assert.AreEqual(inventoryStatus.Tax, 15);
+            inventoryStatus = new InventoryStatus(new Product("product"), 10, 10, 10);
+            dataRepository.UpdateInventoryStatus(0, inventoryStatus);
+            inventoryStatus = dataRepository.GetInventoryStatus(0);
+            Assert.AreEqual(inventoryStatus.Product.Description, "product");
+            Assert.AreEqual(inventoryStatus.State, 10);
+            Assert.AreEqual(inventoryStatus.NettoPrice, 10);
+            Assert.AreEqual(inventoryStatus.Tax, 10);
         }
 
         [TestMethod]
