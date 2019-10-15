@@ -203,7 +203,7 @@ namespace WarehouseTest
             DataContext dataContext = new DataContext();
             DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
             Invoice invoiceGetTest = dataRepository.GetInvoice(0);
-            Assert.AreEqual(dataContext.Invoices[0].Produscts, invoiceGetTest.Produscts);
+            Assert.AreEqual(dataContext.Invoices[0].Products, invoiceGetTest.Products);
             Assert.AreEqual(dataContext.Invoices[0].WarehouseClient, invoiceGetTest.WarehouseClient);
             Assert.AreEqual(typeof(Invoice), invoiceGetTest.GetType());
         }

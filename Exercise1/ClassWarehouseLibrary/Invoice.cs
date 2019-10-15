@@ -5,12 +5,12 @@ namespace ClassWarehouseLibrary
     public class Invoice
     {
         public Client WarehouseClient { get; set; }
-        public List<Product> Produscts { get; set; }
+        public List<Product> Products { get; set; }
 
         public Invoice(Client warehouseClient, List<Product> products)
         {
             WarehouseClient = warehouseClient;
-            Produscts = products;
+            Products = products;
         }
     }
 }
