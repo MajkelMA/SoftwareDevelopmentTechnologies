@@ -30,5 +30,7 @@ namespace ClassWarehouseLibrary
         {
             return _dataRepository.GetAllInventoryStatuses();
         }
+
+
     }
 }
