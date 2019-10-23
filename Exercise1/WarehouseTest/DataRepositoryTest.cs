@@ -140,7 +140,7 @@ namespace WarehouseTest
             DataContext dataContext = new DataContext();
             DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
             InventoryStatus inventoryStatus = dataRepository.GetInventoryStatus(0);
-            Assert.AreEqual(inventoryStatus.Product.Description, "Product0");
+            Assert.AreEqual(inventoryStatus.WarehouseProduct.Description, "Product0");
             Assert.AreEqual(inventoryStatus.State, 10);
             Assert.AreEqual(inventoryStatus.NettoPrice, 100);
             Assert.AreEqual(inventoryStatus.Tax, 15);
@@ -174,14 +174,14 @@ namespace WarehouseTest
             DataContext dataContext = new DataContext();
             DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
             InventoryStatus inventoryStatus = dataRepository.GetInventoryStatus(0);
-            Assert.AreEqual(inventoryStatus.Product.Description, "Product0");
+            Assert.AreEqual(inventoryStatus.WarehouseProduct.Description, "Product0");
             Assert.AreEqual(inventoryStatus.State, 10);
             Assert.AreEqual(inventoryStatus.NettoPrice, 100);
             Assert.AreEqual(inventoryStatus.Tax, 15);
             inventoryStatus = new InventoryStatus(new Product("product"), 10, 10, 10);
             dataRepository.UpdateInventoryStatus(0, inventoryStatus);
             inventoryStatus = dataRepository.GetInventoryStatus(0);
-            Assert.AreEqual(inventoryStatus.Product.Description, "product");
+            Assert.AreEqual(inventoryStatus.WarehouseProduct.Description, "product");
             Assert.AreEqual(inventoryStatus.State, 10);
             Assert.AreEqual(inventoryStatus.NettoPrice, 10);
             Assert.AreEqual(inventoryStatus.Tax, 10);
