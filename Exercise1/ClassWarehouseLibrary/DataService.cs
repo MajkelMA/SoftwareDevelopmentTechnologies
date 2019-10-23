@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace ClassWarehouseLibrary
@@ -7,27 +8,28 @@ namespace ClassWarehouseLibrary
     {
         private IDataRepository _dataRepository;
 
-        Dictionary<int, Product> GetAllProducts()
+        IEnumerable GetAllProducts()
         {
             return _dataRepository.GetAllProducts();
         }
 
-        List<Client> GetAllClients()
+        IEnumerable GetAllClients()
         {
             return _dataRepository.GetAllClients();
         }
 
-        ObservableCollection<Invoice> GetAllInvoices()
+        IEnumerable GetAllInvoices()
         {
             return _dataRepository.GetAllInvoices();
         }
 
-        List<InventoryStatus> GetInventoryStatuses()
+        IEnumerable GetInventoryStatuses()
         {
             return _dataRepository.GetAllInventoryStatuses();
         }
 
-        List<Product> GetClientProducts(Client client)
+        // zwraca wszystkie produkty zakupione przez klienta
+        IEnumerable<Product> GetClientProducts(Client client)
         {
             ObservableCollection<Invoice> invoices = _dataRepository.GetAllInvoices();
             List<Product> products = new List<Product>();
@@ -41,6 +43,23 @@ namespace ClassWarehouseLibrary
             return products;
         }
 
+        // zwraca wszystkie faktury klienta
+        IEnumerable<Invoice> GetClientInvoices(Client client)
+        {
+            return null;
+        }
+
+        // zwraca wszystkie faktury dotyczace produktu
+        IEnumerable<Invoice> GetInvoicesWithProduct(Product product)
+        {
+            return null;
+        }
+
+        // zwraca wszystkich klientow ktorzy kupili dany produkt
+        IEnumerable<Client> GetClientsWhoBoughtProduct(Product product)
+        {
+            return null;
+        }
 
     }
 }
