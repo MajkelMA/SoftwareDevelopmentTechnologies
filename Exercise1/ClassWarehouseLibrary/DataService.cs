@@ -7,30 +7,38 @@ namespace ClassWarehouseLibrary
     {
         private IDataRepository _dataRepository;
 
-        //Product
         Dictionary<int, Product> GetAllProducts()
         {
             return _dataRepository.GetAllProducts();
         }
 
-        //Clients
         List<Client> GetAllClients()
         {
             return _dataRepository.GetAllClients();
         }
 
-        //Invoices
         ObservableCollection<Invoice> GetAllInvoices()
         {
             return _dataRepository.GetAllInvoices();
         }
 
-        //InventoryStatuses
         List<InventoryStatus> GetInventoryStatuses()
         {
             return _dataRepository.GetAllInventoryStatuses();
         }
 
-
+        List<Product> GetClientProducts(Client client)
+        {
+            ObservableCollection<Invoice> invoices = _dataRepository.GetAllInvoices();
+            List<Product> products = new List<Product>();
+            foreach(Invoice item in invoices)
+            {
+                if(item.WarehouseClient.Equals(client))
+                {
+                    products.AddRange(item.Products);
+                }
+            }
+            return products;
+        }
     }
 }
