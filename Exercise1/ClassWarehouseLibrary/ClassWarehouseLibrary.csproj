@@ -46,6 +46,7 @@
     <Compile Include="DataRepository.cs" />
     <Compile Include="DataService.cs" />
     <Compile Include="IAutoFiller.cs" />
+    <Compile Include="IDataRepositorycs.cs" />
     <Compile Include="InventoryStatus.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="Product.cs" />
