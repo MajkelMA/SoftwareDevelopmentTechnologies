@@ -5,114 +5,114 @@ namespace ClassWarehouseLibrary
 {
     public class DataRepository
     {
-        private DataContext _DataContext;
-        private IAutoFilling _AutoFilling;
+        private DataContext _dataContext;
+        private IAutoFilling _autoFilling;
 
-        public DataRepository(DataContext DataContext, IAutoFilling autoFilling)
+        public DataRepository(DataContext dataContext, IAutoFilling autoFilling)
         {
-            _DataContext = DataContext;
-            _AutoFilling = autoFilling;
-            _AutoFilling.AutoFill(_DataContext);
+            _dataContext = dataContext;
+            _autoFilling = autoFilling;
+            _autoFilling.AutoFill(_dataContext);
         }
 
         public void AddClient(Client client)
         {
-            _DataContext.Clients.Add(client);
+            _dataContext.Clients.Add(client);
         }
 
         public Client GetClient(int id)
         {
-            return _DataContext.Clients[id];
+            return _dataContext.Clients[id];
         }
 
         public List<Client> GetAllClients()
         {
-            return _DataContext.Clients;
+            return _dataContext.Clients;
         }
 
         public void UpdateClient(Client newClientInfo, int clientId)
         {
-            _DataContext.Clients[clientId] = newClientInfo;
+            _dataContext.Clients[clientId] = newClientInfo;
         }
 
         public void DeleteClient(Client clientToDelete)
         {
-            _DataContext.Clients.Remove(clientToDelete);
+            _dataContext.Clients.Remove(clientToDelete);
         }
 
         public void AddProduct(Product product, int key)
         {
-            _DataContext.Products.Add(key, product);
+            _dataContext.Products.Add(key, product);
         }
 
         public Product GetProduct(int key)
         {
-            return _DataContext.Products[key];
+            return _dataContext.Products[key];
         }
 
         public Dictionary<int, Product> GetAllProducts()
         {
-            return _DataContext.Products;
+            return _dataContext.Products;
         }
 
         public void DeleteProduct(int key)
         {
-            _DataContext.Products.Remove(key);
+            _dataContext.Products.Remove(key);
         }
 
         public void UpdateProduct(int key, Product newProductInfo)
         {
-            _DataContext.Products[key] = newProductInfo;
+            _dataContext.Products[key] = newProductInfo;
         }
 
         public void AddInventoryStatus(InventoryStatus inventoryStatus)
         {
-            _DataContext.InventoryStatuses.Add(inventoryStatus);
+            _dataContext.InventoryStatuses.Add(inventoryStatus);
         }
 
         public InventoryStatus GetInventoryStatus(int id)
         {
-            return _DataContext.InventoryStatuses[id];
+            return _dataContext.InventoryStatuses[id];
         }
 
         public List<InventoryStatus> GetAllInventoryStatuses()
         {
-            return _DataContext.InventoryStatuses;
+            return _dataContext.InventoryStatuses;
         }
 
         public void DeleteInventoryStatus(InventoryStatus inventoryStatus)
         {
-            _DataContext.InventoryStatuses.Remove(inventoryStatus);
+            _dataContext.InventoryStatuses.Remove(inventoryStatus);
         }
 
         public void UpdateInventoryStatus(int id, InventoryStatus newInventoryStatusInfo)
         {
-            _DataContext.InventoryStatuses[id] = newInventoryStatusInfo;
+            _dataContext.InventoryStatuses[id] = newInventoryStatusInfo;
         }
 
         public void AddInvoice(Invoice invoice)
         {
-            _DataContext.Invoices.Add(invoice);
+            _dataContext.Invoices.Add(invoice);
         }
 
         public Invoice GetInvoice(int id)
         {
-            return _DataContext.Invoices[id];
+            return _dataContext.Invoices[id];
         }
 
         public ObservableCollection<Invoice> GetAllInvoices()
         {
-            return _DataContext.Invoices;
+            return _dataContext.Invoices;
         }
 
         public void DeleteInvoice(Invoice invoice)
         {
-            _DataContext.Invoices.Remove(invoice);
+            _dataContext.Invoices.Remove(invoice);
         }
 
         public void UpdateInvoice(int id, Invoice newInvoiceInfo)
         {
-            _DataContext.Invoices[id] = newInvoiceInfo;
+            _dataContext.Invoices[id] = newInvoiceInfo;
         }
     }
 }
