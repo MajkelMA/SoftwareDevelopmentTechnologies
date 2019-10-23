@@ -46,20 +46,31 @@ namespace ClassWarehouseLibrary
         // zwraca wszystkie faktury klienta
         IEnumerable<Invoice> GetClientInvoices(Client client)
         {
+            //TODO
             return null;
         }
 
         // zwraca wszystkie faktury dotyczace produktu
         IEnumerable<Invoice> GetInvoicesWithProduct(Product product)
         {
+            //TODO
             return null;
         }
 
         // zwraca wszystkich klientow ktorzy kupili dany produkt
         IEnumerable<Client> GetClientsWhoBoughtProduct(Product product)
         {
+            //TODO
             return null;
         }
+
+        // dodaje fakture na podstawie klienta i listy produktow
+        void AddInvoice(Client client, List<Product> products)
+        {
+            //TODO
+        }
+
+        // dodaje produkt na podstawie jego opisu
 
     }
 }
