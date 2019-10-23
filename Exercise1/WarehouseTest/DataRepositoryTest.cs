@@ -37,6 +37,15 @@ namespace WarehouseTest
             Assert.AreEqual(typeof(Client), testClient.GetType());
         }
 
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
+        public void GetClientExceptionTest()
+        {
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            Client testClient = dataRepository.GetClient(3);
+        }
+
         [TestMethod]
         public void GetAllClientsTest()
         {
