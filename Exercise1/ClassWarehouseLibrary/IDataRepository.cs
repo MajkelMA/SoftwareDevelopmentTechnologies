@@ -7,7 +7,7 @@ namespace ClassWarehouseLibrary
     {
         void AddClient(Client client);
         Client GetClient(int id);
-        List<Client> GetClients();
+        List<Client> GetAllClients();
         void UpdateClient(Client newClientInfo, int id);
         void DeleteClient(Client clientToDelete);
         void AddProduct(Product product, int key);
