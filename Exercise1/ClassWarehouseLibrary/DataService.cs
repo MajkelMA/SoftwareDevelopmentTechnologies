@@ -1,0 +1,7 @@
+﻿namespace ClassWarehouseLibrary
+{
+    class DataService
+    {
+
+    }
+}

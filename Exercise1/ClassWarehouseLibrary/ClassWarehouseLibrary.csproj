@@ -44,6 +44,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataRepository.cs" />
+    <Compile Include="DataService.cs" />
     <Compile Include="IAutoFiller.cs" />
     <Compile Include="InventoryStatus.cs" />
     <Compile Include="Invoice.cs" />
