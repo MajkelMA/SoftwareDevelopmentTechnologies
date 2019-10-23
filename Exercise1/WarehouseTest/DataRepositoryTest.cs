@@ -68,14 +68,35 @@ namespace WarehouseTest
             Assert.AreEqual(new DateTime(2000, 12, 12), updateClient.Birthday);
         }
 
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
+        public void UpdateClientExceptionTest()
+        {
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            dataRepository.UpdateClient(new Client("Test", "Testowksi", new DateTime(2000, 12, 12)), 99);
+        }
+
         [TestMethod]
         public void DeleteClientTest()
         {
             DataContext dataContext = new DataContext();
             DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            dataRepository.AddClient(new Client("test", "test", new DateTime(2000, 1, 1)));
             Client clientToDelete = dataRepository.GetClient(0);
             dataRepository.DeleteClient(clientToDelete);
+            Assert.AreEqual(2, dataRepository.GetAllClients().Count);
+            dataRepository.DeleteClient(new Client("test", "test", new DateTime(2000, 1, 1)));
             Assert.AreEqual(1, dataRepository.GetAllClients().Count);
+        }
+
+        [ExpectedException(typeof(ArgumentException))]
+        [TestMethod]
+        public void DeleteClientExceptionTest()
+        {
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            dataRepository.DeleteClient(new Client("test", "test", new DateTime(2000, 1, 1)));
         }
 
         [TestMethod]
@@ -88,6 +109,7 @@ namespace WarehouseTest
             Assert.AreEqual(1, dataRepository.GetAllProducts().Count);
         }
 
+
         [TestMethod]
         public void GetProductTest()
         {
@@ -97,6 +119,15 @@ namespace WarehouseTest
             Product product = dataRepository.GetProduct(0);
             Assert.AreEqual("Product0", product.Description);
             Assert.AreEqual(product.GetType(), typeof(Product));
+        }
+
+        [ExpectedException(typeof(KeyNotFoundException))]
+        [TestMethod]
+        public void GetProductExceptionTest()
+        {
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            Product product = dataRepository.GetProduct(99);
         }
 
         [TestMethod]
@@ -121,6 +152,15 @@ namespace WarehouseTest
             Assert.AreEqual(0, dataRepository.GetAllProducts().Count);
         }
 
+        [ExpectedException(typeof(KeyNotFoundException))]
+        [TestMethod]
+        public void DeleteProductExceptionTest()
+        {
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillEmpty());
+            dataRepository.DeleteProduct(2);
+        }
+
         [TestMethod]
         public void UpdateProductTest()
         {
@@ -129,7 +169,17 @@ namespace WarehouseTest
             Assert.AreEqual(dataRepository.GetProduct(0).Description, "Product0");
             Product product = new Product("new product");
             dataRepository.UpdateProduct(0, product);
-            Assert.AreEqual(dataRepository.GetProduct(0).Description, "new product");
+            Assert.AreEqual("new product" ,dataRepository.GetProduct(0).Description);
+        }
+
+        [ExpectedException(typeof(KeyNotFoundException))]
+        [TestMethod]
+        public void UpdateProductExceptionTest()
+        {
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            Product product = new Product("new product");
+            dataRepository.UpdateProduct(99, product);
         }
 
         [TestMethod]
@@ -155,6 +205,15 @@ namespace WarehouseTest
             Assert.AreEqual(inventoryStatus.Tax, 15);
         }
 
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
+        public void GetInventoryStatusExceptionTest()
+        {
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            InventoryStatus inventoryStatus = dataRepository.GetInventoryStatus(99);
+        }
+
         [TestMethod]
         public void GetAllInventoryStatusesTest()
         {
@@ -175,6 +234,20 @@ namespace WarehouseTest
             Assert.AreEqual(1, dataRepository.GetAllInventoryStatuses().Count);
             dataRepository.DeleteInventoryStatus(inventoryStatus);
             Assert.AreEqual(0, dataRepository.GetAllInventoryStatuses().Count);
+            dataRepository.AddInventoryStatus(inventoryStatus);
+            dataRepository.DeleteInventoryStatus(new InventoryStatus(new Product("product"), 10, 10, 10));
+            Assert.AreEqual(0, dataRepository.GetAllInventoryStatuses().Count);
+        }
+
+        [ExpectedException(typeof(ArgumentException))]
+        [TestMethod]
+        public void DeleteInventoryStatusExceptionTest()
+        {
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillEmpty());
+            Assert.AreEqual(0, dataRepository.GetAllInventoryStatuses().Count);
+            InventoryStatus inventoryStatus = new InventoryStatus(new Product("product"), 10, 10, 10);
+            dataRepository.DeleteInventoryStatus(inventoryStatus);
         }
 
         [TestMethod]
@@ -194,6 +267,16 @@ namespace WarehouseTest
             Assert.AreEqual(inventoryStatus.State, 10);
             Assert.AreEqual(inventoryStatus.NettoPrice, 10);
             Assert.AreEqual(inventoryStatus.Tax, 10);
+        }
+
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
+        public void UpdateInventoryExceptionTest()
+        {
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            InventoryStatus inventoryStatus = new InventoryStatus(new Product("product"), 10, 10, 10);
+            dataRepository.UpdateInventoryStatus(99, inventoryStatus);
         }
 
         [TestMethod]
@@ -217,6 +300,15 @@ namespace WarehouseTest
             Assert.AreEqual(typeof(Invoice), invoiceGetTest.GetType());
         }
 
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
+        public void GetInvoiceExceptionTest()
+        {
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            Invoice invoiceGetTest = dataRepository.GetInvoice(99);
+        }
+
         [TestMethod]
         public void GetAllInvoicesTest()
         {
@@ -235,6 +327,20 @@ namespace WarehouseTest
             Invoice invoiceToDelete = dataRepository.GetInvoice(0);
             dataRepository.DeleteInvoice(invoiceToDelete);
             Assert.AreEqual(1, dataRepository.GetAllInvoices().Count);
+            invoiceToDelete = new Invoice(new Client("test", "test", new DateTime(1997, 9, 22)), new List<Product>());
+            dataRepository.AddInvoice(invoiceToDelete);
+            dataRepository.DeleteInvoice(new Invoice(new Client("test", "test", new DateTime(1997, 9, 22)), new List<Product>()));
+            Assert.AreEqual(1, dataRepository.GetAllInvoices().Count);
+        }
+
+        [ExpectedException(typeof(ArgumentException))]
+        [TestMethod]
+        public void DeleteInvoiceExceptionTest()
+        {
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            Invoice invoiceToDelete = dataRepository.GetInvoice(0);
+            dataRepository.DeleteInvoice(new Invoice(new Client("test", "test", new DateTime(1997, 9, 22)), new List<Product>()));
         }
 
         [TestMethod]
@@ -248,6 +354,17 @@ namespace WarehouseTest
             Assert.AreEqual("Test", dataRepository.GetInvoice(0).WarehouseClient.Name);
             Assert.AreEqual("Testowski", dataRepository.GetInvoice(0).WarehouseClient.Lastname);
             Assert.AreEqual(new DateTime(1995, 5, 12), dataRepository.GetInvoice(0).WarehouseClient.Birthday);
+        }
+
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestMethod]
+        public void UpdateInvoiceExceptionTest()
+        {
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(dataContext, new AutoFillFull());
+            Client newClientInInvoice = new Client("Test", "Testowski", new DateTime(1995, 5, 12));
+            List<Product> productsList = new List<Product>();
+            dataRepository.UpdateInvoice(99, new Invoice(newClientInInvoice, productsList));
         }
     }
 }

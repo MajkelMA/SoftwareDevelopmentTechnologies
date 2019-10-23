@@ -38,7 +38,10 @@ namespace ClassWarehouseLibrary
 
         public void DeleteClient(Client clientToDelete)
         {
-            _dataContext.Clients.Remove(clientToDelete);
+            if (!_dataContext.Clients.Remove(clientToDelete))
+            {
+                throw new ArgumentException();
+            }
         }
 
         public void AddProduct(Product product, int key)
@@ -58,12 +61,24 @@ namespace ClassWarehouseLibrary
 
         public void DeleteProduct(int key)
         {
-            _dataContext.Products.Remove(key);
+            if (!_dataContext.Products.Remove(key))
+            {
+                throw new KeyNotFoundException();
+            }
         }
 
         public void UpdateProduct(int key, Product newProductInfo)
         {
-            _dataContext.Products[key] = newProductInfo;
+            Product product = null;
+            if(!_dataContext.Products.TryGetValue(key, out product))
+            {
+                throw new KeyNotFoundException();
+            }
+            else
+            {
+                product = newProductInfo;
+                _dataContext.Products[key] = product;
+            }
         }
 
         public void AddInventoryStatus(InventoryStatus inventoryStatus)
@@ -83,7 +98,10 @@ namespace ClassWarehouseLibrary
 
         public void DeleteInventoryStatus(InventoryStatus inventoryStatus)
         {
-            _dataContext.InventoryStatuses.Remove(inventoryStatus);
+            if (!_dataContext.InventoryStatuses.Remove(inventoryStatus))
+            {
+                throw new ArgumentException();
+            }
         }
 
         public void UpdateInventoryStatus(int id, InventoryStatus newInventoryStatusInfo)
@@ -108,7 +126,10 @@ namespace ClassWarehouseLibrary
 
         public void DeleteInvoice(Invoice invoice)
         {
-            _dataContext.Invoices.Remove(invoice);
+            if (!_dataContext.Invoices.Remove(invoice))
+            {
+                throw new ArgumentException();
+            }
         }
 
         public void UpdateInvoice(int id, Invoice newInvoiceInfo)
