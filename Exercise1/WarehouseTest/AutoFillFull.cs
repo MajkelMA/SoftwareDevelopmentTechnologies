@@ -5,10 +5,10 @@ using System.Collections.ObjectModel;
 
 namespace WarehouseTest
 {
-    class AutoFillFull : IAutoFilling
+    class AutoFillFull : IAutoFiller
     {
 
-        void IAutoFilling.AutoFill(DataContext dataContext)
+        void IAutoFiller.AutoFill(DataContext dataContext)
         {
             List<Client> Clients = dataContext.Clients;
             Dictionary<int, Product> Products = dataContext.Products;

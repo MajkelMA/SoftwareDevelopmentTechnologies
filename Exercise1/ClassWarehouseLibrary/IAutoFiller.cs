@@ -1,6 +1,6 @@
 ﻿namespace ClassWarehouseLibrary
 {
-    public interface IAutoFilling
+    public interface IAutoFiller
     {
         void AutoFill(DataContext dataContext);
     }

@@ -1,13 +1,8 @@
 ﻿using ClassWarehouseLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WarehouseTest
 {
-    class AutoFillEmpty : IAutoFilling
+    class AutoFillEmpty : IAutoFiller
     {
         public void AutoFill(DataContext dataContext)
         {
