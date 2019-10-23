@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -7,6 +8,11 @@ namespace ClassWarehouseLibrary
     class DataService
     {
         private IDataRepository _dataRepository;
+
+        public DataService(IDataRepository dataRepository)
+        {
+            _dataRepository = dataRepository;
+        }
 
         IEnumerable GetAllProducts()
         {
@@ -70,7 +76,23 @@ namespace ClassWarehouseLibrary
             //TODO
         }
 
-        // dodaje produkt na podstawie jego opisu
+        // dodaje produkt na podstawie jego opisu (aktualizuje stan magazynowy)
+        void AddProduct(string description, float price)
+        {
+            //TODO
+        }
 
+        void AddInventoryStatus(Product product, int state, float nettoPrice, float tax)
+        {
+            //TODO
+        }
+
+        void AddClient(string name, string lastname, DateTime birthday)
+        {
+            //TODO
+        }
+
+
+        // filtrowanie
     }
 }
