@@ -92,7 +92,22 @@ namespace ClassWarehouseLibrary
             //TODO
         }
 
+        IEnumerable<Product> GetProductWithPriceBetween(float min, float max)
+        {
+            //TODO
+            return null;
+        }
 
-        // filtrowanie
+        IEnumerable<Product> GetProductWithTaxBetween(float min, float max)
+        {
+            //TODO
+            return null;
+        }
+
+        IEnumerable<Client> GetClientWithBirthday(int day, int month, int year)
+        {
+            return null;
+        }
+
     }
 }
