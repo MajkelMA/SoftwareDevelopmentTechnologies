@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassWarehouseLibrary", "ClassWarehouseLibrary\ClassWarehouseLibrary.csproj", "{410CCB68-B0DC-46F8-887F-9ECDC056BE4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseConsoleApp", "WarehouseConsoleApp\WarehouseConsoleApp.csproj", "{FAAC2D54-E4C6-4DE8-AD51-4A44C65E5AA5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseTest", "WarehouseTest\WarehouseTest.csproj", "{5C74B87C-2F9B-4E69-BB55-B0CC784FB041}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{410CCB68-B0DC-46F8-887F-9ECDC056BE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{410CCB68-B0DC-46F8-887F-9ECDC056BE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{410CCB68-B0DC-46F8-887F-9ECDC056BE4A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FAAC2D54-E4C6-4DE8-AD51-4A44C65E5AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAAC2D54-E4C6-4DE8-AD51-4A44C65E5AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAAC2D54-E4C6-4DE8-AD51-4A44C65E5AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAAC2D54-E4C6-4DE8-AD51-4A44C65E5AA5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C74B87C-2F9B-4E69-BB55-B0CC784FB041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C74B87C-2F9B-4E69-BB55-B0CC784FB041}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C74B87C-2F9B-4E69-BB55-B0CC784FB041}.Release|Any CPU.ActiveCfg = Release|Any CPU
