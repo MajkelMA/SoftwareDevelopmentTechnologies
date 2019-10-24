@@ -7,7 +7,7 @@ namespace ClassWarehouseLibrary
     {
         public Guid Id { get; set; }
         public Client WarehouseClient { get; set; }
-        public Status status { get; set; }
+        public Status Status { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -15,15 +15,15 @@ namespace ClassWarehouseLibrary
             return invoice != null &&
                    Id.Equals(invoice.Id) &&
                    EqualityComparer<Client>.Default.Equals(WarehouseClient, invoice.WarehouseClient) &&
-                   EqualityComparer<Status>.Default.Equals(status, invoice.status);
+                   EqualityComparer<Status>.Default.Equals(Status, invoice.Status);
         }
 
         public override int GetHashCode()
         {
-            var hashCode = -83349094;
+            var hashCode = 1092332474;
             hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Id);
             hashCode = hashCode * -1521134295 + EqualityComparer<Client>.Default.GetHashCode(WarehouseClient);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Status>.Default.GetHashCode(status);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Status>.Default.GetHashCode(Status);
             return hashCode;
         }
     }
