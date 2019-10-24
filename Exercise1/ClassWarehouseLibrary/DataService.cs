@@ -49,61 +49,70 @@ namespace ClassWarehouseLibrary
             return products;
         }
 
-        // zwraca wszystkie faktury klienta
+        // zwraca wszystkie faktury klienta - radek
         IEnumerable<Invoice> GetClientInvoices(Client client)
         {
             //TODO
             return null;
         }
 
-        // zwraca wszystkie faktury dotyczace produktu
+        // zwraca wszystkie faktury dotyczace produktu - michal
         IEnumerable<Invoice> GetInvoicesWithProduct(Product product)
         {
             //TODO
             return null;
         }
 
-        // zwraca wszystkich klientow ktorzy kupili dany produkt
+        // zwraca wszystkich klientow ktorzy kupili dany produkt - radek
         IEnumerable<Client> GetClientsWhoBoughtProduct(Product product)
         {
             //TODO
             return null;
         }
 
-        // dodaje fakture na podstawie klienta i listy produktow
+        // dodaje fakture na podstawie klienta i listy produktow - michal
         void AddInvoice(Client client, List<Product> products)
         {
             //TODO
         }
 
-        // dodaje produkt na podstawie jego opisu (aktualizuje stan magazynowy)
+        // dodaje produkt na podstawie jego opisu (aktualizuje stan magazynowy) - radek
         void AddProduct(string description, float price)
         {
             //TODO
         }
 
+
+         //michal
         void AddInventoryStatus(Product product, int state, float nettoPrice, float tax)
         {
             //TODO
         }
 
+
+        //radek
         void AddClient(string name, string lastname, DateTime birthday)
         {
             //TODO
         }
 
+
+        //michal
         IEnumerable<Product> GetProductWithPriceBetween(float min, float max)
         {
             //TODO
             return null;
         }
 
+        //radek
         IEnumerable<Product> GetProductWithTaxBetween(float min, float max)
         {
             //TODO
             return null;
         }
 
+
+        //michal
         IEnumerable<Client> GetClientWithBirthday(int day, int month, int year)
         {
             return null;
