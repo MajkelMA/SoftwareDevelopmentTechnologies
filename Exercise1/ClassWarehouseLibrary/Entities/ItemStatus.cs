@@ -10,6 +10,11 @@ namespace ClassWarehouseLibrary.Entities
     {
         public int Amount { get; set; }
 
+        public ItemStatus(Product product, float nettoPrice, float tax, int amount) : base(product, nettoPrice, tax)
+        {
+            Amount = amount;
+        }
+
         public override bool Equals(object obj)
         {
             return obj is ItemStatus status &&

@@ -8,12 +8,13 @@ namespace ClassWarehouseLibrary.Entities
 {
     public class WeightStatus : ClassWarehouseLibrary.Status
     {
+
         public double Mass { get; set; }
 
-        //public WeightStatus()
-        //{
-        //    base.
-        //}
+        public WeightStatus(Product product, float nettoPrice, float tax, double mass) : base(product, nettoPrice, tax)
+        {
+            Mass = mass;
+        }
 
         public override bool Equals(object obj)
         {

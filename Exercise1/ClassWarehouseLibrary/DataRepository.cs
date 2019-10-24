@@ -204,7 +204,7 @@ namespace ClassWarehouseLibrary
                 if(id == clientToUpdate.Id)
                 {
                     clientToUpdate.Name = newCLientInfo.Name;
-                    clientToUpdate.Lastname = newCLientInfo.Lastname;
+                    clientToUpdate.LastName = newCLientInfo.LastName;
                     clientToUpdate.Birthday = newCLientInfo.Birthday;
                     findFlag = true;
                 }
@@ -224,7 +224,7 @@ namespace ClassWarehouseLibrary
                 {
                     statusToUpdate.NettoPrice = newStatusInfo.NettoPrice;
                     statusToUpdate.Tax = newStatusInfo.Tax;
-                    statusToUpdate.WarehouseProduct = newStatusInfo.WarehouseProduct;
+                    statusToUpdate.Product = newStatusInfo.Product;
                     if (statusToUpdate is ItemStatus && newStatusInfo is ItemStatus)
                     {
                         ItemStatus castStatusToUpdate = (ItemStatus)statusToUpdate;
