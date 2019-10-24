@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace ClassWarehouseLibrary
 {
@@ -16,37 +15,33 @@ namespace ClassWarehouseLibrary
 
         IEnumerable GetAllProducts()
         {
-            return _dataRepository.GetAllProducts();
+            //TODO
+            return null;
         }
 
         IEnumerable GetAllClients()
         {
-            return _dataRepository.GetAllClients();
+            //TODO
+            return null;
         }
 
         IEnumerable GetAllInvoices()
         {
-            return _dataRepository.GetAllInvoices();
+            //TODO
+            return null;
         }
 
         IEnumerable GetInventoryStatuses()
         {
-            return _dataRepository.GetAllInventoryStatuses();
+            //TODO
+            return null;
         }
 
         // zwraca wszystkie produkty zakupione przez klienta
         IEnumerable<Product> GetClientProducts(Client client)
         {
-            ObservableCollection<Invoice> invoices = _dataRepository.GetAllInvoices();
-            List<Product> products = new List<Product>();
-            foreach(Invoice item in invoices)
-            {
-                if(item.WarehouseClient.Equals(client))
-                {
-                    products.AddRange(item.Products);
-                }
-            }
-            return products;
+            //TODO
+            return null;
         }
 
         // zwraca wszystkie faktury klienta - radek
@@ -59,16 +54,8 @@ namespace ClassWarehouseLibrary
         // zwraca wszystkie faktury dotyczace produktu - michal
         IEnumerable<Invoice> GetInvoicesWithProduct(Product product)
         {
-            ObservableCollection<Invoice> invoices = _dataRepository.GetAllInvoices();
-            List<Invoice> result = new List<Invoice>();
-            foreach(Invoice item in invoices)
-            {
-                if (item.Products.Contains(product))
-                {
-                    result.Add(item);
-                }
-            }
-            return result;
+            //TODO
+            return null;
         }
 
         // zwraca wszystkich klientow ktorzy kupili dany produkt - radek
@@ -81,7 +68,7 @@ namespace ClassWarehouseLibrary
         // dodaje fakture na podstawie klienta i listy produktow - michal
         void AddInvoice(Client client, List<Product> products)
         {
-            _dataRepository.AddInvoice(new Invoice(client, products));
+            //TODO
         }
 
         // dodaje produkt na podstawie jego opisu (aktualizuje stan magazynowy) - radek
@@ -93,7 +80,7 @@ namespace ClassWarehouseLibrary
          //michal
         void AddInventoryStatus(Product product, int state, float nettoPrice, float tax)
         {
-            _dataRepository.AddInventoryStatus(new InventoryStatus(product, state, nettoPrice, tax));
+            //TODO
         }
 
         //radek
@@ -106,11 +93,7 @@ namespace ClassWarehouseLibrary
         //michal
         IEnumerable<Product> GetProductWithPriceBetween(float min, float max)
         {
-            List<Product> products = new List<Product>();
-            foreach(InventoryStatus item in _dataRepository.GetAllInventoryStatuses())
-            {
-                //TODO
-            }
+            //TODO
             return null;
         }
 
@@ -125,6 +108,7 @@ namespace ClassWarehouseLibrary
         //michal
         IEnumerable<Client> GetClientWithBirthday(int day, int month, int year)
         {
+            //TODO
             return null;
         }
 

@@ -1,29 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ClassWarehouseLibrary
 {
-    public class InventoryStatus
+    public class Status
     {
-        public static long NextId = 0;
-        public long Id { get; }
+        public Guid Id { get; set; }
         public Product WarehouseProduct { get; set; }
         public int State { get; set; }
         public float NettoPrice { get; set; }
         public float Tax { get; set; }
 
-        public InventoryStatus(Product product, int state, float nettoPrice, float tax)
-        {
-            Id = NextId;
-            NextId++;
-            WarehouseProduct = product;
-            State = state;
-            NettoPrice = nettoPrice;
-            Tax = tax;
-        }
-
         public override bool Equals(object obj)
         {
-            return obj is InventoryStatus status &&
+            var status = obj as Status;
+            return status != null &&
+                   Id.Equals(status.Id) &&
                    EqualityComparer<Product>.Default.Equals(WarehouseProduct, status.WarehouseProduct) &&
                    State == status.State &&
                    NettoPrice == status.NettoPrice &&
@@ -32,7 +24,8 @@ namespace ClassWarehouseLibrary
 
         public override int GetHashCode()
         {
-            var hashCode = -687840871;
+            var hashCode = -691914087;
+            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Id);
             hashCode = hashCode * -1521134295 + EqualityComparer<Product>.Default.GetHashCode(WarehouseProduct);
             hashCode = hashCode * -1521134295 + State.GetHashCode();
             hashCode = hashCode * -1521134295 + NettoPrice.GetHashCode();

@@ -5,24 +5,16 @@ namespace ClassWarehouseLibrary
 {
     public class Client
     {
-        public static long NextId = 0;
-        public long Id { get; }
+        public Guid Id { get; set; }
         public String Name { get; set; }
         public String Lastname { get; set; }
         public DateTime Birthday { get; set; }
 
-        public Client(string name, string lastname, DateTime birthday)
-        {
-            Id = NextId;
-            NextId++;
-            Name = name;
-            Lastname = lastname;
-            Birthday = birthday;
-        }
-
         public override bool Equals(object obj)
         {
-            return obj is Client client &&
+            var client = obj as Client;
+            return client != null &&
+                   Id.Equals(client.Id) &&
                    Name == client.Name &&
                    Lastname == client.Lastname &&
                    Birthday == client.Birthday;
@@ -30,7 +22,8 @@ namespace ClassWarehouseLibrary
 
         public override int GetHashCode()
         {
-            var hashCode = 1802927188;
+            var hashCode = -1813795500;
+            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Id);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Lastname);
             hashCode = hashCode * -1521134295 + Birthday.GetHashCode();

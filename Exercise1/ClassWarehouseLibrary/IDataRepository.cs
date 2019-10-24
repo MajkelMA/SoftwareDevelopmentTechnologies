@@ -25,15 +25,15 @@ namespace ClassWarehouseLibrary
 
         void UpdateProduct(int key, Product newproductInfo);
 
-        void AddInventoryStatus(InventoryStatus inventoryStatus);
+        void AddInventoryStatus(Status inventoryStatus);
 
-        InventoryStatus GetInventoryStatus(int id);
+        Status GetInventoryStatus(int id);
 
-        List<InventoryStatus> GetAllInventoryStatuses();
+        List<Status> GetAllInventoryStatuses();
 
-        void DeleteInventoryStatus(InventoryStatus inventoryStatus);
+        void DeleteInventoryStatus(Status inventoryStatus);
 
-        void UpdateInventoryStatus(int id, InventoryStatus newInventoryStatusInfo);
+        void UpdateInventoryStatus(int id, Status newInventoryStatusInfo);
 
         void AddInvoice(Invoice invoice);
 
@@ -44,6 +44,5 @@ namespace ClassWarehouseLibrary
         void DeleteInvoice(Invoice invoice);
 
         void UpdateInvoice(int id, Invoice newInvoiceInfo);
-
     }
 }
