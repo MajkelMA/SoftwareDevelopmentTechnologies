@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System;
 
 namespace ClassWarehouseLibrary
 {
     interface IDataRepository
     {
+        #region clientCRUD
         void AddClient(Client client);
 
         Client GetClient(Guid id);
@@ -16,7 +16,9 @@ namespace ClassWarehouseLibrary
         void UpdateClient(Guid id, Client newClientInfo);
 
         void DeleteClient(Client clientToDelete);
+        #endregion
 
+        #region productCRUD
         void AddProduct(Product product);
 
         Product GetProduct(Guid key);
@@ -31,6 +33,9 @@ namespace ClassWarehouseLibrary
 
         void UpdateProduct(Product product);
 
+        #endregion
+
+        #region statusCRUD
         void AddStatus(Status Status);
 
         Status GetStatus(Guid id);
@@ -41,6 +46,9 @@ namespace ClassWarehouseLibrary
 
         void UpdateStatus(Guid id, Status newStatusInfo);
 
+        #endregion
+
+        #region invoiceCRUD
         void AddInvoice(Invoice invoice);
 
         Invoice GetInvoice(Guid id);
@@ -52,5 +60,6 @@ namespace ClassWarehouseLibrary
         void DeleteInvoice(Invoice invoice);
 
         void UpdateInvoice(Invoice invoice);
+        #endregion
     }
 }
