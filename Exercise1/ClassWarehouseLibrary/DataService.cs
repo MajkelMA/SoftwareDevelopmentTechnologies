@@ -59,8 +59,16 @@ namespace ClassWarehouseLibrary
         // zwraca wszystkie faktury dotyczace produktu - michal
         IEnumerable<Invoice> GetInvoicesWithProduct(Product product)
         {
-            //TODO
-            return null;
+            ObservableCollection<Invoice> invoices = _dataRepository.GetAllInvoices();
+            List<Invoice> result = new List<Invoice>();
+            foreach(Invoice item in invoices)
+            {
+                if (item.Products.Contains(product))
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
         }
 
         // zwraca wszystkich klientow ktorzy kupili dany produkt - radek
