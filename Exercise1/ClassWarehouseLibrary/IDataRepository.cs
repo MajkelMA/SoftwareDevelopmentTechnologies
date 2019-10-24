@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace ClassWarehouseLibrary
@@ -15,15 +16,19 @@ namespace ClassWarehouseLibrary
 
         void DeleteClient(Client clientToDelete);
 
-        void AddProduct(Product product, int key);
+        void AddProduct(Product product);
 
-        Product GetProduct(int key);
+        Product GetProduct(Guid key);
 
-        Dictionary<int, Product> GetAllProducts();
+        Product GetProduct(Product product);
 
-        void DeleteProduct(int key);
+        Dictionary<Guid, Product> GetAllProducts();
 
-        void UpdateProduct(int key, Product newproductInfo);
+        void DeleteProduct(Guid key);
+
+        void DeleteProduct(Product product);
+
+        void UpdateProduct(Product product);
 
         void AddInventoryStatus(Status inventoryStatus);
 
@@ -37,12 +42,14 @@ namespace ClassWarehouseLibrary
 
         void AddInvoice(Invoice invoice);
 
-        Invoice GetInvoice(int id);
+        Invoice GetInvoice(Guid id);
+
+        Invoice GetInvoice(Invoice invoice);
 
         ObservableCollection<Invoice> GetAllInvoices();
 
         void DeleteInvoice(Invoice invoice);
 
-        void UpdateInvoice(int id, Invoice newInvoiceInfo);
+        void UpdateInvoice(Invoice invoice);
     }
 }

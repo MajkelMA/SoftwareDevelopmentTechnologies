@@ -28,12 +28,26 @@ namespace ClassWarehouseLibrary
 
         public void AddInvoice(Invoice invoice)
         {
-            throw new NotImplementedException();
+            foreach(Invoice item in _dataContext.Invoices)
+            {
+                if(item.Id == invoice.Id)
+                {
+                    throw new ArgumentException();
+                }
+            }
+            _dataContext.Invoices.Add(invoice);
         }
 
-        public void AddProduct(Product product, int key)
+        public void AddProduct(Product product)
         {
-            throw new NotImplementedException();
+            foreach(KeyValuePair<Guid, Product> item in _dataContext.Products)
+            {
+                if(item.Key == product.Id)
+                {
+                    throw new ArgumentException();
+                }
+            }
+            _dataContext.Products.Add(product.Id, product);
         }
 
         public void DeleteClient(Client clientToDelete)
@@ -48,12 +62,24 @@ namespace ClassWarehouseLibrary
 
         public void DeleteInvoice(Invoice invoice)
         {
-            throw new NotImplementedException();
+            if (!_dataContext.Invoices.Remove(invoice))
+            {
+                throw new ArgumentException();
+            }
         }
 
-        public void DeleteProduct(int key)
+        public void DeleteProduct(Guid key)
         {
-            throw new NotImplementedException();
+            if(!_dataContext.Products.Remove(key)){
+                throw new ArgumentException();
+            }
+        }
+        public void DeleteProduct(Product product)
+        {
+            if (!_dataContext.Products.Remove(product.Id))
+            {
+                throw new ArgumentException();
+            }
         }
 
         public List<Client> GetAllClients()
@@ -68,12 +94,12 @@ namespace ClassWarehouseLibrary
 
         public ObservableCollection<Invoice> GetAllInvoices()
         {
-            throw new NotImplementedException();
+            return _dataContext.Invoices;
         }
 
-        public Dictionary<int, Product> GetAllProducts()
+        public Dictionary<Guid, Product> GetAllProducts()
         {
-            throw new NotImplementedException();
+            return _dataContext.Products;
         }
 
         public Client GetClient(int id)
@@ -86,14 +112,52 @@ namespace ClassWarehouseLibrary
             throw new NotImplementedException();
         }
 
-        public Invoice GetInvoice(int id)
+        public Invoice GetInvoice(Guid id)
         {
-            throw new NotImplementedException();
+            foreach(Invoice item in _dataContext.Invoices)
+            {
+                if(item.Id == id)
+                {
+                    return item;
+                }
+            }
+            throw new ArgumentException();
         }
 
-        public Product GetProduct(int key)
+        public Invoice GetInvoice(Invoice invoice)
         {
-            throw new NotImplementedException();
+            foreach (Invoice item in _dataContext.Invoices)
+            {
+                if (item.Id == invoice.Id)
+                {
+                    return item;
+                }
+            }
+            throw new ArgumentException();
+        }
+
+        public Product GetProduct(Guid key)
+        {
+            foreach(KeyValuePair<Guid, Product> item in _dataContext.Products)
+            {
+                if(item.Key == key)
+                {
+                    return item.Value;
+                }
+            }
+            throw new ArgumentException();
+        }
+
+        public Product GetProduct(Product product)
+        {
+            foreach (KeyValuePair<Guid, Product> item in _dataContext.Products)
+            {
+                if (item.Key == product.Id)
+                {
+                    return item.Value;
+                }
+            }
+            throw new ArgumentException();
         }
 
         public void UpdateClient(Client newClientInfo, int id)
@@ -106,14 +170,30 @@ namespace ClassWarehouseLibrary
             throw new NotImplementedException();
         }
 
-        public void UpdateInvoice(int id, Invoice newInvoiceInfo)
+        public void UpdateInvoice(Invoice invoice)
         {
-            throw new NotImplementedException();
+            foreach(Invoice item in _dataContext.Invoices)
+            {
+                if(item.Id == invoice.Id)
+                {
+                    item.Status = invoice.Status;
+                    item.WarehouseClient = invoice.WarehouseClient;
+                }
+            }
+            throw new ArgumentException();
         }
 
-        public void UpdateProduct(int key, Product newproductInfo)
+        public void UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            foreach(KeyValuePair<Guid, Product> item in _dataContext.Products)
+            {
+                if(item.Key == product.Id)
+                {
+                    item.Value.Name = product.Name;
+                    item.Value.Description = product.Description;
+                }
+            }
+            throw new ArgumentException();
         }
     }
 }
