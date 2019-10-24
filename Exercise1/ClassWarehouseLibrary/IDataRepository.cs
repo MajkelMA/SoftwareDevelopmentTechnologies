@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System;
 
 namespace ClassWarehouseLibrary
 {
@@ -8,11 +9,11 @@ namespace ClassWarehouseLibrary
     {
         void AddClient(Client client);
 
-        Client GetClient(int id);
+        Client GetClient(Guid id);
 
         List<Client> GetAllClients();
 
-        void UpdateClient(Client newClientInfo, int id);
+        void UpdateClient(Guid id, Client newClientInfo);
 
         void DeleteClient(Client clientToDelete);
 
@@ -30,15 +31,15 @@ namespace ClassWarehouseLibrary
 
         void UpdateProduct(Product product);
 
-        void AddInventoryStatus(Status inventoryStatus);
+        void AddStatus(Status Status);
 
-        Status GetInventoryStatus(int id);
+        Status GetStatus(Guid id);
 
-        List<Status> GetAllInventoryStatuses();
+        List<Status> GetAllStatuses();
 
-        void DeleteInventoryStatus(Status inventoryStatus);
+        void DeleteStatus(Status Status);
 
-        void UpdateInventoryStatus(int id, Status newInventoryStatusInfo);
+        void UpdateStatus(Guid id, Status newStatusInfo);
 
         void AddInvoice(Invoice invoice);
 

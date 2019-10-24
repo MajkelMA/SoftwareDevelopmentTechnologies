@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
+using ClassWarehouseLibrary.Entities;
 
 namespace ClassWarehouseLibrary
 {
@@ -18,12 +19,27 @@ namespace ClassWarehouseLibrary
 
         public void AddClient(Client client)
         {
-            throw new NotImplementedException();
+           foreach(Client clientInList in _dataContext.Clients)
+            {
+                if(clientInList.Id == client.Id)
+                {
+                    throw new ArgumentException();
+                }
+            }
+
+            _dataContext.Clients.Add(client);
         }
 
-        public void AddInventoryStatus(Status inventoryStatus)
+        public void AddStatus(Status status)
         {
-            throw new NotImplementedException();
+            foreach(Status statusInList in _dataContext.Statuses)
+            {
+                if(statusInList.Id == status.Id)
+                {
+                    throw new ArgumentException();
+                }
+            }
+            _dataContext.Statuses.Add(status);
         }
 
         public void AddInvoice(Invoice invoice)
@@ -52,12 +68,18 @@ namespace ClassWarehouseLibrary
 
         public void DeleteClient(Client clientToDelete)
         {
-            throw new NotImplementedException();
+            if (!_dataContext.Clients.Remove(clientToDelete))
+            {
+                throw new ArgumentException();
+            }
         }
 
-        public void DeleteInventoryStatus(Status inventoryStatus)
+        public void DeleteStatus(Status status)
         {
-            throw new NotImplementedException();
+            if (!_dataContext.Statuses.Remove(status))
+            {
+                throw new ArgumentException();
+            }
         }
 
         public void DeleteInvoice(Invoice invoice)
@@ -84,12 +106,12 @@ namespace ClassWarehouseLibrary
 
         public List<Client> GetAllClients()
         {
-            throw new NotImplementedException();
+            return _dataContext.Clients;
         }
 
-        public List<Status> GetAllInventoryStatuses()
+        public List<Status> GetAllStatuses()
         {
-            throw new NotImplementedException();
+            return _dataContext.Statuses;
         }
 
         public ObservableCollection<Invoice> GetAllInvoices()
@@ -102,14 +124,28 @@ namespace ClassWarehouseLibrary
             return _dataContext.Products;
         }
 
-        public Client GetClient(int id)
+        public Client GetClient(Guid id)
         {
-            throw new NotImplementedException();
+           foreach(Client clientToFind in _dataContext.Clients)
+            {
+                if(clientToFind.Id == id)
+                {
+                    return clientToFind;
+                }
+            }
+            throw new ArgumentException();
         }
 
-        public Status GetInventoryStatus(int id)
+        public Status GetStatus(Guid id)
         {
-            throw new NotImplementedException();
+            foreach (Status statusToFind in _dataContext.Statuses)
+            {
+                if(statusToFind.Id == id)
+                {
+                    return statusToFind;
+                }
+            }
+            throw new ArgumentException();
         }
 
         public Invoice GetInvoice(Guid id)
@@ -160,14 +196,57 @@ namespace ClassWarehouseLibrary
             throw new ArgumentException();
         }
 
-        public void UpdateClient(Client newClientInfo, int id)
+        public void UpdateClient(Guid id, Client newCLientInfo)
         {
-            throw new NotImplementedException();
+            bool findFlag = false;
+            foreach(Client clientToUpdate in _dataContext.Clients)
+            {
+                if(id == clientToUpdate.Id)
+                {
+                    clientToUpdate.Name = newCLientInfo.Name;
+                    clientToUpdate.Lastname = newCLientInfo.Lastname;
+                    clientToUpdate.Birthday = newCLientInfo.Birthday;
+                    findFlag = true;
+                }
+            }
+            if (!findFlag)
+            {
+                throw new ArgumentException();
+            }
         }
 
-        public void UpdateInventoryStatus(int id, Status newInventoryStatusInfo)
+        public void UpdateStatus(Guid id, Status newStatusInfo)
         {
-            throw new NotImplementedException();
+            bool changeFlag = false;
+            foreach(Status statusToUpdate in _dataContext.Statuses)
+            {
+                if(statusToUpdate.Id == id)
+                {
+                    statusToUpdate.NettoPrice = newStatusInfo.NettoPrice;
+                    statusToUpdate.Tax = newStatusInfo.Tax;
+                    statusToUpdate.WarehouseProduct = newStatusInfo.WarehouseProduct;
+                    if (statusToUpdate is ItemStatus && newStatusInfo is ItemStatus)
+                    {
+                        ItemStatus castStatusToUpdate = (ItemStatus)statusToUpdate;
+                        ItemStatus castNewStatusInfo = (ItemStatus)newStatusInfo;
+                        castStatusToUpdate.Amount = castNewStatusInfo.Amount;
+                        changeFlag = true;
+                    }
+
+                    if(newStatusInfo.GetType() == typeof(WeightStatus))
+                    {
+                        WeightStatus castStatusToUpdate = (WeightStatus)statusToUpdate;
+                        WeightStatus castNewStatusInfo = (WeightStatus)newStatusInfo;
+                        castStatusToUpdate.Mass = castNewStatusInfo.Mass;
+                        changeFlag = true;
+                    }
+                }
+            }
+
+            if (!changeFlag)
+            {
+                throw new ArgumentException();
+            }
         }
 
         public void UpdateInvoice(Invoice invoice)
