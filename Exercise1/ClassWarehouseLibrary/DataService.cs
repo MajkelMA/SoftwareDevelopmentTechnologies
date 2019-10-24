@@ -13,30 +13,37 @@ namespace ClassWarehouseLibrary
             _dataRepository = dataRepository;
         }
 
+
+        //miichal
         IEnumerable GetAllProducts()
         {
             //TODO
             return null;
         }
-
+        
+        //radek
         IEnumerable GetAllClients()
         {
             //TODO
             return null;
         }
 
+
+        //michal
         IEnumerable GetAllInvoices()
         {
             //TODO
             return null;
         }
 
+
+        //radek
         IEnumerable GetInventoryStatuses()
         {
             //TODO
             return null;
         }
-
+        //michal
         // zwraca wszystkie produkty zakupione przez klienta
         IEnumerable<Product> GetClientProducts(Client client)
         {
