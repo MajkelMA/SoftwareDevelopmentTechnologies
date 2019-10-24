@@ -1,4 +1,5 @@
 ﻿using ClassWarehouseLibrary;
+using ClassWarehouseLibrary.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ namespace WarehouseTest
         {
             List<Client> clients = dataContext.Clients;
             Dictionary<Guid, Product> products = dataContext.Products;
-            ObservableCollection<Invoice> invoice = dataContext.Invoices;
+            ObservableCollection<Invoice> invoices = dataContext.Invoices;
             List<Status> statuses = dataContext.Statuses;
 
             Client client1 = new Client
@@ -44,28 +45,37 @@ namespace WarehouseTest
                 Description = "Description2"
             };
 
-            Product product3 = new Product
+            WeightStatus invoiceWeightStatus1 = new WeightStatus(product1, 1.1f, 1.1f, 1.1);
+            ItemStatus invoiceItemStatus1 = new ItemStatus(product2, 1.1f, 1.1f, 1);
+
+            WeightStatus statusesWeightStatus1 = new WeightStatus(product1, 11.1f, 11.1f, 11.1);
+            ItemStatus statusesItemStatus1 = new ItemStatus(product2, 11.1f, 11.1f, 11);
+
+            Invoice invoice1 = new Invoice
             {
                 Id = Guid.NewGuid(),
-                Name = "Product3",
-                Description = "Description3"
+                WarehouseClient = client1,
+                Status = invoiceWeightStatus1,
             };
 
-            Product product4 = new Product
+            Invoice invoice2 = new Invoice
             {
                 Id = Guid.NewGuid(),
-                Name = "Product4",
-                Description = "Description4"
+                WarehouseClient = client2,
+                Status = invoiceItemStatus1,
             };
 
+            products.Add(product1.Id, product1);
+            products.Add(product2.Id, product2);
 
+            clients.Add(client1);
+            clients.Add(client2);
 
-            //Invoice invoice1 = new Invoice
-            //{
-            //    Id = Guid.NewGuid(),
-            //    WarehouseClient = client1,
-            //    Status = 
-            //};
+            invoices.Add(invoice1);
+            invoices.Add(invoice2);
+
+            statuses.Add(statusesWeightStatus1);
+            statuses.Add(statusesItemStatus1);
         }
     }
 }
