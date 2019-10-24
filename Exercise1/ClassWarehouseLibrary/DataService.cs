@@ -81,7 +81,7 @@ namespace ClassWarehouseLibrary
         // dodaje fakture na podstawie klienta i listy produktow - michal
         void AddInvoice(Client client, List<Product> products)
         {
-            //TODO
+            _dataRepository.AddInvoice(new Invoice(client, products));
         }
 
         // dodaje produkt na podstawie jego opisu (aktualizuje stan magazynowy) - radek
@@ -90,13 +90,11 @@ namespace ClassWarehouseLibrary
             //TODO
         }
 
-
          //michal
         void AddInventoryStatus(Product product, int state, float nettoPrice, float tax)
         {
-            //TODO
+            _dataRepository.AddInventoryStatus(new InventoryStatus(product, state, nettoPrice, tax));
         }
-
 
         //radek
         void AddClient(string name, string lastname, DateTime birthday)
@@ -108,7 +106,11 @@ namespace ClassWarehouseLibrary
         //michal
         IEnumerable<Product> GetProductWithPriceBetween(float min, float max)
         {
-            //TODO
+            List<Product> products = new List<Product>();
+            foreach(InventoryStatus item in _dataRepository.GetAllInventoryStatuses())
+            {
+                //TODO
+            }
             return null;
         }
 
