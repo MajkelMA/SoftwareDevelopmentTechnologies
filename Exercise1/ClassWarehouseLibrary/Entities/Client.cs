@@ -7,7 +7,7 @@ namespace ClassWarehouseLibrary
     {
         public Guid Id { get; set; }
         public String Name { get; set; }
-        public String Lastname { get; set; }
+        public String LastName { get; set; }
         public DateTime Birthday { get; set; }
 
         public override bool Equals(object obj)
@@ -16,7 +16,7 @@ namespace ClassWarehouseLibrary
             return client != null &&
                    Id.Equals(client.Id) &&
                    Name == client.Name &&
-                   Lastname == client.Lastname &&
+                   LastName == client.LastName &&
                    Birthday == client.Birthday;
         }
 
@@ -25,7 +25,7 @@ namespace ClassWarehouseLibrary
             var hashCode = -1813795500;
             hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Id);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Lastname);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LastName);
             hashCode = hashCode * -1521134295 + Birthday.GetHashCode();
             return hashCode;
         }

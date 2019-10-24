@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace ClassWarehouseLibrary.Entities
 {
-    class WeightStatus : Status
+    public class WeightStatus : ClassWarehouseLibrary.Status
     {
         public double Mass { get; set; }
+
+        //public WeightStatus()
+        //{
+        //    base.
+        //}
 
         public override bool Equals(object obj)
         {

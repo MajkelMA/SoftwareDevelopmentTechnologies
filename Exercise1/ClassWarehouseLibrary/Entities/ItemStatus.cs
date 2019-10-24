@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassWarehouseLibrary.Entities
 {
-    class ItemStatus : Status
+    public class ItemStatus : ClassWarehouseLibrary.Status
     {
         public int Amount { get; set; }
 

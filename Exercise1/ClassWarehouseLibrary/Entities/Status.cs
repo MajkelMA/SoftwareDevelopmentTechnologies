@@ -10,6 +10,12 @@ namespace ClassWarehouseLibrary
         public float NettoPrice { get; set; }
         public float Tax { get; set; }
 
+        //public Status(Product product, float nettoPrice, float tax)
+        //{
+        //    Id = Guid.NewGuid();
+        //    WarehouseProduct
+        //}
+
         public override bool Equals(object obj)
         {
             return obj is Status status &&
