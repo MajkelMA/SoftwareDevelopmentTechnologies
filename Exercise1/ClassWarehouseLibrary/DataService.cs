@@ -24,8 +24,7 @@ namespace ClassWarehouseLibrary
         //radek
         IEnumerable GetAllClients()
         {
-            //TODO
-            return null;
+            return _dataRepository.GetAllClients();
         }
 
 
@@ -40,8 +39,7 @@ namespace ClassWarehouseLibrary
         //radek
         IEnumerable GetInventoryStatuses()
         {
-            //TODO
-            return null;
+            return _dataRepository.GetAllStatuses();
         }
         //michal
         // zwraca wszystkie produkty zakupione przez klienta
@@ -54,8 +52,16 @@ namespace ClassWarehouseLibrary
         // zwraca wszystkie faktury klienta - radek
         IEnumerable<Invoice> GetClientInvoices(Client client)
         {
-            //TODO
-            return null;
+            List<Invoice> clientsInvoices = new List<Invoice>();
+            foreach(Invoice invoice in _dataRepository.GetAllInvoices())
+            {
+                if (invoice.WarehouseClient.Equals(client))
+                {
+                    clientsInvoices.Add(invoice);
+                }
+            }
+
+            return clientsInvoices;
         }
 
         // zwraca wszystkie faktury dotyczace produktu - michal
