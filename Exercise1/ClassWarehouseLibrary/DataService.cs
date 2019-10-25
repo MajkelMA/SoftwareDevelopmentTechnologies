@@ -74,8 +74,15 @@ namespace ClassWarehouseLibrary
         // zwraca wszystkich klientow ktorzy kupili dany produkt - radek
         IEnumerable<Client> GetClientsWhoBoughtProduct(Product product)
         {
-            //TODO
-            return null;
+            List<Client> clients = new List<Client>();
+            foreach(Invoice invoice in _dataRepository.GetAllInvoices())
+            {
+                if (invoice.Status.Product.Equals(product))
+                {
+                    clients.Add(invoice.WarehouseClient);
+                }
+            }
+            return clients;
         }
 
         // dodaje fakture na podstawie klienta i listy produktow - michal
@@ -99,7 +106,11 @@ namespace ClassWarehouseLibrary
         //radek
         void AddClient(string name, string lastname, DateTime birthday)
         {
-            //TODO
+            _dataRepository.AddClient(new Client {
+                Name = name,
+                LastName = lastname,
+                Birthday = birthday
+            });
         }
 
 
@@ -113,8 +124,15 @@ namespace ClassWarehouseLibrary
         //radek
         IEnumerable<Product> GetProductWithTaxBetween(float min, float max)
         {
-            //TODO
-            return null;
+            List<Product> products = new List<Product>();
+            foreach(Status status in _dataRepository.GetAllStatuses())
+            {
+                if(status.Tax > min && status.Tax < max)
+                {
+                    products.Add(status.Product);
+                }
+            }
+            return products;
         }
 
 
