@@ -23,7 +23,8 @@ namespace WarehouseTest
             DataRepository dataRepository = new DataRepository(new AutoFillFull());
             Assert.AreEqual(2, dataRepository.GetAllClients().Count);
             
-            dataRepository.AddClient(new Client {
+            dataRepository.AddClient(new Client
+            {
                 Id = new Guid(),
                 Name = "Radoslaw",
                 LastName = "Lapciak",
@@ -126,5 +127,105 @@ namespace WarehouseTest
             dataRepository.DeleteClient(clientToDelete);
             Assert.AreEqual(1, dataRepository.GetAllClients().Count);
         }
+
+        [TestMethod]
+        public void AddClientNoneUniqueIdException()
+        {
+            DataRepository dataRepository = new DataRepository(new AutoFillEmpty());
+            Guid clientId = new Guid();
+            Client clientToAdd = new Client
+            {
+                Id = clientId,
+                Name = "test",
+                LastName = "testowski",
+                Birthday = new DateTime(2000, 10, 10),
+                Email = "example@eexample.com"
+            };
+
+            dataRepository.AddClient(clientToAdd);
+            clientToAdd = new Client
+            {
+                Id = clientId,
+                Name = "test",
+                LastName = "testowski2",
+                Birthday = new DateTime(1000, 10, 10),
+                Email = "kl@examplecom"
+            };
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.AddClient(clientToAdd));
+        }
+
+        [TestMethod]
+        public void AddClientNoneUniqueEmailException()
+        {
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.AddClient(new Client
+            {
+                Id = new Guid(),
+                Name = "test",
+                LastName = "testtowski",
+                Birthday = new DateTime(2000, 10, 10),
+                Email = "ex@example.com"
+            }));
+        }
+
+        [TestMethod]
+        public void GetClientByIdException()
+        {
+            Guid clientsIdToFind = new Guid();
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.GetClient(clientsIdToFind));
+        }
+
+        [TestMethod]
+        public void GetClientByEmailException()
+        {
+            String clientsEmailToFind = "test@test.test";
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.GetClient(clientsEmailToFind));
+        }
+
+        [TestMethod]
+        public void UpdateClientByIdException()
+        {
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Guid clientId = new Guid();
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateClient(new Guid(), new Client
+            {
+                Id = clientId,
+                Name = "test",
+                LastName = "test",
+                Birthday = new DateTime(10, 10, 10),
+                Email = "test@test.com"
+            }));
+        }
+
+        [TestMethod]
+        public void UpdateClientByEmailException()
+        {
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateClient("test@test.test", new Client
+            {
+                Id = new Guid(),
+                Name = "test",
+                LastName = "Testowski",
+                Birthday = new DateTime(20, 10, 10),
+                Email = "vg@t.pl"
+            }));
+        }
+
+        [TestMethod]
+        public void DeleteClientExceptionTest()
+        {
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.DeleteClient(new Client
+            {
+                Id = new Guid(),
+                Name = "test",
+                LastName = "testowski",
+                Birthday = new DateTime(1997, 9, 22),
+                Email = "test@test.test"
+            }));
+        }
     }
+
 }
