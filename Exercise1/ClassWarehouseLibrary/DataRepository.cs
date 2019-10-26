@@ -34,7 +34,7 @@ namespace ClassWarehouseLibrary
         {
             foreach(Status statusInList in _dataContext.Statuses)
             {
-                if(statusInList.Id == status.Id)
+                if(statusInList.Id == status.Id || statusInList.Equals(status))
                 {
                     throw new ArgumentException();
                 }
@@ -258,13 +258,8 @@ namespace ClassWarehouseLibrary
                     statusToUpdate.NettoPrice = newStatusInfo.NettoPrice;
                     statusToUpdate.Tax = newStatusInfo.Tax;
                     statusToUpdate.Product = newStatusInfo.Product;
-                    if (statusToUpdate is ItemStatus && newStatusInfo is ItemStatus)
-                    {
-                        ItemStatus castStatusToUpdate = (ItemStatus)statusToUpdate;
-                        ItemStatus castNewStatusInfo = (ItemStatus)newStatusInfo;
-                        castStatusToUpdate.Amount = castNewStatusInfo.Amount;
-                        changeFlag = true;
-                    }
+                    statusToUpdate.Amount = newStatusInfo.Amount;
+                    changeFlag = true;
                 }
             }
 

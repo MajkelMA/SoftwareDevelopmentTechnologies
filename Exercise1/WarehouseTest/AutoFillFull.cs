@@ -47,17 +47,17 @@ namespace WarehouseTest
                 Description = "Description2"
             };
 
-            WeightStatus invoiceWeightStatus1 = new WeightStatus(product1, 1.1f, 1.1f, 1.1);
+            ItemStatus invoiceItemStatus = new ItemStatus(product1, 1.1f, 1.1f, 1);
             ItemStatus invoiceItemStatus1 = new ItemStatus(product2, 1.1f, 1.1f, 1);
 
-            WeightStatus statusesWeightStatus1 = new WeightStatus(product1, 11.1f, 11.1f, 11.1);
+            ItemStatus statusesItemtStatus = new ItemStatus(product1, 11.1f, 11.1f, 11);
             ItemStatus statusesItemStatus1 = new ItemStatus(product2, 11.1f, 11.1f, 11);
 
             Invoice invoice1 = new Invoice
             {
                 Id = Guid.NewGuid(),
                 WarehouseClient = client1,
-                Status = invoiceWeightStatus1,
+                Status = invoiceItemStatus,
             };
 
             Invoice invoice2 = new Invoice
@@ -76,7 +76,7 @@ namespace WarehouseTest
             invoices.Add(invoice1);
             invoices.Add(invoice2);
 
-            statuses.Add(statusesWeightStatus1);
+            statuses.Add(statusesItemtStatus);
             statuses.Add(statusesItemStatus1);
         }
     }

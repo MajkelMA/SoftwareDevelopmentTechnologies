@@ -14,6 +14,8 @@ namespace ClassWarehouseLibrary
         public Status(Product product, float nettoPrice, float tax)
         {
             Id = Guid.NewGuid();
+            NettoPrice = nettoPrice;
+            Tax = tax;
         }
 
         public override bool Equals(object obj)

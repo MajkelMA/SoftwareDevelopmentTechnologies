@@ -46,7 +46,6 @@
     <Compile Include="DataRepository.cs" />
     <Compile Include="DataService.cs" />
     <Compile Include="Entities\ItemStatus.cs" />
-    <Compile Include="Entities\WeightStatus.cs" />
     <Compile Include="IAutoFiller.cs" />
     <Compile Include="IDataRepository.cs" />
     <Compile Include="Entities\Status.cs" />
