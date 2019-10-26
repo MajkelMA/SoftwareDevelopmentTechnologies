@@ -9,6 +9,7 @@ namespace ClassWarehouseLibrary
         public String Name { get; set; }
         public String LastName { get; set; }
         public DateTime Birthday { get; set; }
+        public String Email { get; set;  }
 
         public override bool Equals(object obj)
         {

@@ -21,7 +21,7 @@ namespace ClassWarehouseLibrary
         {
            foreach(Client clientInList in _dataContext.Clients)
             {
-                if(clientInList.Id == client.Id)
+                if(clientInList.Id == client.Id || clientInList.Email == client.Email)
                 {
                     throw new ArgumentException();
                 }
@@ -136,6 +136,18 @@ namespace ClassWarehouseLibrary
             throw new ArgumentException();
         }
 
+        public Client GetClient(String email)
+        {
+            foreach(Client clientToFind in _dataContext.Clients)
+            {
+                if(clientToFind.Email == email)
+                {
+                    return clientToFind;
+                }
+            }
+            throw new ArgumentException();
+        }
+
         public Status GetStatus(Guid id)
         {
             foreach (Status statusToFind in _dataContext.Statuses)
@@ -206,6 +218,27 @@ namespace ClassWarehouseLibrary
                     clientToUpdate.Name = newCLientInfo.Name;
                     clientToUpdate.LastName = newCLientInfo.LastName;
                     clientToUpdate.Birthday = newCLientInfo.Birthday;
+                    clientToUpdate.Email = newCLientInfo.Email;
+                    findFlag = true;
+                }
+            }
+            if (!findFlag)
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        public void UpdateClient(String email, Client newCLientInfo)
+        {
+            bool findFlag = false;
+            foreach (Client clientToUpdate in _dataContext.Clients)
+            {
+                if (clientToUpdate.Email == email)
+                {
+                    clientToUpdate.Name = newCLientInfo.Name;
+                    clientToUpdate.LastName = newCLientInfo.LastName;
+                    clientToUpdate.Birthday = newCLientInfo.Birthday;
+                    clientToUpdate.Email = newCLientInfo.Email;
                     findFlag = true;
                 }
             }

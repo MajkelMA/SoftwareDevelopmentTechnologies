@@ -20,7 +20,8 @@ namespace WarehouseTest
                 Id = Guid.NewGuid(),
                 Name = "Name1",
                 LastName = "LastName1",
-                Birthday = new DateTime(1000, 1, 1)
+                Birthday = new DateTime(1000, 1, 1),
+                Email = "ex@example.com"
             };
 
             Client client2 = new Client
@@ -28,7 +29,8 @@ namespace WarehouseTest
                 Id = Guid.NewGuid(),
                 Name = "Name2",
                 LastName = "LastName2",
-                Birthday = new DateTime(2000, 2, 2)
+                Birthday = new DateTime(2000, 2, 2),
+                Email = "ex2@example.com"
             };
 
             Product product1 = new Product
