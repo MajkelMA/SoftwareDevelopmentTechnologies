@@ -34,7 +34,7 @@ namespace ClassWarehouseLibrary
         {
             foreach(Status statusInList in _dataContext.Statuses)
             {
-                if(statusInList.Id == status.Id || statusInList.Equals(status))
+                if(statusInList.Id == status.Id || statusInList.Product.Equals(status.Product))
                 {
                     throw new ArgumentException();
                 }
@@ -251,6 +251,19 @@ namespace ClassWarehouseLibrary
         public void UpdateStatus(Guid id, Status newStatusInfo)
         {
             bool changeFlag = false;
+            bool noneUniqueProductFlag = false;
+
+            foreach (Status status in _dataContext.Statuses)
+            {
+                if(newStatusInfo.Id != status.Id)
+                {
+                    if (newStatusInfo.Product.Equals(status.Product))
+                    {
+                        noneUniqueProductFlag = true;
+                    }
+                }
+            }
+
             foreach(Status statusToUpdate in _dataContext.Statuses)
             {
                 if(statusToUpdate.Id == id)
@@ -263,7 +276,7 @@ namespace ClassWarehouseLibrary
                 }
             }
 
-            if (!changeFlag)
+            if ( (!changeFlag) || noneUniqueProductFlag)
             {
                 throw new ArgumentException();
             }

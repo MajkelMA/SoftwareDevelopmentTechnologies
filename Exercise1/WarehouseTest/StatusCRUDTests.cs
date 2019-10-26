@@ -69,5 +69,77 @@ namespace WarehouseTest
             dataRepository.DeleteStatus(statusToDelete);
             Assert.AreEqual(1, dataRepository.GetAllStatuses().Count);
         }
+
+        [TestMethod]
+        public void AddStatusNoneUniqueIdExceptionTest()
+        {
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Guid nonUniqueId = dataRepository.GetAllStatuses()[0].Id;
+            Status statusToAdd = new ItemStatus(new Product
+            {
+                Id = new Guid(),
+                Name = "Milk",
+                Description = "from cow"
+            }, 11.1f, 1, 15);
+
+            statusToAdd.Id = nonUniqueId;
+
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.AddStatus(statusToAdd));
+        }
+
+        [TestMethod]
+        public void AddStatusNoneUniqueProductExceptionTest()
+        {
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Product product = dataRepository.GetAllStatuses()[0].Product;
+            Status status = new ItemStatus(product, 15.3f, 12, 30);
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.AddStatus(status));
+        }
+
+        [TestMethod]
+        public void GetStatusExceptionTest()
+        {
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.GetStatus(new Guid()));
+        }
+
+        [TestMethod]
+        public void DeleteStatusIdExceptionTest()
+        {
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Status statusInfo = dataRepository.GetAllStatuses()[0];
+            Status newStatusInfo = new ItemStatus(statusInfo.Product, 10, 10, 1)
+            {
+                Id = new Guid()
+            };
+
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateStatus(newStatusInfo.Id, newStatusInfo));
+        }   
+
+        [TestMethod]
+        public void UpdateStatusNoneUniqueProductExceptionTest()
+        {
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Product product = dataRepository.GetAllStatuses()[0].Product;
+            Guid idStatusToUpdate = dataRepository.GetAllStatuses()[1].Id;
+            Status newStatusInfo = new ItemStatus(product, 10, 10, 111)
+            {
+                Id = idStatusToUpdate
+            };
+
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateStatus(idStatusToUpdate, newStatusInfo));
+        }
+
+        [TestMethod]
+        public void DeleteStatusExceptionTest()
+        {
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Status status = dataRepository.GetAllStatuses()[0];
+            Status statusToDelete = new ItemStatus(status.Product, 10, 10, 24)
+            {
+                Id = new Guid()
+            };
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.DeleteStatus(statusToDelete));
+        }
     }
 }
