@@ -8,7 +8,7 @@ namespace ClassWarehouseLibrary.Entities
 {
     public class ItemStatus : ClassWarehouseLibrary.Status
     {
-        public int Amount { get; set; }
+        
 
         public ItemStatus(Product product, float nettoPrice, float tax, int amount) : base(product, nettoPrice, tax)
         {

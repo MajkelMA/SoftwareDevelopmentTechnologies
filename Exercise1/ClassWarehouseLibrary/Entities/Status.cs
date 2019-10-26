@@ -9,6 +9,7 @@ namespace ClassWarehouseLibrary
         public Product Product { get; set; }
         public float NettoPrice { get; set; }
         public float Tax { get; set; }
+        public int Amount { get; set; }
 
         public Status(Product product, float nettoPrice, float tax)
         {

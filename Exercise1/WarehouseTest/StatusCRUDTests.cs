@@ -7,7 +7,7 @@ namespace WarehouseTest
     {
         [TestMethod]
         public void TestMethod1()
-        {
+        { 
         }
     }
 }

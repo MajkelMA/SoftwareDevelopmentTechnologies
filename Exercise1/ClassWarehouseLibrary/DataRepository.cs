@@ -265,14 +265,6 @@ namespace ClassWarehouseLibrary
                         castStatusToUpdate.Amount = castNewStatusInfo.Amount;
                         changeFlag = true;
                     }
-
-                    if(newStatusInfo.GetType() == typeof(WeightStatus))
-                    {
-                        WeightStatus castStatusToUpdate = (WeightStatus)statusToUpdate;
-                        WeightStatus castNewStatusInfo = (WeightStatus)newStatusInfo;
-                        castStatusToUpdate.Mass = castNewStatusInfo.Mass;
-                        changeFlag = true;
-                    }
                 }
             }
 
