@@ -6,10 +6,10 @@ namespace ClassWarehouseLibrary
 {
     public class DataContext
     {
-        public List<Client> Clients { get; set; }
-        public Dictionary<Guid, Product> Products { get; set; }
-        public ObservableCollection<Invoice> Invoices { get; set; }
-        public List<Status> Statuses { get; set; }
+        public List<Client> Clients { get; }
+        public Dictionary<Guid, Product> Products { get; }
+        public ObservableCollection<Invoice> Invoices { get; }
+        public List<Status> Statuses { get; } 
         public DataContext()
         {
             Clients = new List<Client>();

@@ -42,30 +42,6 @@ namespace ClassWarehouseLibrary
             _dataContext.Statuses.Add(status);
         }
 
-        public void AddInvoice(Invoice invoice)
-        {
-            foreach(Invoice item in _dataContext.Invoices)
-            {
-                if(item.Id == invoice.Id)
-                {
-                    throw new ArgumentException();
-                }
-            }
-            _dataContext.Invoices.Add(invoice);
-        }
-
-        public void AddProduct(Product product)
-        {
-            foreach(KeyValuePair<Guid, Product> item in _dataContext.Products)
-            {
-                if(item.Key == product.Id)
-                {
-                    throw new ArgumentException();
-                }
-            }
-            _dataContext.Products.Add(product.Id, product);
-        }
-
         public void DeleteClient(Client clientToDelete)
         {
             if (!_dataContext.Clients.Remove(clientToDelete))
@@ -82,28 +58,6 @@ namespace ClassWarehouseLibrary
             }
         }
 
-        public void DeleteInvoice(Invoice invoice)
-        {
-            if (!_dataContext.Invoices.Remove(invoice))
-            {
-                throw new ArgumentException();
-            }
-        }
-
-        public void DeleteProduct(Guid key)
-        {
-            if(!_dataContext.Products.Remove(key)){
-                throw new ArgumentException();
-            }
-        }
-        public void DeleteProduct(Product product)
-        {
-            if (!_dataContext.Products.Remove(product.Id))
-            {
-                throw new ArgumentException();
-            }
-        }
-
         public List<Client> GetAllClients()
         {
             return _dataContext.Clients;
@@ -112,16 +66,6 @@ namespace ClassWarehouseLibrary
         public List<Status> GetAllStatuses()
         {
             return _dataContext.Statuses;
-        }
-
-        public ObservableCollection<Invoice> GetAllInvoices()
-        {
-            return _dataContext.Invoices;
-        }
-
-        public Dictionary<Guid, Product> GetAllProducts()
-        {
-            return _dataContext.Products;
         }
 
         public Client GetClient(Guid id)
@@ -155,54 +99,6 @@ namespace ClassWarehouseLibrary
                 if(statusToFind.Id == id)
                 {
                     return statusToFind;
-                }
-            }
-            throw new ArgumentException();
-        }
-
-        public Invoice GetInvoice(Guid id)
-        {
-            foreach(Invoice item in _dataContext.Invoices)
-            {
-                if(item.Id == id)
-                {
-                    return item;
-                }
-            }
-            throw new ArgumentException();
-        }
-
-        public Invoice GetInvoice(Invoice invoice)
-        {
-            foreach (Invoice item in _dataContext.Invoices)
-            {
-                if (item.Id == invoice.Id)
-                {
-                    return item;
-                }
-            }
-            throw new ArgumentException();
-        }
-
-        public Product GetProduct(Guid key)
-        {
-            foreach(KeyValuePair<Guid, Product> item in _dataContext.Products)
-            {
-                if(item.Key == key)
-                {
-                    return item.Value;
-                }
-            }
-            throw new ArgumentException();
-        }
-
-        public Product GetProduct(Product product)
-        {
-            foreach (KeyValuePair<Guid, Product> item in _dataContext.Products)
-            {
-                if (item.Key == product.Id)
-                {
-                    return item.Value;
                 }
             }
             throw new ArgumentException();
@@ -282,11 +178,134 @@ namespace ClassWarehouseLibrary
             }
         }
 
+        public void AddProduct(Product product)
+        {
+            foreach (KeyValuePair<Guid, Product> item in _dataContext.Products)
+            {
+                if (item.Key == product.Id)
+                {
+                    throw new ArgumentException();
+                }
+            }
+            _dataContext.Products.Add(product.Id, product);
+        }
+
+        public void DeleteProduct(Guid key)
+        {
+            if (!_dataContext.Products.Remove(key))
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        public void DeleteProduct(Product product)
+        {
+            if (!_dataContext.Products.Remove(product.Id))
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            if (!_dataContext.Products.ContainsKey(product.Id))
+            {
+                throw new ArgumentException();
+            }
+
+            foreach (KeyValuePair<Guid, Product> item in _dataContext.Products)
+            {
+                if (item.Key == product.Id)
+                {
+                    item.Value.Description = product.Description;
+                    item.Value.Name = product.Name;
+                }
+            }
+        }
+
+        public Dictionary<Guid, Product> GetAllProducts()
+        {
+            return _dataContext.Products;
+        }
+
+        public Product GetProduct(Guid key)
+        {
+            foreach (KeyValuePair<Guid, Product> item in _dataContext.Products)
+            {
+                if (item.Key == key)
+                {
+                    return item.Value;
+                }
+            }
+            throw new ArgumentException();
+        }
+
+        public Product GetProduct(Product product)
+        {
+            foreach (KeyValuePair<Guid, Product> item in _dataContext.Products)
+            {
+                if (item.Key == product.Id)
+                {
+                    return item.Value;
+                }
+            }
+            throw new ArgumentException();
+        }
+
+        public void AddInvoice(Invoice invoice)
+        {
+            foreach (Invoice item in _dataContext.Invoices)
+            {
+                if (item.Id == invoice.Id)
+                {
+                    throw new ArgumentException();
+                }
+            }
+            _dataContext.Invoices.Add(invoice);
+        }
+
+        public void DeleteInvoice(Invoice invoice)
+        {
+            if (!_dataContext.Invoices.Remove(invoice))
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        public ObservableCollection<Invoice> GetAllInvoices()
+        {
+            return _dataContext.Invoices;
+        }
+
+        public Invoice GetInvoice(Guid id)
+        {
+            foreach (Invoice item in _dataContext.Invoices)
+            {
+                if (item.Id == id)
+                {
+                    return item;
+                }
+            }
+            throw new ArgumentException();
+        }
+
+        public Invoice GetInvoice(Invoice invoice)
+        {
+            foreach (Invoice item in _dataContext.Invoices)
+            {
+                if (item.Id == invoice.Id)
+                {
+                    return item;
+                }
+            }
+            throw new ArgumentException();
+        }
+
         public void UpdateInvoice(Invoice invoice)
         {
-            foreach(Invoice item in _dataContext.Invoices)
+            foreach (Invoice item in _dataContext.Invoices)
             {
-                if(item.Id == invoice.Id)
+                if (item.Id == invoice.Id)
                 {
                     item.Status = invoice.Status;
                     item.WarehouseClient = invoice.WarehouseClient;
@@ -295,17 +314,5 @@ namespace ClassWarehouseLibrary
             throw new ArgumentException();
         }
 
-        public void UpdateProduct(Product product)
-        {
-            foreach(KeyValuePair<Guid, Product> item in _dataContext.Products)
-            {
-                if(item.Key == product.Id)
-                {
-                    item.Value.Name = product.Name;
-                    item.Value.Description = product.Description;
-                }
-            }
-            throw new ArgumentException();
-        }
     }
 }
