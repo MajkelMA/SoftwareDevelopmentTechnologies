@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoFillEmpty.cs" />
+    <Compile Include="AutoFillRand.cs" />
     <Compile Include="AutoFillFull.cs" />
     <Compile Include="ClientCRUDTests.cs" />
     <Compile Include="DataRepositoryTests.cs" />
