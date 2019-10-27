@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using ClassWarehouseLibrary;
+using ClassWarehouseLibrary.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace WarehouseTest
 {
@@ -8,49 +11,157 @@ namespace WarehouseTest
         [TestMethod]
         public void AddInvoiceTest()
         {
-            //
-            // TODO: Add test logic here
-            //
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Assert.AreEqual(dataRepository.GetAllInvoices().Count, 2);
+
+            Product product = new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "TestName",
+                Description = "TestDescription"
+            };
+
+            Client client = new Client
+            {
+                Id = Guid.NewGuid(),
+                Birthday = new DateTime(),
+                Email = "email@gmail.com",
+                LastName = "LastName",
+                Name = "Name"
+            };
+
+            Invoice invoice = new Invoice
+            {
+                Id = Guid.NewGuid(),
+                Status = new ItemStatus(product, 10f, 10f, 10),
+                WarehouseClient = client
+            };
+
+            dataRepository.AddInvoice(invoice);
+            Assert.AreEqual(dataRepository.GetAllInvoices().Count, 3);
+            Assert.IsTrue(dataRepository.GetAllInvoices().Contains(invoice));
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.AddInvoice(invoice));
         }
 
         [TestMethod]
         public void DeleteInvoiceTest()
         {
-            //
-            // TODO: Add test logic here
-            //
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Assert.AreEqual(dataRepository.GetAllInvoices().Count, 2);
+
+            Product product = new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "TestName",
+                Description = "TestDescription"
+            };
+
+            Client client = new Client
+            {
+                Id = Guid.NewGuid(),
+                Birthday = new DateTime(),
+                Email = "email@gmail.com",
+                LastName = "LastName",
+                Name = "Name"
+            };
+
+            Invoice invoice = new Invoice
+            {
+                Id = Guid.NewGuid(),
+                Status = new ItemStatus(product, 10f, 10f, 10),
+                WarehouseClient = client
+            };
+
+            dataRepository.AddInvoice(invoice);
+            Assert.AreEqual(dataRepository.GetAllInvoices().Count, 3);
+            dataRepository.DeleteInvoice(invoice);
+            Assert.AreEqual(dataRepository.GetAllInvoices().Count, 2);
+            Assert.IsFalse(dataRepository.GetAllInvoices().Contains(invoice));
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.DeleteInvoice(invoice));
         }
 
         [TestMethod]
         public void GetAllInvoicesTest()
         {
-            //
-            // TODO: Add test logic here
-            //
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Assert.AreEqual(dataRepository.GetAllInvoices().Count, 2);
         }
 
         [TestMethod]
-        public void GetInvoiceTest1()
+        public void GetInvoiceTest()
         {
-            //
-            // TODO: Add test logic here
-            //
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Assert.AreEqual(dataRepository.GetAllInvoices().Count, 2);
+
+            Product product = new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "TestName",
+                Description = "TestDescription"
+            };
+
+            Client client = new Client
+            {
+                Id = Guid.NewGuid(),
+                Birthday = new DateTime(),
+                Email = "email@gmail.com",
+                LastName = "LastName",
+                Name = "Name"
+            };
+
+            Guid testId = Guid.NewGuid();
+
+            Invoice invoice = new Invoice
+            {
+                Id = testId,
+                Status = new ItemStatus(product, 10f, 10f, 10),
+                WarehouseClient = client
+            };
+
+            dataRepository.AddInvoice(invoice);
+            Assert.IsTrue(dataRepository.GetAllInvoices().Contains(invoice));
+            Invoice getInvoice = dataRepository.GetInvoice(testId);
+            Assert.AreEqual(getInvoice, invoice);
+            getInvoice = dataRepository.GetInvoice(invoice);
+            Assert.AreEqual(getInvoice, invoice);
         }
 
-        [TestMethod]
-        public void GetInvoiceTest2()
-        {
-            //
-            // TODO: Add test logic here
-            //
-        }
 
         [TestMethod]
         public void UpdateInvoiceTest()
         {
-            //
-            // TODO: Add test logic here
-            //
+            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Assert.AreEqual(dataRepository.GetAllInvoices().Count, 2);
+
+            Product product = new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = "TestName",
+                Description = "TestDescription"
+            };
+
+            Client client = new Client
+            {
+                Id = Guid.NewGuid(),
+                Birthday = new DateTime(),
+                Email = "email@gmail.com",
+                LastName = "LastName",
+                Name = "Name"
+            };
+
+            Invoice invoice = new Invoice
+            {
+                Id = Guid.NewGuid(),
+                Status = new ItemStatus(product, 10f, 10f, 10),
+                WarehouseClient = client
+            };
+
+            Assert.IsFalse(dataRepository.GetAllInvoices().Contains(invoice));
+            dataRepository.AddInvoice(invoice);
+            Assert.IsTrue(dataRepository.GetAllInvoices().Contains(invoice));
+            invoice.Status = new ItemStatus(product, 10f, 10f, 100);
+            dataRepository.UpdateInvoice(invoice);
+            Assert.IsTrue(dataRepository.GetAllInvoices().Contains(invoice));
         }
     }
 }

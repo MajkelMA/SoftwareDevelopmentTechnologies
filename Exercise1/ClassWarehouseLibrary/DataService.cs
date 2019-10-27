@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassWarehouseLibrary.Entities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13,12 +14,10 @@ namespace ClassWarehouseLibrary
             _dataRepository = dataRepository;
         }
 
-
         //miichal
         IEnumerable GetAllProducts()
         {
-            //TODO
-            return null;
+            return _dataRepository.GetAllProducts();
         }
         
         //radek
@@ -27,26 +26,31 @@ namespace ClassWarehouseLibrary
             return _dataRepository.GetAllClients();
         }
 
-
         //michal
         IEnumerable GetAllInvoices()
         {
-            //TODO
-            return null;
+            return _dataRepository.GetAllInvoices();
         }
-
 
         //radek
         IEnumerable GetInventoryStatuses()
         {
             return _dataRepository.GetAllStatuses();
         }
+
         //michal
         // zwraca wszystkie produkty zakupione przez klienta
         IEnumerable<Product> GetClientProducts(Client client)
         {
-            //TODO
-            return null;
+            List<Product> result = new List<Product>();
+            foreach(Invoice item in _dataRepository.GetAllInvoices())
+            {
+                if(item.WarehouseClient == client)
+                {
+                    result.Add(item.Status.Product);
+                }
+            }
+            return result;
         }
 
         // zwraca wszystkie faktury klienta - radek
@@ -67,8 +71,15 @@ namespace ClassWarehouseLibrary
         // zwraca wszystkie faktury dotyczace produktu - michal
         IEnumerable<Invoice> GetInvoicesWithProduct(Product product)
         {
-            //TODO
-            return null;
+            List<Invoice> result = new List<Invoice>();
+            foreach (Invoice item in _dataRepository.GetAllInvoices())
+            {
+                if (item.Status.Product == product)
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
         }
 
         // zwraca wszystkich klientow ktorzy kupili dany produkt - radek
@@ -85,10 +96,15 @@ namespace ClassWarehouseLibrary
             return clients;
         }
 
-        // dodaje fakture na podstawie klienta i listy produktow - michal
-        void AddInvoice(Client client, List<Product> products)
+        // dodaje fakture na podstawie klienta i statusu produktu - michal
+        void AddInvoice(Client client, Status status)
         {
-            //TODO
+            _dataRepository.AddInvoice(new Invoice
+            {
+                Id = Guid.NewGuid(),
+                Status = status,
+                WarehouseClient = client
+            });
         }
 
         // dodaje produkt na podstawie jego opisu (aktualizuje stan magazynowy) - radek
@@ -98,9 +114,9 @@ namespace ClassWarehouseLibrary
         }
 
          //michal
-        void AddInventoryStatus(Product product, int state, float nettoPrice, float tax)
+        void AddStatus(Product product, float nettoPrice, float tax, int amount)
         {
-            //TODO
+            _dataRepository.AddStatus(new ItemStatus(product, nettoPrice, tax, amount));
         }
 
         //radek
@@ -117,8 +133,15 @@ namespace ClassWarehouseLibrary
         //michal
         IEnumerable<Product> GetProductWithPriceBetween(float min, float max)
         {
-            //TODO
-            return null;
+            List<Product> result = new List<Product>();
+            foreach(Status item in _dataRepository.GetAllStatuses())
+            {
+                if(item.NettoPrice >= min && item.NettoPrice <= max)
+                {
+                    result.Add(item.Product);
+                }
+            }
+            return result;
         }
 
         //radek
@@ -139,8 +162,16 @@ namespace ClassWarehouseLibrary
         //michal
         IEnumerable<Client> GetClientWithBirthday(int day, int month, int year)
         {
-            //TODO
-            return null;
+            List<Client> result = new List<Client>();
+            DateTime date = new DateTime(year, month, day);
+            foreach(Client item in _dataRepository.GetAllClients())
+            {
+                if(item.Birthday == date)
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
         }
 
     }

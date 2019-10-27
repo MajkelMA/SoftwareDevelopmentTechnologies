@@ -303,6 +303,11 @@ namespace ClassWarehouseLibrary
 
         public void UpdateInvoice(Invoice invoice)
         {
+            if (!_dataContext.Invoices.Contains(invoice))
+            {
+                throw new ArgumentException();
+            }
+
             foreach (Invoice item in _dataContext.Invoices)
             {
                 if (item.Id == invoice.Id)
@@ -311,7 +316,6 @@ namespace ClassWarehouseLibrary
                     item.WarehouseClient = invoice.WarehouseClient;
                 }
             }
-            throw new ArgumentException();
         }
 
     }
