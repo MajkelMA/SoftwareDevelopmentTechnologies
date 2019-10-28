@@ -77,6 +77,7 @@ namespace WarehouseTest
             dataRepository.DeleteInvoice(invoice);
             Assert.AreEqual(dataRepository.GetAllInvoices().Count, 2);
             Assert.IsFalse(dataRepository.GetAllInvoices().Contains(invoice));
+            // rozwiazanie ze strony msdn https://docs.microsoft.com/pl-pl/visualstudio/test/walkthrough-creating-and-running-unit-tests-for-managed-code?view=vs-2019
             Assert.ThrowsException<ArgumentException>(() => dataRepository.DeleteInvoice(invoice));
         }
 

@@ -151,6 +151,7 @@ namespace WarehouseTest
                 Birthday = new DateTime(1000, 10, 10),
                 Email = "kl@examplecom"
             };
+            // rozwiazanie ze strony msdn https://docs.microsoft.com/pl-pl/visualstudio/test/walkthrough-creating-and-running-unit-tests-for-managed-code?view=vs-2019
             Assert.ThrowsException<ArgumentException>(() => dataRepository.AddClient(clientToAdd));
         }
 

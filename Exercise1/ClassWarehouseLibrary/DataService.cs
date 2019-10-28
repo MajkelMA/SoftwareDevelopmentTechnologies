@@ -108,9 +108,16 @@ namespace ClassWarehouseLibrary
         }
 
         // dodaje produkt na podstawie jego opisu (aktualizuje stan magazynowy) - radek
-        void AddProduct(string description, float price)
+        void AddProduct(string name ,string description, float price)
         {
-            //TODO
+            Product productToAdd = new Product
+            {
+                Id = new Guid(),
+                Description = description,
+                Name = name
+            };
+            _dataRepository.AddProduct(productToAdd);
+            _dataRepository.AddStatus(new ItemStatus(productToAdd, price, 0, 0));
         }
 
          //michal
