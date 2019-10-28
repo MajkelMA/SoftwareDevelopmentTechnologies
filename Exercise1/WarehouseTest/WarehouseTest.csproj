@@ -55,7 +55,6 @@
     <Compile Include="AutoFillFull.cs" />
     <Compile Include="AutoFillRandTests.cs" />
     <Compile Include="ClientCRUDTests.cs" />
-    <Compile Include="DataRepositoryTests.cs" />
     <Compile Include="InvoiceCRUDTests.cs" />
     <Compile Include="ProductCRUDTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
