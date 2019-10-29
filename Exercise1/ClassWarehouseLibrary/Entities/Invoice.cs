@@ -11,8 +11,7 @@ namespace ClassWarehouseLibrary
 
         public override bool Equals(object obj)
         {
-            var invoice = obj as Invoice;
-            return invoice != null &&
+            return obj is Invoice invoice &&
                    Id.Equals(invoice.Id) &&
                    EqualityComparer<Client>.Default.Equals(WarehouseClient, invoice.WarehouseClient) &&
                    EqualityComparer<Status>.Default.Equals(Status, invoice.Status);
@@ -20,7 +19,7 @@ namespace ClassWarehouseLibrary
 
         public override int GetHashCode()
         {
-            var hashCode = 1092332474;
+            int hashCode = 1092332474;
             hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Id);
             hashCode = hashCode * -1521134295 + EqualityComparer<Client>.Default.GetHashCode(WarehouseClient);
             hashCode = hashCode * -1521134295 + EqualityComparer<Status>.Default.GetHashCode(Status);

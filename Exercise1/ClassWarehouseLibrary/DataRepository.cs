@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
-using ClassWarehouseLibrary.Entities;
 using System.Collections.Specialized;
 
 namespace ClassWarehouseLibrary

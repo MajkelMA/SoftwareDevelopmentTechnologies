@@ -13,8 +13,7 @@ namespace ClassWarehouseLibrary
 
         public override bool Equals(object obj)
         {
-            var client = obj as Client;
-            return client != null &&
+            return obj is Client client &&
                    Id.Equals(client.Id) &&
                    Name == client.Name &&
                    LastName == client.LastName &&

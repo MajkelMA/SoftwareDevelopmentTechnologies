@@ -30,7 +30,7 @@ namespace ClassWarehouseLibrary
 
         public override int GetHashCode()
         {
-            var hashCode = 1746626795;
+            int hashCode = 1746626795;
             hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Id);
             hashCode = hashCode * -1521134295 + EqualityComparer<Product>.Default.GetHashCode(Product);
             hashCode = hashCode * -1521134295 + NettoPrice.GetHashCode();

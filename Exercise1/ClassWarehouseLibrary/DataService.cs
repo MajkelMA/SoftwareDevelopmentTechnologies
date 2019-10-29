@@ -14,32 +14,26 @@ namespace ClassWarehouseLibrary
             _dataRepository = dataRepository;
         }
 
-        //miichal
         IEnumerable GetAllProducts()
         {
             return _dataRepository.GetAllProducts();
         }
         
-        //radek
         IEnumerable GetAllClients()
         {
             return _dataRepository.GetAllClients();
         }
 
-        //michal
         IEnumerable GetAllInvoices()
         {
             return _dataRepository.GetAllInvoices();
         }
 
-        //radek
         IEnumerable GetInventoryStatuses()
         {
             return _dataRepository.GetAllStatuses();
         }
 
-        //michal
-        // zwraca wszystkie produkty zakupione przez klienta
         IEnumerable<Product> GetClientProducts(Client client)
         {
             List<Product> result = new List<Product>();
@@ -53,7 +47,6 @@ namespace ClassWarehouseLibrary
             return result;
         }
 
-        // zwraca wszystkie faktury klienta - radek
         IEnumerable<Invoice> GetClientInvoices(Client client)
         {
             List<Invoice> clientsInvoices = new List<Invoice>();
@@ -68,7 +61,6 @@ namespace ClassWarehouseLibrary
             return clientsInvoices;
         }
 
-        // zwraca wszystkie faktury dotyczace produktu - michal
         IEnumerable<Invoice> GetInvoicesWithProduct(Product product)
         {
             List<Invoice> result = new List<Invoice>();
@@ -82,7 +74,6 @@ namespace ClassWarehouseLibrary
             return result;
         }
 
-        // zwraca wszystkich klientow ktorzy kupili dany produkt - radek
         IEnumerable<Client> GetClientsWhoBoughtProduct(Product product)
         {
             List<Client> clients = new List<Client>();
@@ -96,7 +87,6 @@ namespace ClassWarehouseLibrary
             return clients;
         }
 
-        // dodaje fakture na podstawie klienta i statusu produktu - michal
         void AddInvoice(Client client, Status status)
         {
             _dataRepository.AddInvoice(new Invoice
@@ -107,7 +97,6 @@ namespace ClassWarehouseLibrary
             });
         }
 
-        // dodaje produkt na podstawie jego opisu (aktualizuje stan magazynowy) - radek
         void AddProduct(string name ,string description, float price)
         {
             Product productToAdd = new Product
@@ -120,13 +109,11 @@ namespace ClassWarehouseLibrary
             _dataRepository.AddStatus(new ItemStatus(productToAdd, price, 0, 0));
         }
 
-         //michal
         void AddStatus(Product product, float nettoPrice, float tax, int amount)
         {
             _dataRepository.AddStatus(new ItemStatus(product, nettoPrice, tax, amount));
         }
 
-        //radek
         void AddClient(string name, string lastname, DateTime birthday)
         {
             _dataRepository.AddClient(new Client {
@@ -136,8 +123,6 @@ namespace ClassWarehouseLibrary
             });
         }
 
-
-        //michal
         IEnumerable<Product> GetProductWithPriceBetween(float min, float max)
         {
             List<Product> result = new List<Product>();
@@ -151,7 +136,6 @@ namespace ClassWarehouseLibrary
             return result;
         }
 
-        //radek
         IEnumerable<Product> GetProductWithTaxBetween(float min, float max)
         {
             List<Product> products = new List<Product>();
@@ -165,8 +149,6 @@ namespace ClassWarehouseLibrary
             return products;
         }
 
-
-        //michal
         IEnumerable<Client> GetClientWithBirthday(int day, int month, int year)
         {
             List<Client> result = new List<Client>();
