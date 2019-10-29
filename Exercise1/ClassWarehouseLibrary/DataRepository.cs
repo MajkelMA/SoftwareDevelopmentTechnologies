@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System;
 using ClassWarehouseLibrary.Entities;
+using System.Collections.Specialized;
 
 namespace ClassWarehouseLibrary
 {
@@ -10,11 +11,28 @@ namespace ClassWarehouseLibrary
         private DataContext _dataContext;
         private IAutoFiller _autoFilling;
 
+        public event EventHandler InvoiceAdded;
+        public event EventHandler InvoiceDeleted;
+
         public DataRepository(IAutoFiller autoFilling)
         {
             _dataContext = new DataContext();
             _autoFilling = autoFilling;
             _autoFilling.AutoFill(_dataContext);
+
+            _dataContext.Invoices.CollectionChanged += InvoicesContexChanged;
+        }
+
+        private void InvoicesContexChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if(e.Action == NotifyCollectionChangedAction.Add)
+            {
+                InvoiceAdded?.Invoke(this, new EventArgs());
+            }
+            else if(e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                InvoiceDeleted?.Invoke(this, new EventArgs());
+            }
         }
 
         public void AddClient(Client client)
