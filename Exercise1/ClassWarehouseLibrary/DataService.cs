@@ -117,6 +117,7 @@ namespace ClassWarehouseLibrary
         void AddClient(string name, string lastname, DateTime birthday)
         {
             _dataRepository.AddClient(new Client {
+                // ################## CHANGE ###################
                 Name = name,
                 LastName = lastname,
                 Birthday = birthday

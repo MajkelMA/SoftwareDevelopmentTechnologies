@@ -9,7 +9,7 @@ namespace ClassWarehouseLibrary
         public List<Client> Clients { get; }
         public Dictionary<Guid, Product> Products { get; }
         public ObservableCollection<Invoice> Invoices { get; }
-        public List<Status> Statuses { get; } 
+        public List<Status> Statuses { get; }
         public DataContext()
         {
             Clients = new List<Client>();

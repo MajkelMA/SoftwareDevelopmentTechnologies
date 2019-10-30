@@ -123,8 +123,6 @@ namespace WarehouseTest
             Assert.IsTrue(dataRepository.GetAllInvoices().Contains(invoice));
             Invoice getInvoice = dataRepository.GetInvoice(testId);
             Assert.AreEqual(getInvoice, invoice);
-            getInvoice = dataRepository.GetInvoice(invoice);
-            Assert.AreEqual(getInvoice, invoice);
         }
 
 
@@ -163,6 +161,12 @@ namespace WarehouseTest
             invoice.Status = new ItemStatus(product, 10f, 10f, 100);
             dataRepository.UpdateInvoice(invoice);
             Assert.IsTrue(dataRepository.GetAllInvoices().Contains(invoice));
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateInvoice(new Invoice
+            {
+                Id = Guid.NewGuid(),
+                Status = new ItemStatus(product, 10f, 10f, 10),
+                WarehouseClient = client
+            }));
         }
     }
 }

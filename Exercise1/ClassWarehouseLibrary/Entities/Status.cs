@@ -27,17 +27,5 @@ namespace ClassWarehouseLibrary
                    NettoPrice == status.NettoPrice &&
                    Tax == status.Tax;
         }
-
-        public override int GetHashCode()
-        {
-            int hashCode = 1746626795;
-            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Id);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Product>.Default.GetHashCode(Product);
-            hashCode = hashCode * -1521134295 + NettoPrice.GetHashCode();
-            hashCode = hashCode * -1521134295 + Tax.GetHashCode();
-            return hashCode;
-        }
-        
-       
     }
 }

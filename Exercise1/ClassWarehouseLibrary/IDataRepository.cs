@@ -23,8 +23,6 @@ namespace ClassWarehouseLibrary
 
         Product GetProduct(Guid key);
 
-        Product GetProduct(Product product);
-
         Dictionary<Guid, Product> GetAllProducts();
 
         void DeleteProduct(Guid key);
@@ -52,8 +50,6 @@ namespace ClassWarehouseLibrary
         void AddInvoice(Invoice invoice);
 
         Invoice GetInvoice(Guid id);
-
-        Invoice GetInvoice(Invoice invoice);
 
         ObservableCollection<Invoice> GetAllInvoices();
 

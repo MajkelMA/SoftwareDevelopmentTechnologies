@@ -16,14 +16,5 @@ namespace ClassWarehouseLibrary
                    Name == product.Name &&
                    Description == product.Description;
         }
-
-        public override int GetHashCode()
-        {
-            int hashCode = 1829809407;
-            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Id);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
-            return hashCode;
-        }
     }
 }

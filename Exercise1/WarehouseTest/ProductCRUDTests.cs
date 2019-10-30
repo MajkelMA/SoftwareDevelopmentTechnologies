@@ -108,7 +108,6 @@ namespace WarehouseTest
                 Description = "TestDescription"
             };
             dataRepository.AddProduct(product);
-            Assert.AreEqual(dataRepository.GetProduct(product), product);
             Assert.AreEqual(dataRepository.GetProduct(testId), product);
         }
     }
