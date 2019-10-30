@@ -18,7 +18,6 @@ namespace ClassWarehouseLibrary
             _dataContext = new DataContext();
             _autoFilling = autoFilling;
             _autoFilling.AutoFill(_dataContext);
-
             _dataContext.Invoices.CollectionChanged += InvoicesContexChanged;
         }
 
