@@ -6,6 +6,8 @@ namespace ClassWarehouseLibrary
 {
     interface IDataRepository
     {
+        event EventHandler InvoiceAdded;
+        event EventHandler InvoiceDeleted;
         #region clientCRUD
         void AddClient(Client client);
 

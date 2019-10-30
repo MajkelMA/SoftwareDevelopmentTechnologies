@@ -9,6 +9,18 @@ namespace ClassWarehouseLibrary
     {
         private IDataRepository _dataRepository;
 
+        public event EventHandler InvoiceAdded
+        {
+            add => _dataRepository.InvoiceAdded += value;
+            remove => _dataRepository.InvoiceAdded -= value;
+        }
+        public event EventHandler InvoiceRemoved
+        {
+            add => _dataRepository.InvoiceDeleted += value;
+            remove => _dataRepository.InvoiceDeleted -= value;
+        }
+
+
         public DataService(IDataRepository dataRepository)
         {
             _dataRepository = dataRepository;
