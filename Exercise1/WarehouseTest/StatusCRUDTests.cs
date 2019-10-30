@@ -20,12 +20,21 @@ namespace WarehouseTest
         {
             DataRepository dataRepository = new DataRepository(new AutoFillFull());
             Guid id = dataRepository.GetAllStatuses()[0].Id;
-
             Status status = dataRepository.GetStatus(id);
             Assert.IsTrue(status is ItemStatus);
             Assert.AreEqual(11, status.Amount);
             Assert.AreEqual(11.1, status.NettoPrice, 0.0001);
             Assert.AreEqual(11.1, status.Tax, 0.0001);
+
+            dataRepository.AddStatus(new PackageStatus(new Product
+            {
+                Id = new Guid(),
+                Description = "description",
+                Name = "name"
+            }, 10, 10, 10));
+
+            status = dataRepository.GetAllStatuses()[dataRepository.GetAllStatuses().Count-1];
+            Assert.IsTrue(status is PackageStatus);
         }
 
 
@@ -46,15 +55,17 @@ namespace WarehouseTest
         public void UpdateStatusTest()
         {
             DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            Guid statusesIdToUpdate = dataRepository.GetAllStatuses()[0].Id;
+
             Status status = new ItemStatus(new Product
             {
                 Id = new Guid(),
                 Description = "description",
                 Name = "milk"
-            }, 3.99f , 1, 15);
+            }, 3.99f, 1, 15);
 
-            Guid statusesIdToUpdate = dataRepository.GetAllStatuses()[0].Id;
-            dataRepository.UpdateStatus(statusesIdToUpdate, status);
+            status.Id = statusesIdToUpdate;
+            dataRepository.UpdateStatus(status);
 
             Status changedStatus = dataRepository.GetStatus(statusesIdToUpdate);
             Assert.IsTrue(changedStatus is ItemStatus);
@@ -97,10 +108,11 @@ namespace WarehouseTest
         }
 
         [TestMethod]
-        public void GetStatusExceptionTest()
+        public void GetStatusReturnsNull()
         {
             DataRepository dataRepository = new DataRepository(new AutoFillFull());
-            Assert.ThrowsException<ArgumentException>(() => dataRepository.GetStatus(new Guid()));
+            Status status =  dataRepository.GetStatus(new Guid());
+            Assert.AreEqual(null, status);
         }
 
         [TestMethod]
@@ -113,7 +125,7 @@ namespace WarehouseTest
                 Id = new Guid()
             };
 
-            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateStatus(newStatusInfo.Id, newStatusInfo));
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateStatus(newStatusInfo));
         }   
 
         [TestMethod]
@@ -127,7 +139,7 @@ namespace WarehouseTest
                 Id = idStatusToUpdate
             };
 
-            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateStatus(idStatusToUpdate, newStatusInfo));
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateStatus(newStatusInfo));
         }
 
         [TestMethod]

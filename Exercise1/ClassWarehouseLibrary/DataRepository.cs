@@ -34,6 +34,8 @@ namespace ClassWarehouseLibrary
             }
         }
 
+
+        #region client
         public void AddClient(Client client)
         {
             foreach (Client clientInList in _dataContext.Clients)
@@ -47,6 +49,85 @@ namespace ClassWarehouseLibrary
             _dataContext.Clients.Add(client);
         }
 
+        public void DeleteClient(Client clientToDelete)
+        {
+            if (!_dataContext.Clients.Remove(clientToDelete))
+            {
+                throw new ArgumentException("such client does not exist");
+            }
+        }
+
+
+        public List<Client> GetAllClients()
+        {
+            return _dataContext.Clients;
+        }
+
+        public Client GetClient(Guid id)
+        {
+            foreach (Client clientToFind in _dataContext.Clients)
+            {
+                if (clientToFind.Id == id)
+                {
+                    return clientToFind;
+                }
+            }
+            return null;
+        }
+
+        public Client GetClient(String email)
+        {
+            foreach (Client clientToFind in _dataContext.Clients)
+            {
+                if (clientToFind.Email == email)
+                {
+                    return clientToFind;
+                }
+            }
+            return null;
+        }
+
+        public void UpdateClient(Client newCLientInfo)
+        {
+            bool findFlag = false;
+            bool noneUniqueEmailFlag = false;
+
+            foreach (Client client in _dataContext.Clients)
+            {
+                if (newCLientInfo.Id != client.Id)
+                {
+                    if (client.Email == newCLientInfo.Email)
+                    {
+                        noneUniqueEmailFlag = true;
+                    }
+                }
+            }
+
+            foreach (Client clientToUpdate in _dataContext.Clients)
+            {
+                if (newCLientInfo.Id == clientToUpdate.Id)
+                {
+                    clientToUpdate.Name = newCLientInfo.Name;
+                    clientToUpdate.LastName = newCLientInfo.LastName;
+                    clientToUpdate.Birthday = newCLientInfo.Birthday;
+                    clientToUpdate.Email = newCLientInfo.Email;
+                    findFlag = true;
+                }
+            }
+            if (!findFlag)
+            {
+                throw new ArgumentException("such client does not exist");
+            }
+
+            if (noneUniqueEmailFlag)
+            {
+                throw new ArgumentException("none unique Email");
+            }
+        }
+
+        #endregion
+
+        #region status
         public void AddStatus(Status status)
         {
             foreach (Status statusInList in _dataContext.Statuses)
@@ -59,14 +140,6 @@ namespace ClassWarehouseLibrary
             _dataContext.Statuses.Add(status);
         }
 
-        public void DeleteClient(Client clientToDelete)
-        {
-            if (!_dataContext.Clients.Remove(clientToDelete))
-            {
-                throw new ArgumentException("such client does not exist");
-            }
-        }
-
         public void DeleteStatus(Status status)
         {
             if (!_dataContext.Statuses.Remove(status))
@@ -75,40 +148,9 @@ namespace ClassWarehouseLibrary
             }
         }
 
-        public List<Client> GetAllClients()
-        {
-            return _dataContext.Clients;
-        }
-
         public List<Status> GetAllStatuses()
         {
             return _dataContext.Statuses;
-        }
-
-        public Client GetClient(Guid id)
-        {
-            foreach (Client clientToFind in _dataContext.Clients)
-            {
-                if (clientToFind.Id == id)
-                {
-                    return clientToFind;
-                }
-            }
-            //####################  CHANGE  #################### 
-            throw new ArgumentException();
-        }
-
-        public Client GetClient(String email)
-        {
-            foreach (Client clientToFind in _dataContext.Clients)
-            {
-                if (clientToFind.Email == email)
-                {
-                    return clientToFind;
-                }
-            }
-            //####################  CHANGE  ####################
-            throw new ArgumentException();
         }
 
         public Status GetStatus(Guid id)
@@ -120,53 +162,10 @@ namespace ClassWarehouseLibrary
                     return statusToFind;
                 }
             }
-            //####################  CHANGE  ####################
-            throw new ArgumentException();
+            return null;
         }
 
-        public void UpdateClient(Guid id, Client newCLientInfo)
-        {
-            bool findFlag = false;
-            foreach (Client clientToUpdate in _dataContext.Clients)
-            {
-                if (id == clientToUpdate.Id)
-                {
-                    clientToUpdate.Name = newCLientInfo.Name;
-                    clientToUpdate.LastName = newCLientInfo.LastName;
-                    clientToUpdate.Birthday = newCLientInfo.Birthday;
-                    clientToUpdate.Email = newCLientInfo.Email;
-                    findFlag = true;
-                }
-            }
-            if (!findFlag)
-            {
-                //####################  CHANGE  ####################
-                throw new ArgumentException();
-            }
-        }
-
-        public void UpdateClient(String email, Client newCLientInfo)
-        {
-            bool findFlag = false;
-            foreach (Client clientToUpdate in _dataContext.Clients)
-            {
-                if (clientToUpdate.Email == email)
-                {
-                    clientToUpdate.Name = newCLientInfo.Name;
-                    clientToUpdate.LastName = newCLientInfo.LastName;
-                    clientToUpdate.Birthday = newCLientInfo.Birthday;
-                    clientToUpdate.Email = newCLientInfo.Email;
-                    findFlag = true;
-                }
-            }
-            if (!findFlag)
-            {
-                //####################  CHANGE  ####################
-                throw new ArgumentException();
-            }
-        }
-
-        public void UpdateStatus(Guid id, Status newStatusInfo)
+        public void UpdateStatus(Status newStatusInfo)
         {
             bool changeFlag = false;
             bool noneUniqueProductFlag = false;
@@ -184,7 +183,7 @@ namespace ClassWarehouseLibrary
 
             foreach (Status statusToUpdate in _dataContext.Statuses)
             {
-                if (statusToUpdate.Id == id)
+                if (newStatusInfo.Id == statusToUpdate.Id)
                 {
                     statusToUpdate.NettoPrice = newStatusInfo.NettoPrice;
                     statusToUpdate.Tax = newStatusInfo.Tax;
@@ -194,12 +193,17 @@ namespace ClassWarehouseLibrary
                 }
             }
 
-            if ((!changeFlag) || noneUniqueProductFlag)
+            if (!changeFlag)
             {
-                //####################  CHANGE  ####################
-                throw new ArgumentException();
+                throw new ArgumentException("such status dosn't exist");
+            }
+
+            if (noneUniqueProductFlag) {
+                throw new ArgumentException("Product in Status is not unique");
             }
         }
+
+        #endregion
 
         #region ProductRegion
         public void AddProduct(Product product)

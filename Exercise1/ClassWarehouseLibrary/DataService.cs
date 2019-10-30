@@ -97,7 +97,7 @@ namespace ClassWarehouseLibrary
             });
         }
 
-        void AddProduct(string name ,string description, float price)
+        void AddProduct(string name ,string description, float price, Type type)
         {
             Product productToAdd = new Product
             {
@@ -105,22 +105,39 @@ namespace ClassWarehouseLibrary
                 Description = description,
                 Name = name
             };
-            _dataRepository.AddProduct(productToAdd);
-            _dataRepository.AddStatus(new ItemStatus(productToAdd, price, 0, 0));
+
+            if (type == typeof(ItemStatus))
+            {
+                _dataRepository.AddProduct(productToAdd);
+                _dataRepository.AddStatus(new ItemStatus(productToAdd, price, 0, 0));
+            }
+            else if(type == typeof(PackageStatus))
+            {
+                _dataRepository.AddProduct(productToAdd);
+                _dataRepository.AddStatus(new PackageStatus(productToAdd, price, 0, 0));
+            }
         }
 
-        void AddStatus(Product product, float nettoPrice, float tax, int amount)
+        void AddStatus(Product product, float nettoPrice, float tax, int amount, Type type)
         {
-            _dataRepository.AddStatus(new ItemStatus(product, nettoPrice, tax, amount));
+            if (type == typeof(ItemStatus))
+            {
+                _dataRepository.AddStatus(new ItemStatus(product, nettoPrice, tax, amount));
+            }
+            if(type == typeof(PackageStatus))
+            {
+                _dataRepository.AddStatus(new PackageStatus(product, nettoPrice, tax, amount));
+            }
         }
 
-        void AddClient(string name, string lastname, DateTime birthday)
+        void AddClient(string name, string lastname, DateTime birthday, string email)
         {
             _dataRepository.AddClient(new Client {
-                // ################## CHANGE ###################
+                Id = new Guid(),
                 Name = name,
                 LastName = lastname,
-                Birthday = birthday
+                Birthday = birthday,
+                Email = email
             });
         }
 

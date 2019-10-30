@@ -11,11 +11,14 @@ namespace ClassWarehouseLibrary
 
         Client GetClient(Guid id);
 
+        Client GetClient(String email);
+
         List<Client> GetAllClients();
 
-        void UpdateClient(Guid id, Client newClientInfo);
+        void UpdateClient(Client newClientInfo);
 
         void DeleteClient(Client clientToDelete);
+
         #endregion
 
         #region productCRUD
@@ -42,7 +45,7 @@ namespace ClassWarehouseLibrary
 
         void DeleteStatus(Status Status);
 
-        void UpdateStatus(Guid id, Status newStatusInfo);
+        void UpdateStatus(Status newStatusInfo);
 
         #endregion
 

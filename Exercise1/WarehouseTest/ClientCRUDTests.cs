@@ -90,7 +90,7 @@ namespace WarehouseTest
                 Email = "test2@example.com"
             };
 
-            dataRepository.UpdateClient(clientId, client);
+            dataRepository.UpdateClient(client);
             client = dataRepository.GetClient(clientId);
 
             Assert.AreEqual("Test2", client.Name);
@@ -99,25 +99,6 @@ namespace WarehouseTest
             Assert.AreEqual("test2@example.com", client.Email);
         }
 
-        [TestMethod]
-        public void UpdateClentByEmailTest()
-        {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
-            Client client = new Client
-            {
-                Name = "Radoslaw",
-                LastName = "Lapciak",
-                Birthday = new DateTime(1997, 9, 22),
-                Email = "ex@example.com"
-            };
-
-            dataRepository.UpdateClient("ex@example.com", client);
-            Client updatedClient = dataRepository.GetClient("ex@example.com");
-            Assert.AreEqual("Radoslaw", updatedClient.Name);
-            Assert.AreEqual("Lapciak", updatedClient.LastName);
-            Assert.AreEqual(new DateTime(1997, 9, 22), updatedClient.Birthday);
-
-        }
 
         [TestMethod]
         public void DeleteClientTest()
@@ -170,29 +151,28 @@ namespace WarehouseTest
         }
 
         [TestMethod]
-        public void GetClientByIdException()
+        public void GetClientByIdReturnsNull()
         {
-            Guid clientsIdToFind = new Guid();
             DataRepository dataRepository = new DataRepository(new AutoFillFull());
-            Assert.ThrowsException<ArgumentException>(() => dataRepository.GetClient(clientsIdToFind));
+            Client client = dataRepository.GetClient(new Guid());
+            Assert.AreEqual(null, client);
         }
 
         [TestMethod]
-        public void GetClientByEmailException()
+        public void GetClientByEmailReturnsNull ()
         {
-            String clientsEmailToFind = "test@test.test";
             DataRepository dataRepository = new DataRepository(new AutoFillFull());
-            Assert.ThrowsException<ArgumentException>(() => dataRepository.GetClient(clientsEmailToFind));
+            Client client = dataRepository.GetClient("none@ex.com");
+            Assert.AreEqual(null, client);
         }
 
         [TestMethod]
         public void UpdateClientByIdException()
         {
             DataRepository dataRepository = new DataRepository(new AutoFillFull());
-            Guid clientId = new Guid();
-            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateClient(new Guid(), new Client
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateClient(new Client
             {
-                Id = clientId,
+                Id = new Guid(),
                 Name = "test",
                 LastName = "test",
                 Birthday = new DateTime(10, 10, 10),
@@ -201,16 +181,17 @@ namespace WarehouseTest
         }
 
         [TestMethod]
-        public void UpdateClientByEmailException()
+        public void UpdateClientNoneUniqueEmailExceptionTest()
         {
             DataRepository dataRepository = new DataRepository(new AutoFillFull());
-            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateClient("test@test.test", new Client
+            Guid clientsidToUpdate = dataRepository.GetAllClients()[0].Id;
+            Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateClient(new Client
             {
-                Id = new Guid(),
-                Name = "test",
-                LastName = "Testowski",
-                Birthday = new DateTime(20, 10, 10),
-                Email = "vg@t.pl"
+                Id = clientsidToUpdate,
+                Name = "new name",
+                LastName = "new lastname",
+                Birthday = new DateTime(1992, 10, 10),
+                Email = "ex2@example.com"
             }));
         }
 
