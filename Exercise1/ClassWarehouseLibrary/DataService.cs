@@ -9,27 +9,27 @@ namespace ClassWarehouseLibrary
     {
         private IDataRepository _dataRepository;
 
-        private event EventHandler InvoiceAdded;
-        private event EventHandler InvoiceRemoved;
+        private event EventHandler EventeAdded;
+        private event EventHandler EventRemoved;
 
-        public void AddInvoiceSub(EventHandler handler)
+        public void AddEventSub(EventHandler handler)
         {
-            _dataRepository.InvoiceAdded += handler;
+            _dataRepository.EventAdded += handler;
         }
 
-        public void AddInvoiceUnsub(EventHandler handler)
+        public void AddEventUnsub(EventHandler handler)
         {
-            _dataRepository.InvoiceAdded -= handler;
+            _dataRepository.EventAdded -= handler;
         }
 
-        public void RemoveInvoiceSub(EventHandler handler)
+        public void RemoveEventSub(EventHandler handler)
         {
-            _dataRepository.InvoiceAdded += handler;
+            _dataRepository.EventAdded += handler;
         }
 
-        public void RemoveInvoiceUnsub(EventHandler handler)
+        public void RemoveEventUnsub(EventHandler handler)
         {
-            _dataRepository.InvoiceAdded -= handler;
+            _dataRepository.EventAdded -= handler;
         }
 
         public DataService(IDataRepository dataRepository)
@@ -47,9 +47,9 @@ namespace ClassWarehouseLibrary
             return _dataRepository.GetAllClients();
         }
 
-        IEnumerable GetAllInvoices()
+        IEnumerable GetAllEvents()
         {
-            return _dataRepository.GetAllInvoices();
+            return _dataRepository.GetAllEvents();
         }
 
         IEnumerable GetInventoryStatuses()
@@ -60,7 +60,7 @@ namespace ClassWarehouseLibrary
         IEnumerable<Product> GetClientProducts(Client client)
         {
             List<Product> result = new List<Product>();
-            foreach(Invoice item in _dataRepository.GetAllInvoices())
+            foreach(Event item in _dataRepository.GetAllEvents())
             {
                 if(item.WarehouseClient == client)
                 {
@@ -70,24 +70,24 @@ namespace ClassWarehouseLibrary
             return result;
         }
 
-        IEnumerable<Invoice> GetClientInvoices(Client client)
+        IEnumerable<Event> GetClientEvents(Client client)
         {
-            List<Invoice> clientsInvoices = new List<Invoice>();
-            foreach(Invoice invoice in _dataRepository.GetAllInvoices())
+            List<Event> clientsEvents = new List<Event>();
+            foreach(Event item in _dataRepository.GetAllEvents())
             {
-                if (invoice.WarehouseClient.Equals(client))
+                if (item.WarehouseClient.Equals(client))
                 {
-                    clientsInvoices.Add(invoice);
+                    clientsEvents.Add(item);
                 }
             }
 
-            return clientsInvoices;
+            return clientsEvents;
         }
 
-        IEnumerable<Invoice> GetInvoicesWithProduct(Product product)
+        IEnumerable<Event> GetEventsWithProduct(Product product)
         {
-            List<Invoice> result = new List<Invoice>();
-            foreach (Invoice item in _dataRepository.GetAllInvoices())
+            List<Event> result = new List<Event>();
+            foreach (Event item in _dataRepository.GetAllEvents())
             {
                 if (item.Status.Product == product)
                 {
@@ -100,24 +100,35 @@ namespace ClassWarehouseLibrary
         IEnumerable<Client> GetClientsWhoBoughtProduct(Product product)
         {
             List<Client> clients = new List<Client>();
-            foreach(Invoice invoice in _dataRepository.GetAllInvoices())
+            foreach(Event item in _dataRepository.GetAllEvents())
             {
-                if (invoice.Status.Product.Equals(product))
+                if(item.GetType() == typeof(SellEvent))
+                if (item.Status.Product.Equals(product))
                 {
-                    clients.Add(invoice.WarehouseClient);
+                    clients.Add(item.WarehouseClient);
                 }
             }
             return clients;
         }
 
-        void AddInvoice(Client client, Status status)
+        void AddEvent(Client client, Status status, string description, Type type)
         {
-            _dataRepository.AddInvoice(new Invoice
+            Event eventToAdd;
+            if(type == typeof(DestroyEvent))
             {
-                Id = Guid.NewGuid(),
-                Status = status,
-                WarehouseClient = client
-            });
+                eventToAdd = new DestroyEvent(new Guid(), client, status, description);
+                _dataRepository.AddEvent(eventToAdd);
+            }
+            else if (type == typeof(SellEvent))
+            {
+                eventToAdd = new SellEvent(new Guid(), client, status, description);
+                _dataRepository.AddEvent(eventToAdd);
+            }
+            else if (type == typeof(BuyEvent))
+            {
+                eventToAdd = new BuyEvent(new Guid(), client, status, description);
+                _dataRepository.AddEvent(eventToAdd);
+            }
         }
 
         void AddProduct(string name ,string description, float price, Type type)

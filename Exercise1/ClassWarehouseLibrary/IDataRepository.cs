@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassWarehouseLibrary.Entities;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -6,8 +7,8 @@ namespace ClassWarehouseLibrary
 {
     interface IDataRepository
     {
-        event EventHandler InvoiceAdded;
-        event EventHandler InvoiceDeleted;
+        event EventHandler EventAdded;
+        event EventHandler EventDeleted;
         #region clientCRUD
         void AddClient(Client client);
 
@@ -51,16 +52,16 @@ namespace ClassWarehouseLibrary
 
         #endregion
 
-        #region invoiceCRUD
-        void AddInvoice(Invoice invoice);
+        #region eventCRUD
+        void AddEvent(Event eventToAdd);
 
-        Invoice GetInvoice(Guid id);
+        Event GetEvent(Guid id);
 
-        ObservableCollection<Invoice> GetAllInvoices();
+        ObservableCollection<Event> GetAllEvents();
 
-        void DeleteInvoice(Invoice invoice);
+        void DeleteEvent(Event eventToDelete);
 
-        void UpdateInvoice(Invoice invoice);
+        void UpdateEvent(Event eventToUpdate);
         #endregion
     }
 }

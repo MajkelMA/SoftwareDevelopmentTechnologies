@@ -25,7 +25,7 @@ namespace WarehouseTest
             
             dataRepository.AddClient(new Client
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 Name = "Radoslaw",
                 LastName = "Lapciak",
                 Birthday = new DateTime(1997, 9, 22),
@@ -38,7 +38,7 @@ namespace WarehouseTest
         [TestMethod]
         public void GetClientByGuidTest()
         {
-            Guid clientId = new Guid();
+            Guid clientId = Guid.NewGuid();
             Client clientToAdd = new Client
             {
                 Id = clientId,
@@ -69,7 +69,7 @@ namespace WarehouseTest
         public void UpdateClientByGuidTest()
         {
             DataRepository dataRepository = new DataRepository(new AutoFillEmpty());
-            Guid clientId = new Guid();
+            Guid clientId = Guid.NewGuid();
             Client client = new Client
             {
                 Id = clientId,
@@ -113,7 +113,7 @@ namespace WarehouseTest
         public void AddClientNoneUniqueIdException()
         {
             DataRepository dataRepository = new DataRepository(new AutoFillEmpty());
-            Guid clientId = new Guid();
+            Guid clientId = Guid.NewGuid();
             Client clientToAdd = new Client
             {
                 Id = clientId,
@@ -142,7 +142,7 @@ namespace WarehouseTest
             DataRepository dataRepository = new DataRepository(new AutoFillFull());
             Assert.ThrowsException<ArgumentException>(() => dataRepository.AddClient(new Client
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 Name = "test",
                 LastName = "testtowski",
                 Birthday = new DateTime(2000, 10, 10),
@@ -154,7 +154,7 @@ namespace WarehouseTest
         public void GetClientByIdReturnsNull()
         {
             DataRepository dataRepository = new DataRepository(new AutoFillFull());
-            Client client = dataRepository.GetClient(new Guid());
+            Client client = dataRepository.GetClient(Guid.NewGuid());
             Assert.AreEqual(null, client);
         }
 
@@ -172,7 +172,7 @@ namespace WarehouseTest
             DataRepository dataRepository = new DataRepository(new AutoFillFull());
             Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateClient(new Client
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 Name = "test",
                 LastName = "test",
                 Birthday = new DateTime(10, 10, 10),
@@ -201,7 +201,7 @@ namespace WarehouseTest
             DataRepository dataRepository = new DataRepository(new AutoFillFull());
             Assert.ThrowsException<ArgumentException>(() => dataRepository.DeleteClient(new Client
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 Name = "test",
                 LastName = "testowski",
                 Birthday = new DateTime(1997, 9, 22),

@@ -41,16 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\BuyEvent.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataRepository.cs" />
     <Compile Include="DataService.cs" />
+    <Compile Include="Entities\DestroyEvent.cs" />
+    <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\ItemStatus.cs" />
     <Compile Include="Entities\PackageStatus.cs" />
+    <Compile Include="Entities\SellEvent.cs" />
     <Compile Include="IAutoFiller.cs" />
     <Compile Include="IDataRepository.cs" />
     <Compile Include="Entities\Status.cs" />
-    <Compile Include="Entities\Invoice.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System;
 using System.Collections.Specialized;
+using ClassWarehouseLibrary.Entities;
 
 namespace ClassWarehouseLibrary
 {
@@ -10,26 +11,26 @@ namespace ClassWarehouseLibrary
         private DataContext _dataContext;
         private IAutoFiller _autoFilling;
 
-        public event EventHandler InvoiceAdded;
-        public event EventHandler InvoiceDeleted;
+        public event EventHandler EventAdded;
+        public event EventHandler EventDeleted;
 
         public DataRepository(IAutoFiller autoFilling)
         {
             _dataContext = new DataContext();
             _autoFilling = autoFilling;
             _autoFilling.AutoFill(_dataContext);
-            _dataContext.Invoices.CollectionChanged += InvoicesContexChanged;
+            _dataContext.Events.CollectionChanged += EventsContexChanged;
         }
 
-        private void InvoicesContexChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void EventsContexChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-                InvoiceAdded?.Invoke(this, new EventArgs());
+                EventAdded?.Invoke(this, new EventArgs());
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
-                InvoiceDeleted?.Invoke(this, new EventArgs());
+                EventDeleted?.Invoke(this, new EventArgs());
             }
         }
 
@@ -254,35 +255,35 @@ namespace ClassWarehouseLibrary
         }
         #endregion
 
-        #region InvoiceRegion
-        public void AddInvoice(Invoice invoice)
+        #region EventRegion
+        public void AddEvent(Event eventToAdd)
         {
-            foreach (Invoice item in _dataContext.Invoices)
+            foreach (Event item in _dataContext.Events)
             {
-                if (item.Id == invoice.Id)
+                if (item.Id == eventToAdd.Id)
                 {
-                    throw new ArgumentException("such invoice already exists");
+                    throw new ArgumentException("such event already exists");
                 }
             }
-            _dataContext.Invoices.Add(invoice);
+            _dataContext.Events.Add(eventToAdd);
         }
 
-        public void DeleteInvoice(Invoice invoice)
+        public void DeleteEvent(Event eventToDelete)
         {
-            if (!_dataContext.Invoices.Remove(invoice))
+            if (!_dataContext.Events.Remove(eventToDelete))
             {
-                throw new ArgumentException("such invoice does not exist");
+                throw new ArgumentException("such event does not exist");
             }
         }
 
-        public ObservableCollection<Invoice> GetAllInvoices()
+        public ObservableCollection<Event> GetAllEvents()
         {
-            return _dataContext.Invoices;
+            return _dataContext.Events;
         }
 
-        public Invoice GetInvoice(Guid id)
+        public Event GetEvent(Guid id)
         {
-            foreach (Invoice item in _dataContext.Invoices)
+            foreach (Event item in _dataContext.Events)
             {
                 if (item.Id == id)
                 {
@@ -292,19 +293,20 @@ namespace ClassWarehouseLibrary
             return null;
         }
 
-        public void UpdateInvoice(Invoice invoice)
+        public void UpdateEvent(Event eventToUpdate)
         {
-            if (!_dataContext.Invoices.Contains(invoice))
+            if (!_dataContext.Events.Contains(eventToUpdate))
             {
-                throw new ArgumentException("such invoice does not exist");
+                throw new ArgumentException("such event does not exist");
             }
 
-            foreach (Invoice item in _dataContext.Invoices)
+            foreach (Event item in _dataContext.Events)
             {
-                if (item.Id == invoice.Id)
+                if (item.Id == eventToUpdate.Id)
                 {
-                    item.Status = invoice.Status;
-                    item.WarehouseClient = invoice.WarehouseClient;
+                    item.Status = eventToUpdate.Status;
+                    item.WarehouseClient = eventToUpdate.WarehouseClient;
+                    item.Description = eventToUpdate.Description;
                 }
             }
         }

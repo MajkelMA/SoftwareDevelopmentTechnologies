@@ -28,7 +28,7 @@ namespace WarehouseTest
 
             dataRepository.AddStatus(new PackageStatus(new Product
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 Description = "description",
                 Name = "name"
             }, 10, 10, 10));
@@ -44,7 +44,7 @@ namespace WarehouseTest
             DataRepository dataRepository = new DataRepository(new AutoFillEmpty());
             dataRepository.AddStatus(new ItemStatus(new Product
             {
-                Id =  new Guid(),
+                Id = Guid.NewGuid(),
                 Description = "description",
                 Name = "name"
             }, 10, 20, 10));
@@ -59,7 +59,7 @@ namespace WarehouseTest
 
             Status status = new ItemStatus(new Product
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 Description = "description",
                 Name = "milk"
             }, 3.99f, 1, 15);
@@ -88,7 +88,7 @@ namespace WarehouseTest
             Guid nonUniqueId = dataRepository.GetAllStatuses()[0].Id;
             Status statusToAdd = new ItemStatus(new Product
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 Name = "Milk",
                 Description = "from cow"
             }, 11.1f, 1, 15);
@@ -122,8 +122,8 @@ namespace WarehouseTest
             Status statusInfo = dataRepository.GetAllStatuses()[0];
             Status newStatusInfo = new ItemStatus(statusInfo.Product, 10, 10, 1)
             {
-                Id = new Guid()
-            };
+                Id = Guid.NewGuid()
+        };
 
             Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateStatus(newStatusInfo));
         }   
@@ -149,8 +149,8 @@ namespace WarehouseTest
             Status status = dataRepository.GetAllStatuses()[0];
             Status statusToDelete = new ItemStatus(status.Product, 10, 10, 24)
             {
-                Id = new Guid()
-            };
+                Id = Guid.NewGuid()
+        };
             Assert.ThrowsException<ArgumentException>(() => dataRepository.DeleteStatus(statusToDelete));
         }
     }

@@ -12,7 +12,7 @@ namespace WarehouseTest
         {
             List<Client> clients = dataContext.Clients;
             Dictionary<Guid, Product> products = dataContext.Products;
-            ObservableCollection<Invoice> invoices = dataContext.Invoices;
+            ObservableCollection<Event> events = dataContext.Events;
             List<Status> statuses = dataContext.Statuses;
 
             Client client1 = new Client
@@ -53,19 +53,9 @@ namespace WarehouseTest
             ItemStatus statusesItemtStatus = new ItemStatus(product1, 11.1f, 11.1f, 11);
             ItemStatus statusesItemStatus1 = new ItemStatus(product2, 11.1f, 11.1f, 11);
 
-            Invoice invoice1 = new Invoice
-            {
-                Id = Guid.NewGuid(),
-                WarehouseClient = client1,
-                Status = invoiceItemStatus,
-            };
-
-            Invoice invoice2 = new Invoice
-            {
-                Id = Guid.NewGuid(),
-                WarehouseClient = client2,
-                Status = invoiceItemStatus1,
-            };
+            Event event1 = new DestroyEvent(Guid.NewGuid(), client1, invoiceItemStatus, "example destroy");
+            Event event2 = new BuyEvent(Guid.NewGuid(), client1, invoiceItemStatus1, "example buy");
+            Event event3 = new SellEvent(Guid.NewGuid(), client2, invoiceItemStatus1, "example sell");
 
             products.Add(product1.Id, product1);
             products.Add(product2.Id, product2);
@@ -73,8 +63,9 @@ namespace WarehouseTest
             clients.Add(client1);
             clients.Add(client2);
 
-            invoices.Add(invoice1);
-            invoices.Add(invoice2);
+            events.Add(event1);
+            events.Add(event2);
+            events.Add(event3);
 
             statuses.Add(statusesItemtStatus);
             statuses.Add(statusesItemStatus1);
