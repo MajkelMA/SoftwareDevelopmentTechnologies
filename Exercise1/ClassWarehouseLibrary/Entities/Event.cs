@@ -5,11 +5,10 @@ namespace ClassWarehouseLibrary.Entities
 {
     public abstract class Event
     {
-
         public Guid Id { get; set; }
         public Client WarehouseClient { get; set; }
         public Status Status { get; set; }
-        public String Description { get; set; }
+        public string Description { get; set; }
 
         protected Event(Guid id, Client warehouseClient, Status status, string description)
         {

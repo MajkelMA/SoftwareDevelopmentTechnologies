@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace ClassWarehouseLibrary
 {
     public class Client
     {
         public Guid Id { get; set; }
-        public String Name { get; set; }
-        public String LastName { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
         public DateTime Birthday { get; set; }
-        public String Email { get; set; }
+        public string Email { get; set; }
 
         public override bool Equals(object obj)
         {

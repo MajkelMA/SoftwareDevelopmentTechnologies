@@ -47,15 +47,14 @@ namespace WarehouseTest
                 Description = "Description2"
             };
 
-            ItemStatus invoiceItemStatus = new ItemStatus(product1, 1.1f, 1.1f, 1);
-            ItemStatus invoiceItemStatus1 = new ItemStatus(product2, 1.1f, 1.1f, 1);
+            ItemStatus itemStatus = new ItemStatus(product1, 1.1f, 1.1f, 1);
+            ItemStatus itemStatus1 = new ItemStatus(product2, 1.1f, 1.1f, 1);
+            ItemStatus itemStatus2 = new ItemStatus(product1, 11.1f, 11.1f, 11);
+            ItemStatus itemStatus3 = new ItemStatus(product2, 11.1f, 11.1f, 11);
 
-            ItemStatus statusesItemtStatus = new ItemStatus(product1, 11.1f, 11.1f, 11);
-            ItemStatus statusesItemStatus1 = new ItemStatus(product2, 11.1f, 11.1f, 11);
-
-            Event event1 = new DestroyEvent(Guid.NewGuid(), client1, invoiceItemStatus, "example destroy");
-            Event event2 = new BuyEvent(Guid.NewGuid(), client1, invoiceItemStatus1, "example buy");
-            Event event3 = new SellEvent(Guid.NewGuid(), client2, invoiceItemStatus1, "example sell");
+            Event event1 = new DestroyEvent(Guid.NewGuid(), client1, itemStatus, "example destroy");
+            Event event2 = new BuyEvent(Guid.NewGuid(), client1, itemStatus1, "example buy");
+            Event event3 = new SellEvent(Guid.NewGuid(), client2, itemStatus1, "example sell");
 
             products.Add(product1.Id, product1);
             products.Add(product2.Id, product2);
@@ -67,8 +66,8 @@ namespace WarehouseTest
             events.Add(event2);
             events.Add(event3);
 
-            statuses.Add(statusesItemtStatus);
-            statuses.Add(statusesItemStatus1);
+            statuses.Add(itemStatus2);
+            statuses.Add(itemStatus3);
         }
     }
 }

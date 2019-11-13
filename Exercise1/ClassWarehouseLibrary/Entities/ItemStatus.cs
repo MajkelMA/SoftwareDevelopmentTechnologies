@@ -2,8 +2,6 @@
 {
     public class ItemStatus : ClassWarehouseLibrary.Status
     {
-
-
         public ItemStatus(Product product, float nettoPrice, float tax, int amount) : base(product, nettoPrice, tax)
         {
             Amount = amount;

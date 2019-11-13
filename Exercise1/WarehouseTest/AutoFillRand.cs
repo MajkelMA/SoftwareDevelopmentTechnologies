@@ -47,14 +47,13 @@ namespace WarehouseTest
                 Description = Rand.GetRandString()
             };
 
-            ItemStatus invoiceItemStatus = new ItemStatus(product1, 1.1f, 1.1f, 1);
-            ItemStatus invoiceItemStatus1 = new ItemStatus(product2, 1.1f, 1.1f, 1);
+            ItemStatus itemStatus = new ItemStatus(product1, 1.1f, 1.1f, 1);
+            ItemStatus itemStatus1 = new ItemStatus(product2, 1.1f, 1.1f, 1);
+            ItemStatus itemStatus2 = new ItemStatus(product1, 11.1f, 11.1f, 11);
+            ItemStatus itemStatus3 = new ItemStatus(product2, 11.1f, 11.1f, 11);
 
-            ItemStatus statusesItemtStatus = new ItemStatus(product1, 11.1f, 11.1f, 11);
-            ItemStatus statusesItemStatus1 = new ItemStatus(product2, 11.1f, 11.1f, 11);
-
-            Event event1 = new BuyEvent(new Guid(), client1, invoiceItemStatus, "buy example");
-            Event event2 = new SellEvent(new Guid(), client2, invoiceItemStatus1, "sell example");
+            Event event1 = new BuyEvent(new Guid(), client1, itemStatus, "buy example");
+            Event event2 = new SellEvent(new Guid(), client2, itemStatus1, "sell example");
 
             products.Add(product1.Id, product1);
             products.Add(product2.Id, product2);
@@ -65,8 +64,8 @@ namespace WarehouseTest
             events.Add(event1);
             events.Add(event2);
 
-            statuses.Add(statusesItemtStatus);
-            statuses.Add(statusesItemStatus1);
+            statuses.Add(itemStatus2);
+            statuses.Add(itemStatus3);
         }
     }
 
