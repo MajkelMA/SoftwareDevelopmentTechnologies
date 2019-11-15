@@ -12,7 +12,7 @@ namespace WarehouseTest
         [TestMethod]
         public void AutoFillTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillRand());
+            DataRepository dataRepository = new DataRepository(new AutoFillRand(), new DataContext());
             Assert.AreEqual(dataRepository.GetAllClients().Count, 2);
             Assert.AreEqual(dataRepository.GetAllProducts().Count, 2);
             Assert.AreEqual(dataRepository.GetAllEvents().Count, 2);

@@ -10,7 +10,7 @@ namespace WarehouseTest
         [TestMethod]
         public void AddProductTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.AreEqual(dataRepository.GetAllProducts().Count, 2);
             Product product = new Product
             {
@@ -25,7 +25,7 @@ namespace WarehouseTest
         [TestMethod]
         public void DeleteProduct1Test()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.AreEqual(dataRepository.GetAllProducts().Count, 2);
             Guid testId = Guid.NewGuid();
             Product product = new Product
@@ -45,7 +45,7 @@ namespace WarehouseTest
         [TestMethod]
         public void DeleteProduct2Test()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.AreEqual(dataRepository.GetAllProducts().Count, 2);
             Product product = new Product
             {
@@ -64,7 +64,7 @@ namespace WarehouseTest
         [TestMethod]
         public void UpdateProductTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.AreEqual(dataRepository.GetAllProducts().Count, 2);
             Guid testId = Guid.NewGuid();
             Product product = new Product
@@ -92,14 +92,14 @@ namespace WarehouseTest
         [TestMethod]
         public void GetAllProductsTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.AreEqual(dataRepository.GetAllProducts().Count, 2);
         }
 
         [TestMethod]
         public void GetProductTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Guid testId = Guid.NewGuid();
             Product product = new Product
             {

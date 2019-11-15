@@ -1,13 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace ClassWarehouseLibrary.Entities
 {
+    [DataContract]
     public class BuyEvent : Event
     {
+        public BuyEvent()
+        {
+
+        }
+
         public BuyEvent(Guid id, Client warehouseClient, Status status, string description) : base(id, warehouseClient, status, description)
         {
 
@@ -16,6 +20,11 @@ namespace ClassWarehouseLibrary.Entities
         public override bool Equals(object obj)
         {
             return base.Equals(obj);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + " - BuyEvent";
         }
     }
 }

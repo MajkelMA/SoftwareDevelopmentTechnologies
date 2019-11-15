@@ -11,7 +11,7 @@ namespace WarehouseTest
         [TestMethod]
         public void AddEventTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.AreEqual(dataRepository.GetAllEvents().Count, 3);
 
             Product product = new Product
@@ -41,7 +41,7 @@ namespace WarehouseTest
         [TestMethod]
         public void DeleteEventTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.AreEqual(dataRepository.GetAllEvents().Count, 3);
 
             Product product = new Product
@@ -74,14 +74,14 @@ namespace WarehouseTest
         [TestMethod]
         public void GetAllEventsTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.AreEqual(dataRepository.GetAllEvents().Count, 3);
         }
 
         [TestMethod]
         public void GetEventTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.AreEqual(dataRepository.GetAllEvents().Count, 3);
 
             Product product = new Product
@@ -114,7 +114,7 @@ namespace WarehouseTest
         [TestMethod]
         public void UpdateEventTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.AreEqual(dataRepository.GetAllEvents().Count, 3);
 
             Product product = new Product

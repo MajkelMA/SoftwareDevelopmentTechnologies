@@ -13,14 +13,14 @@ namespace WarehouseTest
         [TestMethod]
         public void GetAllClientTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.AreEqual(2, dataRepository.GetAllClients().Count);
         }
 
         [TestMethod]
         public void AddClientTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.AreEqual(2, dataRepository.GetAllClients().Count);
             
             dataRepository.AddClient(new Client
@@ -47,7 +47,7 @@ namespace WarehouseTest
                 Birthday = new DateTime(1997, 9, 22),
                 Email = "test@test.tet"
             };
-            DataRepository dataRepository = new DataRepository(new AutoFillEmpty());
+            DataRepository dataRepository = new DataRepository(new AutoFillEmpty(), new DataContext());
             dataRepository.AddClient(clientToAdd);
             Client client = dataRepository.GetClient(clientId);
             Assert.AreEqual("Radoslaw", client.Name);
@@ -58,7 +58,7 @@ namespace WarehouseTest
         [TestMethod]
         public void GetClientByEmailTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Client client = dataRepository.GetClient("ex@example.com");
             Assert.AreEqual("Name1", client.Name);
             Assert.AreEqual("LastName1", client.LastName);
@@ -68,7 +68,7 @@ namespace WarehouseTest
         [TestMethod]
         public void UpdateClientByGuidTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillEmpty());
+            DataRepository dataRepository = new DataRepository(new AutoFillEmpty(), new DataContext());
             Guid clientId = Guid.NewGuid();
             Client client = new Client
             {
@@ -103,7 +103,7 @@ namespace WarehouseTest
         [TestMethod]
         public void DeleteClientTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Client clientToDelete = dataRepository.GetClient("ex@example.com");
             dataRepository.DeleteClient(clientToDelete);
             Assert.AreEqual(1, dataRepository.GetAllClients().Count);
@@ -112,7 +112,7 @@ namespace WarehouseTest
         [TestMethod]
         public void AddClientNoneUniqueIdException()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillEmpty());
+            DataRepository dataRepository = new DataRepository(new AutoFillEmpty(), new DataContext());
             Guid clientId = Guid.NewGuid();
             Client clientToAdd = new Client
             {
@@ -139,7 +139,7 @@ namespace WarehouseTest
         [TestMethod]
         public void AddClientNoneUniqueEmailException()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.ThrowsException<ArgumentException>(() => dataRepository.AddClient(new Client
             {
                 Id = Guid.NewGuid(),
@@ -153,7 +153,7 @@ namespace WarehouseTest
         [TestMethod]
         public void GetClientByIdReturnsNull()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Client client = dataRepository.GetClient(Guid.NewGuid());
             Assert.AreEqual(null, client);
         }
@@ -161,7 +161,7 @@ namespace WarehouseTest
         [TestMethod]
         public void GetClientByEmailReturnsNull ()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Client client = dataRepository.GetClient("none@ex.com");
             Assert.AreEqual(null, client);
         }
@@ -169,7 +169,7 @@ namespace WarehouseTest
         [TestMethod]
         public void UpdateClientByIdException()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateClient(new Client
             {
                 Id = Guid.NewGuid(),
@@ -183,7 +183,7 @@ namespace WarehouseTest
         [TestMethod]
         public void UpdateClientNoneUniqueEmailExceptionTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Guid clientsidToUpdate = dataRepository.GetAllClients()[0].Id;
             Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateClient(new Client
             {
@@ -198,7 +198,7 @@ namespace WarehouseTest
         [TestMethod]
         public void DeleteClientExceptionTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull());
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Assert.ThrowsException<ArgumentException>(() => dataRepository.DeleteClient(new Client
             {
                 Id = Guid.NewGuid(),

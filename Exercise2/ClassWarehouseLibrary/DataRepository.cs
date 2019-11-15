@@ -14,9 +14,9 @@ namespace ClassWarehouseLibrary
         public event EventHandler EventAdded;
         public event EventHandler EventDeleted;
 
-        public DataRepository(IAutoFiller autoFilling)
+        public DataRepository(IAutoFiller autoFilling, DataContext dataContext)
         {
-            _dataContext = new DataContext();
+            _dataContext = dataContext;
             _autoFilling = autoFilling;
             _autoFilling.AutoFill(_dataContext);
             _dataContext.Events.CollectionChanged += EventsContexChanged;
@@ -33,7 +33,6 @@ namespace ClassWarehouseLibrary
                 EventDeleted?.Invoke(this, new EventArgs());
             }
         }
-
 
         #region client
         public void AddClient(Client client)
