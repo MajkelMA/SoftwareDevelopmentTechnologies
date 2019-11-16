@@ -111,7 +111,7 @@ namespace ClassWarehouseLibrary
             return clients;
         }
 
-        void AddEvent(Client client, Status status, string description, Type type)
+        void AddEvent(Client client, EventStatus status, string description, Type type)
         {
             Event eventToAdd;
             if(type == typeof(DestroyEvent))
@@ -140,28 +140,13 @@ namespace ClassWarehouseLibrary
                 Name = name
             };
 
-            if (type == typeof(ItemStatus))
-            {
-                _dataRepository.AddProduct(productToAdd);
-                _dataRepository.AddStatus(new ItemStatus(productToAdd, price, 0, 0));
-            }
-            else if(type == typeof(PackageStatus))
-            {
-                _dataRepository.AddProduct(productToAdd);
-                _dataRepository.AddStatus(new PackageStatus(productToAdd, price, 0, 0));
-            }
+            _dataRepository.AddProduct(productToAdd);
+            _dataRepository.AddStatus(new Status(productToAdd, price, 0, 0));
         }
 
         void AddStatus(Product product, float nettoPrice, float tax, int amount, Type type)
         {
-            if (type == typeof(ItemStatus))
-            {
-                _dataRepository.AddStatus(new ItemStatus(product, nettoPrice, tax, amount));
-            }
-            if(type == typeof(PackageStatus))
-            {
-                _dataRepository.AddStatus(new PackageStatus(product, nettoPrice, tax, amount));
-            }
+            _dataRepository.AddStatus(new Status(product, nettoPrice, tax, amount));
         }
 
         void AddClient(string name, string lastname, DateTime birthday, string email)

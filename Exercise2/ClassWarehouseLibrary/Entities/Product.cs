@@ -1,10 +1,12 @@
-﻿using System;
+﻿using ISerialization;
+using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace ClassWarehouseLibrary
 {
     [DataContract]
-    public class Product
+    public class Product : IOwnFormatter
     {
         [DataMember]
         public Guid Id { get; set; }
@@ -26,29 +28,18 @@ namespace ClassWarehouseLibrary
             return "Product " + "Id: " + Id + " Name: " + Name + " Description: " + Description;
         }
 
-        //public XmlSchema GetSchema()
-        //{
-        //    return null;
-        //}
+        public string Serialize(ObjectIDGenerator idGenerator)
+        {
+            return this.GetType().FullName + "|"
+                   + idGenerator.GetId(this, out bool firstTime) + "|"
+                   + Id + "|" + Name + "|" + Description + "\n";
+        }
 
-        //public void ReadXml(XmlReader reader)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void WriteXml(XmlWriter writer)
-        //{
-        //    //writer.WriteStartElement("Product");
-        //    writer.WriteStartElement("Id");
-        //    writer.WriteString(Id.ToString());
-        //    writer.WriteEndElement();
-        //    writer.WriteStartElement("Name");
-        //    writer.WriteString(Name);
-        //    writer.WriteEndElement();
-        //    writer.WriteStartElement("Description");
-        //    writer.WriteString(Description);
-        //    writer.WriteEndElement();
-        //    //writer.WriteEndElement();
-        //}
+        public void Deserialize(string[] details, Dictionary<long, Object> objReferences)
+        {
+            this.Id = Guid.Parse(details[2]);
+            this.Name = details[3];
+            this.Description = details[4];
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ISerialization;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -9,14 +10,14 @@ namespace ClassWarehouseLibrary.Entities
     [KnownType(typeof(BuyEvent))]
     [KnownType(typeof(DestroyEvent))]
     [KnownType(typeof(SellEvent))]
-    public abstract class Event
+    public abstract class Event : IOwnFormatter
     {
         [DataMember]
         public Guid Id { get; set; }
         [DataMember]
         public Client WarehouseClient { get; set; }
         [DataMember]
-        public Status Status { get; set; }
+        public EventStatus Status { get; set; }
         [DataMember]
         public String Description { get; set; }
 
@@ -25,7 +26,7 @@ namespace ClassWarehouseLibrary.Entities
 
         }
 
-        protected Event(Guid id, Client warehouseClient, Status status, string description)
+        protected Event(Guid id, Client warehouseClient, EventStatus status, string description)
         {
             this.Id = id;
             WarehouseClient = warehouseClient;
@@ -38,7 +39,7 @@ namespace ClassWarehouseLibrary.Entities
             return obj is Event @event &&
                    Id.Equals(@event.Id) &&
                    EqualityComparer<Client>.Default.Equals(WarehouseClient, @event.WarehouseClient) &&
-                   EqualityComparer<Status>.Default.Equals(Status, @event.Status) &&
+                   EqualityComparer<EventStatus>.Default.Equals(Status, @event.Status) &&
                    Description == @event.Description;
         }
 
@@ -46,5 +47,9 @@ namespace ClassWarehouseLibrary.Entities
         {
             return "Event" + " Id: " + Id + " Client: " + WarehouseClient + " Status: " + Status + " Description: " + Description;
         }
+
+        public abstract string Serialize(ObjectIDGenerator idGenerator);
+
+        public abstract void Deserialize(string[] details, Dictionary<long, Object> objReferences);
     }
 }

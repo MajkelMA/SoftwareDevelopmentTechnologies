@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using ISerialization;
+using System.Runtime.Serialization;
 
 namespace SerializationTest
 {
@@ -6,41 +7,47 @@ namespace SerializationTest
     class TestClass1
     {
         [DataMember]
-        public TestClass3 testClass3;
-        public string test1 { set; get; }
+        public TestClass2 testClass2 { set; get; }
 
         public TestClass1()
         {
-            this.test1 = "TestClas1";
-            this.testClass3 = new TestClass3();
+            this.testClass2 = new TestClass2();
         }
+
+        //public string Serialize(ObjectIDGenerator idGenerator)
+        //{
+        //    return this.GetType().FullName + "|"
+        //           + idGenerator.GetId(this, out bool firstTime) + "|"
+        //           + test1 + "\n";
+        //}
+
+        //public TestClass1 Deserialize(string serializationStream)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
     }
 
-    [DataContract(IsReference = true)]
+    [DataContract(IsReference = false)]
     class TestClass2
     {
         [DataMember]
-        public TestClass1 testClass1;
-        public string test2 { set; get; }
+        public TestClass1 testClass1 { set; get; }
 
         public TestClass2()
         {
-            this.test2 = "TestClas2";
             this.testClass1 = new TestClass1();
         }
-    }
 
-    [DataContract(IsReference = true)]
-    class TestClass3
-    {
-        [DataMember]
-        public TestClass2 testClass2;
-        public string test3 { set; get; }
+        //public string Serialize(ObjectIDGenerator idGenerator)
+        //{
+        //    return this.GetType().FullName + "|"
+        //           + idGenerator.GetId(this, out bool firstTime) + "|"
+        //           + test2 + "\n";
+        //}
 
-        public TestClass3()
-        {
-            this.test3 = "TestClas3";
-            this.testClass2 = new TestClass2();
-        }
+        //public TestClass2 Deserialize(string serializationStream)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
     }
 }

@@ -1,10 +1,14 @@
-﻿using System;
+﻿using ISerialization;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace ClassWarehouseLibrary
 {
     [DataContract]
-    public class Client
+    public class Client : IOwnFormatter
     {
         [DataMember]
         public Guid Id { get; set; }
@@ -28,7 +32,23 @@ namespace ClassWarehouseLibrary
 
         public override string ToString()
         {
-            return "Client " + "Id: " + Id + " Name: " + Name + " LastName: " + LastName + " Birthday: " + Birthday.ToString() + " Email: " + Email;
+            return "Client |" + "Id: " + Id + "| Name: " + Name + "| LastName: " + LastName + "| Birthday: " + Birthday.ToString() + "| Email: " + Email;
+        }
+
+        public string Serialize(ObjectIDGenerator idGenerator)
+        {
+            return this.GetType().FullName + "|"
+                   + idGenerator.GetId(this, out bool firstTime) + "|" 
+                   + Id + "|" + Name + "|" + LastName + "|" + Birthday.ToString() + "|" + Email + "\n";
+        }
+
+        public void Deserialize(string[] details, Dictionary<long, Object> objReferences)
+        {
+            Id = Guid.Parse(details[2]);
+            Name = details[3];
+            LastName = details[4];
+            Birthday = Convert.ToDateTime(details[5]);
+            Email = details[6];
         }
     }
 }

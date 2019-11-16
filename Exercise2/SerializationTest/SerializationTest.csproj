@@ -52,13 +52,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestClass.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="RecursionSerializationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ISerialization\ISerialization.csproj">
+      <Project>{5180AB4B-B559-420C-9A4A-BC6EAB760E5B}</Project>
+      <Name>ISerialization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Serialization\Serialization.csproj">
       <Project>{c095c6ce-bfbf-4943-8ba9-e6d00f10ad46}</Project>
       <Name>Serialization</Name>

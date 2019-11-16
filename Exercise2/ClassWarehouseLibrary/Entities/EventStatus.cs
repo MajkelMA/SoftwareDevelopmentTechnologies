@@ -1,13 +1,14 @@
-﻿using ClassWarehouseLibrary.Entities;
-using ISerialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ClassWarehouseLibrary
 {
     [DataContract]
-    public class Status : IOwnFormatter
+    public class EventStatus
     {
         [DataMember]
         public Guid Id { get; set; }
@@ -20,12 +21,12 @@ namespace ClassWarehouseLibrary
         [DataMember]
         public int Amount { get; set; }
 
-        public Status()
+        public EventStatus()
         {
 
         }
 
-        public Status(Product product, float nettoPrice, float tax, int amount)
+        public EventStatus(Product product, float nettoPrice, float tax, int amount)
         {
             Id = Guid.NewGuid();
             NettoPrice = nettoPrice;
@@ -64,6 +65,5 @@ namespace ClassWarehouseLibrary
             Amount = Int32.Parse(details[5]);
             Product = (Product)objReferences[Int64.Parse(details[6])];
         }
-
     }
 }
