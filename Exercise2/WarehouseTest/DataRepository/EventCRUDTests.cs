@@ -2,6 +2,7 @@
 using ClassWarehouseLibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.IO;
 
 namespace WarehouseTest
 {
@@ -11,14 +12,15 @@ namespace WarehouseTest
         [TestMethod]
         public void AddEventTest()
         {
-            DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
+            DataContext dataContext = new DataContext();
+            DataRepository dataRepository = new DataRepository(new AutoFillFull(), dataContext);
             Assert.AreEqual(dataRepository.GetAllEvents().Count, 3);
 
             Product product = new Product
             {
                 Id = Guid.NewGuid(),
-                Name = "TestName",
-                Description = "TestDescription"
+                Name = "ProductName",
+                Description = "ProductDescription"
             };
 
             Client client = new Client
@@ -30,8 +32,8 @@ namespace WarehouseTest
                 Name = "Name"
             };
 
-            Event buyEvent = new BuyEvent(Guid.NewGuid(), client, new ItemStatus(product, 10f, 10f, 10), "example");
-
+            BuyEvent buyEvent = new BuyEvent(Guid.NewGuid(), client, new EventStatus(product, 10f, 10f, 10), "example buy");
+            
             dataRepository.AddEvent(buyEvent);
             Assert.AreEqual(dataRepository.GetAllEvents().Count, 4);
             Assert.IsTrue(dataRepository.GetAllEvents().Contains(buyEvent));
@@ -60,7 +62,7 @@ namespace WarehouseTest
                 Name = "Name"
             };
 
-            Event sellEvent = new SellEvent(new Guid(), client, new ItemStatus(product, 10f, 10f, 10), "example");
+            SellEvent sellEvent = new SellEvent(new Guid(), client, new EventStatus(product, 10f, 10f, 10), "example");
 
             dataRepository.AddEvent(sellEvent);
             Assert.AreEqual(dataRepository.GetAllEvents().Count, 4);
@@ -102,7 +104,7 @@ namespace WarehouseTest
 
             Guid testId = Guid.NewGuid();
 
-            Event destroyEvent = new DestroyEvent(testId, client, new ItemStatus(product, 10f, 10f, 10), "example");
+            DestroyEvent destroyEvent = new DestroyEvent(testId, client, new EventStatus(product, 10f, 10f, 10), "example");
 
             dataRepository.AddEvent(destroyEvent);
             Assert.IsTrue(dataRepository.GetAllEvents().Contains(destroyEvent));
@@ -133,18 +135,18 @@ namespace WarehouseTest
                 Name = "Name"
             };
 
-            Event sellEvent = new SellEvent(new Guid(), client, new ItemStatus(product, 10f, 10f, 10), "example");
+            SellEvent sellEvent = new SellEvent(new Guid(), client, new EventStatus(product, 10f, 10f, 10), "example");
 
             Assert.IsFalse(dataRepository.GetAllEvents().Contains(sellEvent));
             dataRepository.AddEvent(sellEvent);
             Assert.IsTrue(dataRepository.GetAllEvents().Contains(sellEvent));
-            sellEvent.Status = new ItemStatus(product, 10f, 10f, 100);
+            sellEvent.Status = new EventStatus(product, 10f, 10f, 100);
             dataRepository.UpdateEvent(sellEvent);
             Assert.IsTrue(dataRepository.GetAllEvents().Contains(sellEvent));
             Assert.ThrowsException<ArgumentException>(() => dataRepository.UpdateEvent(new SellEvent(
                     Guid.NewGuid(),
                     client,
-                    new ItemStatus(product, 10f, 10f, 10),
+                    new EventStatus(product, 10f, 10f, 10),
                     "example"
                 )));
         }

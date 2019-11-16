@@ -21,12 +21,12 @@ namespace WarehouseTest
             DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Guid id = dataRepository.GetAllStatuses()[0].Id;
             Status status = dataRepository.GetStatus(id);
-            Assert.IsTrue(status is ItemStatus);
-            Assert.AreEqual(11, status.Amount);
-            Assert.AreEqual(11.1, status.NettoPrice, 0.0001);
-            Assert.AreEqual(11.1, status.Tax, 0.0001);
+            Assert.IsTrue(status is Status);
+            Assert.AreEqual(4, status.Amount);
+            Assert.AreEqual(4.4, status.NettoPrice, 0.0001);
+            Assert.AreEqual(4.4, status.Tax, 0.0001);
 
-            dataRepository.AddStatus(new PackageStatus(new Product
+            dataRepository.AddStatus(new Status(new Product
             {
                 Id = Guid.NewGuid(),
                 Description = "description",
@@ -34,7 +34,7 @@ namespace WarehouseTest
             }, 10, 10, 10));
 
             status = dataRepository.GetAllStatuses()[dataRepository.GetAllStatuses().Count-1];
-            Assert.IsTrue(status is PackageStatus);
+            Assert.IsTrue(status is Status);
         }
 
 
@@ -42,7 +42,7 @@ namespace WarehouseTest
         public void AddStatusTest()
         {
             DataRepository dataRepository = new DataRepository(new AutoFillEmpty(), new DataContext());
-            dataRepository.AddStatus(new ItemStatus(new Product
+            dataRepository.AddStatus(new Status(new Product
             {
                 Id = Guid.NewGuid(),
                 Description = "description",
@@ -57,7 +57,7 @@ namespace WarehouseTest
             DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Guid statusesIdToUpdate = dataRepository.GetAllStatuses()[0].Id;
 
-            Status status = new ItemStatus(new Product
+            Status status = new Status(new Product
             {
                 Id = Guid.NewGuid(),
                 Description = "description",
@@ -68,7 +68,7 @@ namespace WarehouseTest
             dataRepository.UpdateStatus(status);
 
             Status changedStatus = dataRepository.GetStatus(statusesIdToUpdate);
-            Assert.IsTrue(changedStatus is ItemStatus);
+            Assert.IsTrue(changedStatus is Status);
             Assert.AreEqual(3.99f, changedStatus.NettoPrice, 0.0001);
         }
 
@@ -86,7 +86,7 @@ namespace WarehouseTest
         {
             DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Guid nonUniqueId = dataRepository.GetAllStatuses()[0].Id;
-            Status statusToAdd = new ItemStatus(new Product
+            Status statusToAdd = new Status(new Product
             {
                 Id = Guid.NewGuid(),
                 Name = "Milk",
@@ -103,7 +103,7 @@ namespace WarehouseTest
         {
             DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Product product = dataRepository.GetAllStatuses()[0].Product;
-            Status status = new ItemStatus(product, 15.3f, 12, 30);
+            Status status = new Status(product, 15.3f, 12, 30);
             Assert.ThrowsException<ArgumentException>(() => dataRepository.AddStatus(status));
         }
 
@@ -120,7 +120,7 @@ namespace WarehouseTest
         {
             DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Status statusInfo = dataRepository.GetAllStatuses()[0];
-            Status newStatusInfo = new ItemStatus(statusInfo.Product, 10, 10, 1)
+            Status newStatusInfo = new Status(statusInfo.Product, 10, 10, 1)
             {
                 Id = Guid.NewGuid()
         };
@@ -134,7 +134,7 @@ namespace WarehouseTest
             DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Product product = dataRepository.GetAllStatuses()[0].Product;
             Guid idStatusToUpdate = dataRepository.GetAllStatuses()[1].Id;
-            Status newStatusInfo = new ItemStatus(product, 10, 10, 111)
+            Status newStatusInfo = new Status(product, 10, 10, 111)
             {
                 Id = idStatusToUpdate
             };
@@ -147,7 +147,7 @@ namespace WarehouseTest
         {
             DataRepository dataRepository = new DataRepository(new AutoFillFull(), new DataContext());
             Status status = dataRepository.GetAllStatuses()[0];
-            Status statusToDelete = new ItemStatus(status.Product, 10, 10, 24)
+            Status statusToDelete = new Status(status.Product, 10, 10, 24)
             {
                 Id = Guid.NewGuid()
         };

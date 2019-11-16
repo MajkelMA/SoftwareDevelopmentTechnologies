@@ -42,19 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OwnSerialization.cs" />
+    <Compile Include="IOwnFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlSerialization.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ClassWarehouseLibrary\ClassWarehouseLibrary.csproj">
-      <Project>{410ccb68-b0dc-46f8-887f-9ecdc056be4a}</Project>
-      <Name>ClassWarehouseLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ISerialization\ISerialization.csproj">
-      <Project>{5180ab4b-b559-420c-9a4a-bc6eab760e5b}</Project>
-      <Name>ISerialization</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

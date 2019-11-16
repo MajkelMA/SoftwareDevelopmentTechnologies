@@ -1,17 +1,16 @@
-﻿using ISerialization;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-namespace SerializationTest
+namespace WarehouseTest
 {
     [DataContract(IsReference = true)]
     class TestClass1
     {
         [DataMember]
-        public TestClass2 testClass2 { set; get; }
+        public TestClass2 TestClass2 { get; set; }
 
         public TestClass1()
         {
-            this.testClass2 = new TestClass2();
+
         }
 
         //public string Serialize(ObjectIDGenerator idGenerator)
@@ -27,15 +26,15 @@ namespace SerializationTest
         //}
     }
 
-    [DataContract(IsReference = false)]
+    [DataContract(IsReference = true)]
     class TestClass2
     {
         [DataMember]
-        public TestClass1 testClass1 { set; get; }
+        public TestClass1 TestClass1 { get; set; }
 
         public TestClass2()
         {
-            this.testClass1 = new TestClass1();
+
         }
 
         //public string Serialize(ObjectIDGenerator idGenerator)

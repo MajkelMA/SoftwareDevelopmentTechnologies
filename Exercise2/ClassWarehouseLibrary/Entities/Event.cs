@@ -1,8 +1,7 @@
-﻿using ISerialization;
+﻿using Serialization;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
 
 namespace ClassWarehouseLibrary.Entities
 {
@@ -32,15 +31,6 @@ namespace ClassWarehouseLibrary.Entities
             WarehouseClient = warehouseClient;
             Status = status;
             Description = description;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is Event @event &&
-                   Id.Equals(@event.Id) &&
-                   EqualityComparer<Client>.Default.Equals(WarehouseClient, @event.WarehouseClient) &&
-                   EqualityComparer<EventStatus>.Default.Equals(Status, @event.Status) &&
-                   Description == @event.Description;
         }
 
         public override string ToString()

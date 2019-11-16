@@ -34,7 +34,7 @@ namespace ClassWarehouseLibrary
             }
         }
 
-        #region client
+        #region "Client Region"
         public void AddClient(Client client)
         {
             foreach (Client clientInList in _dataContext.Clients)
@@ -126,7 +126,7 @@ namespace ClassWarehouseLibrary
 
         #endregion
 
-        #region status
+        #region "Status Region"
         public void AddStatus(Status status)
         {
             foreach (Status statusInList in _dataContext.Statuses)
@@ -204,7 +204,7 @@ namespace ClassWarehouseLibrary
 
         #endregion
 
-        #region ProductRegion
+        #region "Product Region"
         public void AddProduct(Product product)
         {
             _dataContext.Products.Add(product.Id, product);
@@ -254,7 +254,7 @@ namespace ClassWarehouseLibrary
         }
         #endregion
 
-        #region EventRegion
+        #region "EventRegion"
         public void AddEvent(Event eventToAdd)
         {
             foreach (Event item in _dataContext.Events)

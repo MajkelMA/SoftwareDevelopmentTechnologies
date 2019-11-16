@@ -46,7 +46,7 @@ namespace ClassWarehouseLibrary
 
         public override string ToString()
         {
-            return "Status " + "Id: " + Id + " Product: " + Product.ToString() + " NettoPrice: " + NettoPrice + " Tax: " + Tax + " Amount: " + Amount;
+            return "EventStatus " + "Id: " + Id + " Product: " + Product.ToString() + " NettoPrice: " + NettoPrice + " Tax: " + Tax + " Amount: " + Amount;
         }
 
         public string Serialize(ObjectIDGenerator idGenerator)

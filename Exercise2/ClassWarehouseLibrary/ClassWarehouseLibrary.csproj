@@ -55,12 +55,13 @@
     <Compile Include="IDataRepository.cs" />
     <Compile Include="Entities\Status.cs" />
     <Compile Include="Entities\Product.cs" />
+    <Compile Include="OwnSerialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ISerialization\ISerialization.csproj">
-      <Project>{5180AB4B-B559-420C-9A4A-BC6EAB760E5B}</Project>
-      <Name>ISerialization</Name>
+    <ProjectReference Include="..\Serialization\Serialization.csproj">
+      <Project>{c095c6ce-bfbf-4943-8ba9-e6d00f10ad46}</Project>
+      <Name>Serialization</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

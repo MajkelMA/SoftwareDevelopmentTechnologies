@@ -1,11 +1,10 @@
-﻿using ClassWarehouseLibrary;
-using ClassWarehouseLibrary.Entities;
-using ISerialization;
+﻿using ClassWarehouseLibrary.Entities;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Serialization;
 
-namespace Serialization
+namespace ClassWarehouseLibrary
 {
     public class OwnSerialization : IOwnFormatter<DataContext>
     {
