@@ -60,7 +60,7 @@
     <Compile Include="DataRepository\EventCRUDTests.cs" />
     <Compile Include="DataRepository\ProductCRUDTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Serialization\RecursionXmlSerializationTest.cs" />
+    <Compile Include="Serialization\OwnRecursiveSerializationTest.cs" />
     <Compile Include="DataRepository\StatusCRUDTests.cs" />
     <Compile Include="Serialization\TestClass.cs" />
   </ItemGroup>
@@ -71,6 +71,10 @@
     <ProjectReference Include="..\ClassWarehouseLibrary\ClassWarehouseLibrary.csproj">
       <Project>{410ccb68-b0dc-46f8-887f-9ecdc056be4a}</Project>
       <Name>ClassWarehouseLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Serialization\Serialization.csproj">
+      <Project>{c095c6ce-bfbf-4943-8ba9-e6d00f10ad46}</Project>
+      <Name>Serialization</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

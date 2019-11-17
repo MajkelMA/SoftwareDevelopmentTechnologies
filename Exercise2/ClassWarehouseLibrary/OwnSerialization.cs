@@ -18,7 +18,7 @@ namespace ClassWarehouseLibrary
             typeof(SellEvent).FullName,
             typeof(DestroyEvent).FullName
         };
-        private Dictionary<long, Object> _objReferences = new Dictionary<long, Object>();
+        private Dictionary<long, object> _objReferences = new Dictionary<long, object>();
 
         public OwnSerialization(DataContext dataContext)
         {

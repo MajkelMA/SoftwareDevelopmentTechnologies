@@ -14,6 +14,6 @@ namespace Serialization
     public interface IOwnFormatter<T>
     {
         string Serialize(ObjectIDGenerator idGenerator);
-        T Deserialize(string serializationStream);
+        T Deserialize(string serializationString);
     }
 }
