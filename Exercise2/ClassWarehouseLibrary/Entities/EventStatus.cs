@@ -21,10 +21,7 @@ namespace ClassWarehouseLibrary
         [DataMember]
         public int Amount { get; set; }
 
-        public EventStatus()
-        {
-
-        }
+        public EventStatus() { }
 
         public EventStatus(Product product, float nettoPrice, float tax, int amount)
         {
@@ -33,20 +30,6 @@ namespace ClassWarehouseLibrary
             Tax = tax;
             Product = product;
             Amount = amount;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is Status status &&
-                   Id.Equals(status.Id) &&
-                   EqualityComparer<Product>.Default.Equals(Product, status.Product) &&
-                   NettoPrice == status.NettoPrice &&
-                   Tax == status.Tax;
-        }
-
-        public override string ToString()
-        {
-            return "EventStatus " + "Id: " + Id + " Product: " + Product.ToString() + " NettoPrice: " + NettoPrice + " Tax: " + Tax + " Amount: " + Amount;
         }
 
         public string Serialize(ObjectIDGenerator idGenerator)
@@ -65,5 +48,21 @@ namespace ClassWarehouseLibrary
             Amount = Int32.Parse(details[5]);
             Product = (Product)objReferences[Int64.Parse(details[6])];
         }
+
+        #region "Overrides"
+        public override string ToString()
+        {
+            return "EventStatus " + "Id: " + Id + " Product: " + Product.ToString() + " NettoPrice: " + NettoPrice + " Tax: " + Tax + " Amount: " + Amount;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is EventStatus status &&
+                   Id.Equals(status.Id) &&
+                   Product.Equals(status.Product) &&
+                   NettoPrice.Equals(status.NettoPrice) &&
+                   Tax.Equals(status.Tax);
+        }
+        #endregion
     }
 }

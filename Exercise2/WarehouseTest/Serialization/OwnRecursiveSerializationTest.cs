@@ -30,8 +30,6 @@ namespace WarehouseTest
                                   + "WarehouseTest.TestClass1|3|description1|4|\n"
                                   + "WarehouseTest.TestClass2|4|description2|1|\n"
                            );
-
-            File.WriteAllText("test-own-serialization", result);
         }
 
         [TestMethod]
@@ -48,9 +46,10 @@ namespace WarehouseTest
             test4.TestClass1 = test1;
 
             Assert.AreEqual(test1.TestClass2.TestClass1.TestClass2.TestClass1, test1);
-
             ObjectIDGenerator idGenerator = new ObjectIDGenerator();
-            string result = File.ReadAllText("test-own-serialization");
+            string result = test1.Serialize(idGenerator);
+
+            idGenerator = new ObjectIDGenerator();
             TestClass1 deserialized = new TestClass1();
             deserialized.Deserialize(result, idGenerator, new Dictionary<long, object>());
 

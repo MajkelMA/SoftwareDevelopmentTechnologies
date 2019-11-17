@@ -15,19 +15,6 @@ namespace ClassWarehouseLibrary
         [DataMember]
         public String Description { get; set; }
 
-        public override bool Equals(object obj)
-        {
-            return obj is Product product &&
-                   Id.Equals(product.Id) &&
-                   Name == product.Name &&
-                   Description == product.Description;
-        }
-
-        public override string ToString()
-        {
-            return "Product " + "Id: " + Id + " Name: " + Name + " Description: " + Description;
-        }
-
         public string Serialize(ObjectIDGenerator idGenerator)
         {
             return this.GetType().FullName + "|"
@@ -41,5 +28,19 @@ namespace ClassWarehouseLibrary
             this.Name = details[3];
             this.Description = details[4];
         }
+
+        #region "Overrides"
+        public override string ToString()
+        {
+            return "Product " + "Id: " + Id + " Name: " + Name + " Description: " + Description;
+        }
+        public override bool Equals(object obj)
+        {
+            return obj is Product product &&
+                   Id.Equals(product.Id) &&
+                   Name.Equals(product.Name) &&
+                   Description.Equals(product.Description);
+        }
+        #endregion
     }
 }

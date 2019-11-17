@@ -173,5 +173,11 @@ namespace ClassWarehouseLibrary
             }
             return index;
         }
+
+        public override bool Equals(object obj)
+        {
+            DataContext refObj = (DataContext) obj;
+            return refObj.Equals(this);
+        }
     }
 }

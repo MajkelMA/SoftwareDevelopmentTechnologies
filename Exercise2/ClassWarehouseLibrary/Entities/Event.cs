@@ -33,13 +33,15 @@ namespace ClassWarehouseLibrary.Entities
             Description = description;
         }
 
+        public abstract string Serialize(ObjectIDGenerator idGenerator);
+
+        public abstract void Deserialize(string[] details, Dictionary<long, Object> objReferences);
+
+        #region "Overrides"
         public override string ToString()
         {
             return "Event" + " Id: " + Id + " Client: " + WarehouseClient + " Status: " + Status + " Description: " + Description;
         }
-
-        public abstract string Serialize(ObjectIDGenerator idGenerator);
-
-        public abstract void Deserialize(string[] details, Dictionary<long, Object> objReferences);
+        #endregion
     }
 }

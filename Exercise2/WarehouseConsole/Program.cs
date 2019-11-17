@@ -16,7 +16,7 @@ namespace WarehouseConsole
                 DataContext dataContext = new DataContext();
                 DataRepository dataRepository = new DataRepository(new AutoFillFull(), dataContext);
                 Console.Clear();
-                Console.WriteLine("Insert \"xml\" or \"own\"");
+                Console.WriteLine("Insert \"xml\" or \"own\"\n(press any key to exit)");
                 choice = Console.ReadLine();
                 if (choice == "xml")
                 {
@@ -63,6 +63,8 @@ namespace WarehouseConsole
                             break;
                     }
 
+
+                    //przykład z serializacją w OwnSerialization a nie w DataContext
                     //Console.WriteLine("Insert \"s\" - serialize or \"d\" - deserialize");
                     //string choice2 = Console.ReadLine();
                     //string result;

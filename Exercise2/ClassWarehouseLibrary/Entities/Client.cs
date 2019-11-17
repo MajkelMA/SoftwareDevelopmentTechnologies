@@ -19,20 +19,6 @@ namespace ClassWarehouseLibrary
         [DataMember]
         public String Email { get; set; }
 
-        public override bool Equals(object obj)
-        {
-            return obj is Client client &&
-                   Id.Equals(client.Id) &&
-                   Name == client.Name &&
-                   LastName == client.LastName &&
-                   Birthday == client.Birthday;
-        }
-
-        public override string ToString()
-        {
-            return "Client |" + "Id: " + Id + "| Name: " + Name + "| LastName: " + LastName + "| Birthday: " + Birthday.ToString() + "| Email: " + Email;
-        }
-
         public string Serialize(ObjectIDGenerator idGenerator)
         {
             return this.GetType().FullName + "|"
@@ -48,5 +34,21 @@ namespace ClassWarehouseLibrary
             Birthday = Convert.ToDateTime(details[5]);
             Email = details[6];
         }
+
+        #region "Overrides"
+        public override string ToString()
+        {
+            return "Client |" + "Id: " + Id + "| Name: " + Name + "| LastName: " + LastName + "| Birthday: " + Birthday.ToString() + "| Email: " + Email;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Client client &&
+                   Id.Equals(client.Id) &&
+                   Name.Equals(client.Name) &&
+                   LastName.Equals(client.LastName) &&
+                   Birthday.Equals(client.Birthday);
+        }
+        #endregion
     }
 }

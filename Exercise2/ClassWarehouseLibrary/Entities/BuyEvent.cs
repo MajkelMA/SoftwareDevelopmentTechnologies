@@ -8,20 +8,9 @@ namespace ClassWarehouseLibrary.Entities
     [DataContract]
     public class BuyEvent : Event
     {
-        public BuyEvent()
-        {
+        public BuyEvent() { }
 
-        }
-
-        public BuyEvent(Guid id, Client warehouseClient, EventStatus status, string description) : base(id, warehouseClient, status, description)
-        {
-
-        }
-
-        public override string ToString()
-        {
-            return base.ToString() + " - BuyEvent";
-        }
+        public BuyEvent(Guid id, Client warehouseClient, EventStatus status, string description) : base(id, warehouseClient, status, description) { }
 
         public override string Serialize(ObjectIDGenerator idGenerator)
         {
@@ -40,5 +29,12 @@ namespace ClassWarehouseLibrary.Entities
             Status = (EventStatus)objReferences[Int64.Parse(details[4])];
             Description = details[5];
         }
+
+        #region "Overrides"
+        public override string ToString()
+        {
+            return base.ToString() + " - BuyEvent";
+        }
+        #endregion
     }
 }

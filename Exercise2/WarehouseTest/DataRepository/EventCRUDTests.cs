@@ -2,7 +2,6 @@
 using ClassWarehouseLibrary.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.IO;
 
 namespace WarehouseTest
 {

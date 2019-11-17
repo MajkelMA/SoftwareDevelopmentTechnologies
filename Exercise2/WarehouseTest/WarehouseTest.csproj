@@ -63,6 +63,7 @@
     <Compile Include="Serialization\OwnRecursiveSerializationTest.cs" />
     <Compile Include="DataRepository\StatusCRUDTests.cs" />
     <Compile Include="Serialization\TestClass.cs" />
+    <Compile Include="Serialization\OwnSerializationTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
