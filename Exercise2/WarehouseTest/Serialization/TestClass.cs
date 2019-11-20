@@ -82,8 +82,6 @@ namespace WarehouseTest
 
         public string Serialize(ObjectIDGenerator idGenerator)
         {
-            Type type = this.GetType();
-
             string result = this.GetType().FullName + "|"
                     + idGenerator.GetId(this, out bool firstTime) + "|"
                     + Test2 + "|"
