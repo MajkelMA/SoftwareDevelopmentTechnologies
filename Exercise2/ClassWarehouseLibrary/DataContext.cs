@@ -16,7 +16,6 @@ namespace ClassWarehouseLibrary
     [KnownType(typeof(Status))]
     public class DataContext : IOwnSerialization<DataContext>
     {
-        private Dictionary<long, object> _objReferences = new Dictionary<long, object>();
 
         [DataMember]
         public Dictionary<Guid, Product> Products { get; set; }
@@ -90,6 +89,7 @@ namespace ClassWarehouseLibrary
 
         public DataContext Deserialize(string strToDeserialize)
         {
+           Dictionary<long, object> _objReferences = new Dictionary<long, object>();
             this.clear();
             string[] objArray = strToDeserialize.Split('\n');
 
@@ -102,42 +102,42 @@ namespace ClassWarehouseLibrary
                         Client client = new Client();
                         client.Deserialize(splitObjArray, _objReferences);
                         Clients.Add(client);
-                        this._objReferences.Add(Int64.Parse(splitObjArray[1]), client);
+                        _objReferences.Add(Int64.Parse(splitObjArray[1]), client);
                         break;
                     case 1:
                         Product product = new Product();
                         product.Deserialize(splitObjArray, _objReferences);
                         Products.Add(product.Id, product);
-                        this._objReferences.Add(Int64.Parse(splitObjArray[1]), product);
+                        _objReferences.Add(Int64.Parse(splitObjArray[1]), product);
                         break;
                     case 2:
                         Status status = new Status();
                         status.Deserialize(splitObjArray, _objReferences);
                         Statuses.Add(status);
-                        this._objReferences.Add(Int64.Parse(splitObjArray[1]), status);
+                        _objReferences.Add(Int64.Parse(splitObjArray[1]), status);
                         break;
                     case 3:
                         EventStatus eventStatus = new EventStatus();
                         eventStatus.Deserialize(splitObjArray, _objReferences);
-                        this._objReferences.Add(Int64.Parse(splitObjArray[1]), eventStatus);
+                        _objReferences.Add(Int64.Parse(splitObjArray[1]), eventStatus);
                         break;
                     case 4:
                         BuyEvent buyEvent = new BuyEvent();
                         buyEvent.Deserialize(splitObjArray, _objReferences);
                         Events.Add(buyEvent);
-                        this._objReferences.Add(Int64.Parse(splitObjArray[1]), buyEvent);
+                        _objReferences.Add(Int64.Parse(splitObjArray[1]), buyEvent);
                         break;
                     case 5:
                         SellEvent sellEvent = new SellEvent();
                         sellEvent.Deserialize(splitObjArray, _objReferences);
                         Events.Add(sellEvent);
-                        this._objReferences.Add(Int64.Parse(splitObjArray[1]), sellEvent);
+                        _objReferences.Add(Int64.Parse(splitObjArray[1]), sellEvent);
                         break;
                     case 6:
                         DestroyEvent destroyEvent = new DestroyEvent();
                         destroyEvent.Deserialize(splitObjArray, _objReferences);
                         Events.Add(destroyEvent);
-                        this._objReferences.Add(Int64.Parse(splitObjArray[1]), destroyEvent);
+                        _objReferences.Add(Int64.Parse(splitObjArray[1]), destroyEvent);
                         break;
                     default:
                         if (splitObjArray[0] == "")
