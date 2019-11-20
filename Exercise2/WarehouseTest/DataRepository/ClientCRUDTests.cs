@@ -1,6 +1,5 @@
 ﻿using ClassWarehouseLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ClassWarehouseLibrary.Entities;
 using System;
 
 
