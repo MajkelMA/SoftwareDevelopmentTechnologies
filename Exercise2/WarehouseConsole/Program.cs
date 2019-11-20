@@ -51,10 +51,12 @@ namespace WarehouseConsole
                         case "s":
                             ObjectIDGenerator idGenerator = new ObjectIDGenerator();
                             result = dataContext.Serialize(idGenerator);
-                            File.WriteAllText("own-serialization", result);
+                            WriteReadFile.Write("own-serialization", result);
+                            //File.WriteAllText("own-serialization", result);
                             break;
                         case "d":
-                            result = File.ReadAllText("own-serialization");
+                            //result = File.ReadAllText("own-serialization");
+                            result = WriteReadFile.Read("own-serialization");
                             dataContext = dataContext.Deserialize(result);
                             Console.WriteLine("Deserialized file:\n" + dataContext);
                             break;

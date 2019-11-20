@@ -9,7 +9,7 @@ namespace ClassWarehouseLibrary.Entities
     [KnownType(typeof(BuyEvent))]
     [KnownType(typeof(DestroyEvent))]
     [KnownType(typeof(SellEvent))]
-    public abstract class Event : IOwnFormatter
+    public abstract class Event : IOwnSerialization
     {
         [DataMember]
         public Guid Id { get; set; }

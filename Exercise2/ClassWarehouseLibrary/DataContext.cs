@@ -1,8 +1,11 @@
 ﻿using ClassWarehouseLibrary.Entities;
+using Serialization;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace ClassWarehouseLibrary
 {
@@ -11,7 +14,7 @@ namespace ClassWarehouseLibrary
     [KnownType(typeof(Client))]
     [KnownType(typeof(Event))]
     [KnownType(typeof(Status))]
-    public class DataContext
+    public class DataContext : IOwnSerialization<DataContext>
     {
         private Dictionary<long, object> _objReferences = new Dictionary<long, object>();
 

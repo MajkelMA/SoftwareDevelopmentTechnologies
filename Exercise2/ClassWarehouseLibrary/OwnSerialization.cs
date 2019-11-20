@@ -6,7 +6,7 @@ using Serialization;
 
 namespace ClassWarehouseLibrary
 {
-    public class OwnSerialization : IOwnFormatter<DataContext>
+    public class OwnSerialization : IOwnSerialization<DataContext>
     {
         private DataContext _dataContext;
         private List<string> _types = new List<string>() {

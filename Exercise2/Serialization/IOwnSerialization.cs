@@ -5,13 +5,13 @@ using System.Runtime.Serialization;
 
 namespace Serialization
 {
-    public interface IOwnFormatter
+    public interface IOwnSerialization
     {
         string Serialize(ObjectIDGenerator idGenerator);
         void Deserialize(string[] details, Dictionary<long, Object> objReferences);
     }
 
-    public interface IOwnFormatter<T>
+    public interface IOwnSerialization<T>
     {
         string Serialize(ObjectIDGenerator idGenerator);
         T Deserialize(string serializationString);

@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace ClassWarehouseLibrary
 {
     [DataContract]
-    public class Status : IOwnFormatter
+    public class Status : IOwnSerialization
     {
         [DataMember]
         public Guid Id { get; set; }
