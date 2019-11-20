@@ -12,12 +12,8 @@ namespace WarehouseTest
 
         public TestClass1()
         {
-            Test1 = "description1";
+
         }
-        //public override string ToString()
-        //{
-        //    return "Test1: " + Test1 + " | TestClass2: " + TestClass2 + "\n";
-        //}
         #endregion
 
         public string Serialize(ObjectIDGenerator idGenerator)
@@ -47,7 +43,11 @@ namespace WarehouseTest
             splitedDetials = splitedDetials[0].Split('|');
 
             idGenerator.GetId(this, out bool firstTime);
-            if (firstTime) objReferences.Add(Int64.Parse(splitedDetials[1]), this);
+            if (firstTime)
+            {
+                objReferences.Add(Int64.Parse(splitedDetials[1]), this);
+                this.Test1 = splitedDetials[2];
+            }
             if (TestClass2 == null)
             {
                 if (objReferences.ContainsKey(Int64.Parse(splitedDetials[3])))
@@ -70,13 +70,8 @@ namespace WarehouseTest
 
         public TestClass2()
         {
-            Test2 = "description2";
-        }
 
-        //public override string ToString()
-        //{
-        //    return "Test2: " + Test2 + " | TestClass1: " + TestClass1 + "\n";
-        //}
+        }
         #endregion
 
         public string Serialize(ObjectIDGenerator idGenerator)
@@ -106,7 +101,11 @@ namespace WarehouseTest
             splitedDetials = splitedDetials[0].Split('|');
 
             idGenerator.GetId(this, out bool firstTime);
-            if (firstTime) objReferences.Add(Int64.Parse(splitedDetials[1]), this);
+            if (firstTime)
+            {
+                objReferences.Add(Int64.Parse(splitedDetials[1]), this);
+                this.Test2 = splitedDetials[2];
+            }
             if (TestClass1 == null)
             {
                 if (objReferences.ContainsKey(Int64.Parse(splitedDetials[3])))

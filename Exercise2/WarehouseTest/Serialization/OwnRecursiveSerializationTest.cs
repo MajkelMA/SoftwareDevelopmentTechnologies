@@ -15,6 +15,11 @@ namespace WarehouseTest
             TestClass1 test3 = new TestClass1();
             TestClass2 test4 = new TestClass2();
 
+            test1.Test1 = "description1";
+            test2.Test2 = "description2";
+            test3.Test1 = "description3";
+            test4.Test2 = "description4";
+
             test1.TestClass2 = test2;
             test2.TestClass1 = test3;
             test3.TestClass2 = test4;
@@ -23,12 +28,12 @@ namespace WarehouseTest
             ObjectIDGenerator idGenerator = new ObjectIDGenerator();
             string result = test1.Serialize(idGenerator);
 
-            Assert.AreEqual(result, 
+            Assert.AreEqual(result,
                                     "WarehouseTest.TestClass1|1|description1|2|\n"
                                   + "WarehouseTest.TestClass2|2|description2|3|\n"
-                                  + "WarehouseTest.TestClass1|3|description1|4|\n"
-                                  + "WarehouseTest.TestClass2|4|description2|1|\n"
-                           );
+                                  + "WarehouseTest.TestClass1|3|description3|4|\n"
+                                  + "WarehouseTest.TestClass2|4|description4|1|\n"
+            );
         }
 
         [TestMethod]
@@ -38,6 +43,11 @@ namespace WarehouseTest
             TestClass2 test2 = new TestClass2();
             TestClass1 test3 = new TestClass1();
             TestClass2 test4 = new TestClass2();
+
+            test1.Test1 = "description1";
+            test2.Test2 = "description2";
+            test3.Test1 = "description3";
+            test4.Test2 = "description4";
 
             test1.TestClass2 = test2;
             test2.TestClass1 = test3;
@@ -53,6 +63,15 @@ namespace WarehouseTest
             deserialized.Deserialize(result, idGenerator, new Dictionary<long, object>());
 
             Assert.AreEqual(deserialized.TestClass2.TestClass1.TestClass2.TestClass1, deserialized);
+
+            idGenerator = new ObjectIDGenerator();
+            result = deserialized.Serialize(idGenerator);
+            Assert.AreEqual(result,
+                        "WarehouseTest.TestClass1|1|description1|2|\n"
+                      + "WarehouseTest.TestClass2|2|description2|3|\n"
+                      + "WarehouseTest.TestClass1|3|description3|4|\n"
+                      + "WarehouseTest.TestClass2|4|description4|1|\n"
+            );
         }
     }
 }
