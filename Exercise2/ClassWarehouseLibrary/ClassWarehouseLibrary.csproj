@@ -55,7 +55,6 @@
     <Compile Include="IDataRepository.cs" />
     <Compile Include="Entities\Status.cs" />
     <Compile Include="Entities\Product.cs" />
-    <Compile Include="OwnSerialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
