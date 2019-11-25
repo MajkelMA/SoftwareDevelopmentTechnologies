@@ -24,7 +24,7 @@ namespace ClassLibrary
             FloatProperty = info.GetSingle("FloatProperty");
             DateTimeProperty = info.GetDateTime("DateTimeProperty");
             StringProperty = info.GetString("StringProperty");
-            ClassCProperty = (ClassC)info.GetValue("ClassCProperty", typeof(ClassB));
+            ClassCProperty = (ClassC)info.GetValue("ClassCProperty", typeof(ClassC));
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)

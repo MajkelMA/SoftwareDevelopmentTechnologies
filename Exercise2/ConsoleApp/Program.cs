@@ -21,12 +21,12 @@ namespace ConsoleApp
                 IFormatter f = new OwnFormatter();
                 f.Serialize(s, classA);
             }
-            //using (FileStream s = new FileStream("test.txt", FileMode.Open))
-            //{
-            //    IFormatter f = new OwnFormatter();
-            //    ClassA testClass = (ClassA)f.Deserialize(s);
-            //    //System.Console.WriteLine(testClass.ClassBProperty.ClassCProperty.ClassAProperty.StringProperty);
-            //}
+            using (FileStream s = new FileStream("test.txt", FileMode.Open))
+            {
+                IFormatter f = new OwnFormatter();
+                ClassA testClass = (ClassA)f.Deserialize(s);
+                System.Console.WriteLine(testClass.ClassBProperty.ClassCProperty.ClassAProperty.StringProperty);
+            }
             System.Console.Read();
 
         }
