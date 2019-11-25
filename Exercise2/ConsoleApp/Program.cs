@@ -10,9 +10,9 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            ClassA classA = new ClassA(1.2f, new DateTime(1997, 1, 1, 0, 0, 0), "test", null);
+            ClassA classA = new ClassA(1.2f, new DateTime(1997, 1, 1, 0, 0, 0), "testf=frwgdrdetg", null);
             ClassB classB = new ClassB(2.2f, new DateTime(1997, 2, 1, 0, 0, 0), "testB", null);
-            ClassC classC = new ClassC(3.2f, new DateTime(1997, 3, 1, 0, 0, 0), "testC", classA);
+            ClassC classC = new ClassC(3.2f, new DateTime(1997, 3, 1, 0, 0, 0), "testC", null);
 
             classA.ClassBProperty = classB;
             classB.ClassCProperty = classC;
@@ -25,7 +25,7 @@ namespace ConsoleApp
             {
                 IFormatter f = new OwnFormatter();
                 ClassA testClass = (ClassA)f.Deserialize(s);
-                System.Console.WriteLine(testClass.ClassBProperty.ClassCProperty.ClassAProperty.StringProperty);
+                System.Console.WriteLine(testClass.StringProperty);
             }
             System.Console.Read();
 

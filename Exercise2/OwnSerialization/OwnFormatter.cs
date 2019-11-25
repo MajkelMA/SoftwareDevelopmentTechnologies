@@ -85,7 +85,7 @@ namespace OwnSerialization
 
         protected void WriteString(object obj, string name)
         {
-            DataRow += "|" + obj.GetType() + "=" + name + "=" + (String)obj;
+            DataRow += "|" + obj.GetType() + "=" + name + "=" + "\"" + (String)obj + "\"";
         }
 
         protected void WriteObject(object obj, string name, Type type)
@@ -100,7 +100,7 @@ namespace OwnSerialization
             }
             else
             {
-                DataRow += "|" + name + "=-1";
+                DataRow += "|" + "null" + "=" + name + "=-1";
             }
         }
 
@@ -251,11 +251,22 @@ namespace OwnSerialization
                 Type typeToSave = Binder.BindToType(splitedDeserializationInfoRow[0], data[0]);
                 if(typeToSave == null)
                 {
-                    SaveParsedValueToSerializationInfo(info, Type.GetType(data[0]), data[1], data[2]);
+                    if (!data[0].Equals("null"))
+                    { 
+                        SaveParsedValueToSerializationInfo(info, Type.GetType(data[0]), data[1], data[2]);
+                    }
+                    else
+                    {
+                        info.AddValue(data[1], null);
+                    }
+
                 }
                 else
                 {
-                    info.AddValue(data[1], References[data[2]], typeToSave);
+                    if (!data[2].Equals("-1"))
+                    {
+                        info.AddValue(data[1], References[data[2]], typeToSave);
+                    }
                 }
             }
         }
