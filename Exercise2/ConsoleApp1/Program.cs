@@ -148,6 +148,7 @@ namespace ConsoleApp
                                         ClassA testClass = (ClassA)f.Deserialize(s);
                                         if (testClass.ClassBProperty.ClassCProperty.ClassAProperty == testClass)
                                             Console.WriteLine("Deserialization is completed!");
+                                        else Console.WriteLine("Deserialization is failed!");
                                     }
                                     break;
                                 case "B":
@@ -157,6 +158,7 @@ namespace ConsoleApp
                                         ClassB testClass = (ClassB)f.Deserialize(s);
                                         if (testClass.ClassCProperty.ClassAProperty.ClassBProperty == testClass)
                                             Console.WriteLine("Deserialization is completed!");
+                                        else Console.WriteLine("Deserialization is failed!");
                                     }
                                     break;
                                 case "C":
@@ -166,6 +168,7 @@ namespace ConsoleApp
                                         ClassC testClass = (ClassC)f.Deserialize(s);
                                         if (testClass.ClassAProperty.ClassBProperty.ClassCProperty == testClass)
                                             Console.WriteLine("Deserialization is completed!");
+                                        else Console.WriteLine("Deserialization is failed!");
                                     }
                                     break;
                                 default:
