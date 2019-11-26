@@ -3,7 +3,6 @@ using OwnSerialization;
 using System;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
 
 namespace ConsoleApp
 {

@@ -248,10 +248,10 @@ namespace OwnSerialization
             {
                 string[] data = splitedDeserializationInfoRow[i].Split('=');
                 Type typeToSave = Binder.BindToType(splitedDeserializationInfoRow[0], data[0]);
-                if(typeToSave == null)
+                if (typeToSave == null)
                 {
                     if (!data[0].Equals("null"))
-                    { 
+                    {
                         SaveParsedValueToSerializationInfo(info, Type.GetType(data[0]), data[1], data[2]);
                     }
                     else
