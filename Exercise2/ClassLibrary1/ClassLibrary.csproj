@@ -42,8 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassAPrim.cs" />
     <Compile Include="ClassA.cs" />
+    <Compile Include="ClassBPrim.cs" />
     <Compile Include="ClassB.cs" />
+    <Compile Include="ClassCPrim.cs" />
     <Compile Include="ClassC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
 
@@ -17,7 +18,7 @@ namespace OwnSerialization
 
         public void serialize()
         {
-            DataContractSerializer ser = new DataContractSerializer(typeof(T), null, int.MaxValue, false, true, null, null);
+            DataContractSerializer ser = new DataContractSerializer(typeof(T), null, Int32.MaxValue, false, true, null, null);
             XmlWriter writer = XmlWriter.Create(this._fileName, new XmlWriterSettings() { Indent = true });
             ser.WriteObject(writer, this._obj);
             writer.Close();
