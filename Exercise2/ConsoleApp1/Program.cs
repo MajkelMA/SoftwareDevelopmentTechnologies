@@ -63,18 +63,21 @@ namespace ConsoleApp
                                     ClassAPrim deserializedClassA = xmlClassA.deserialize();
                                     if (deserializedClassA.ClassBProperty.ClassCProperty.ClassAProperty == deserializedClassA)
                                         Console.WriteLine("Deserialization is completed!");
+                                    else Console.WriteLine("Deserialization is failed!");
                                     break;
                                 case "B":
                                     XmlSerialization<ClassBPrim> xmlClassB = new XmlSerialization<ClassBPrim>("xml-b.xml", new ClassBPrim());
                                     ClassBPrim deserializedClassB = xmlClassB.deserialize();
                                     if (deserializedClassB.ClassCProperty.ClassAProperty.ClassBProperty == deserializedClassB)
                                         Console.WriteLine("Deserialization is completed!");
+                                    else Console.WriteLine("Deserialization is failed!");
                                     break;
                                 case "C":
                                     XmlSerialization<ClassCPrim> xmlClassC = new XmlSerialization<ClassCPrim>("xml-c.xml", new ClassCPrim());
                                     ClassCPrim deserializedClassC = xmlClassC.deserialize();
                                     if (deserializedClassC.ClassAProperty.ClassBProperty.ClassCProperty == deserializedClassC)
                                         Console.WriteLine("Deserialization is completed!");
+                                    else Console.WriteLine("Deserialization is failed!");
                                     break;
                                 default:
                                     Console.WriteLine("Invalid input!");
@@ -179,8 +182,6 @@ namespace ConsoleApp
                 Console.WriteLine("Click any to continue");
                 Console.ReadLine();
             } while (choice == "xml" || choice == "own");
-
-            System.Console.Read();
         }
     }
 }
