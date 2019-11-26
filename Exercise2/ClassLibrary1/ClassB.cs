@@ -1,16 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace ClassLibrary
 {
+    [DataContract]
     public class ClassB : ISerializable
     {
+        [DataMember]
         public float FloatProperty { get; set; }
+        [DataMember]
         public DateTime DateTimeProperty { get; set; }
+        [DataMember]
         public string StringProperty { get; set; }
+        [DataMember]
         public ClassC ClassCProperty { get; set; }
+
         public ClassB(float floatProperty, DateTime dateTimeProperty, string stringProperty, ClassC classCProperty)
         {
             FloatProperty = floatProperty;
