@@ -33,5 +33,10 @@ namespace ClassLibrary
             info.AddValue("StringProperty", StringProperty);
             info.AddValue("ClassBProperty", ClassBProperty, typeof(ClassB));
         }
+
+        public override string ToString()
+        {
+            return "String property: " + StringProperty + " DateTime property: " + DateTimeProperty + " FloatProperty: " + FloatProperty;
+        }
     }
 }

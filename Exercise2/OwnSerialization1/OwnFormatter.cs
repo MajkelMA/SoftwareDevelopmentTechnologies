@@ -67,7 +67,7 @@ namespace OwnSerialization
 
         protected override void WriteDateTime(DateTime val, string name)
         {
-            DataRow += "|" + val.GetType() + "=" + name + "=" + val.ToUniversalTime().ToString();
+            DataRow += "|" + val.GetType() + "=" + name + "=" + val.ToUniversalTime();
         }
 
         protected override void WriteObjectRef(object obj, string name, Type memberType)

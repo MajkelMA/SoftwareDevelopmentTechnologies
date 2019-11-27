@@ -147,7 +147,13 @@ namespace ConsoleApp
                                         IFormatter f = new OwnFormatter();
                                         ClassA testClass = (ClassA)f.Deserialize(s);
                                         if (testClass.ClassBProperty.ClassCProperty.ClassAProperty == testClass)
+                                        {
                                             Console.WriteLine("Deserialization is completed!");
+                                            Console.WriteLine(testClass);
+                                            Console.WriteLine(testClass.ClassBProperty);
+                                            Console.WriteLine(testClass.ClassBProperty.ClassCProperty);
+                                            Console.WriteLine(testClass.ClassBProperty.ClassCProperty.ClassAProperty);
+                                        }
                                         else Console.WriteLine("Deserialization is failed!");
                                     }
                                     break;
@@ -157,7 +163,13 @@ namespace ConsoleApp
                                         IFormatter f = new OwnFormatter();
                                         ClassB testClass = (ClassB)f.Deserialize(s);
                                         if (testClass.ClassCProperty.ClassAProperty.ClassBProperty == testClass)
+                                        {
                                             Console.WriteLine("Deserialization is completed!");
+                                            Console.WriteLine(testClass);
+                                            Console.WriteLine(testClass.ClassCProperty);
+                                            Console.WriteLine(testClass.ClassCProperty.ClassAProperty);
+                                            Console.WriteLine(testClass.ClassCProperty.ClassAProperty.ClassBProperty);
+                                        }
                                         else Console.WriteLine("Deserialization is failed!");
                                     }
                                     break;
@@ -167,7 +179,13 @@ namespace ConsoleApp
                                         IFormatter f = new OwnFormatter();
                                         ClassC testClass = (ClassC)f.Deserialize(s);
                                         if (testClass.ClassAProperty.ClassBProperty.ClassCProperty == testClass)
+                                        {
                                             Console.WriteLine("Deserialization is completed!");
+                                            Console.WriteLine(testClass);
+                                            Console.WriteLine(testClass.ClassAProperty);
+                                            Console.WriteLine(testClass.ClassAProperty.ClassBProperty);
+                                            Console.WriteLine(testClass.ClassAProperty.ClassBProperty.ClassCProperty);
+                                        }
                                         else Console.WriteLine("Deserialization is failed!");
                                     }
                                     break;
