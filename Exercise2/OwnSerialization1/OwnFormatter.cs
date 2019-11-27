@@ -278,7 +278,7 @@ namespace OwnSerialization
                     info.AddValue(name, Single.Parse(val, System.Globalization.CultureInfo.InvariantCulture));
                     break;
                 case "System.DateTime":
-                    info.AddValue(name, DateTime.Parse(val));
+                    info.AddValue(name, DateTime.Parse(val, null, System.Globalization.DateTimeStyles.AssumeLocal));
                     break;
                 case "System.String":
                     info.AddValue(name, val);
