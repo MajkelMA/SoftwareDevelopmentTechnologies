@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LINQ
 {
@@ -13,7 +10,7 @@ namespace LINQ
         public static List<Product> GetProductsByName(string namePart)
         {
             Table<Product> products = DataContext.GetTable<Product>();
-            List<Product> result = (from product in products 
+            List<Product> result = (from product in products
                                     where product.Name.Contains(namePart)
                                     select product).ToList();
             return result;
@@ -39,8 +36,11 @@ namespace LINQ
 
         public static string GetProductVendorByProductName(string productName)
         {
-            //dla michała
-            return null;
+            Table<ProductVendor> productVendors = DataContext.GetTable<ProductVendor>();
+            string result = (from productVendor in productVendors
+                             where productVendor.Product.Name.Equals(productName)
+                             select productVendor.Vendor.Name).Single();
+            return result;
         }
 
         public static List<Product> GetProductsWithNRecentReviews(int howManyReviews)
@@ -50,14 +50,20 @@ namespace LINQ
             List<Product> result = (from productReview in productReviews
                                     orderby productReview.ReviewDate descending
                                     select productReview.Product).Take(howManyReviews).ToList();
-
             return result.Distinct().ToList();
         }
 
         public static List<Product> GetNRecentlyReviewedProducts(int howManyProducts)
         {
-            //dla michała
-            return null;
+            Table<ProductReview> productReviews = DataContext.GetTable<ProductReview>();
+
+            List<Product> result = (from productReview in productReviews
+                                    orderby productReview.ReviewDate descending
+                                    group productReview.Product by productReview.ProductID into g
+                                    select g.First())
+                        .Take(howManyProducts)
+                        .ToList();
+            return result;
         }
 
         public static List<Product> GetNProductFromCategory(string categoryName, int n)
@@ -70,10 +76,23 @@ namespace LINQ
             return result;
         }
 
-        public static int GetTotalStandardCostByCategory(ProductCategory category)
+        public static decimal GetTotalStandardCostByCategory(ProductCategory category)
         {
-            //dla michała
-            return 0;
+            Table<Product> products = DataContext.GetTable<Product>();
+            decimal result = (from product in products
+                              where product.ProductSubcategory.ProductCategory.Equals(category)
+                              select product.StandardCost).Sum();
+            return result;
         }
+
+        public static decimal GetTotalStandardCostByCategory(string category)
+        {
+            Table<Product> products = DataContext.GetTable<Product>();
+            decimal result = (from product in products
+                              where product.ProductSubcategory.ProductCategory.Name.Equals(category)
+                              select product.StandardCost).Sum();
+            return result;
+        }
+
     }
 }

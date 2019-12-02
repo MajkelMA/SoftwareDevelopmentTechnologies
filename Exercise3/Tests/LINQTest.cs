@@ -46,12 +46,32 @@ namespace Tests
         }
 
         [TestMethod]
-        public void GetNProductFromCategorytest()
+        public void GetNProductFromCategoryTest()
         {
             List<Product> products = DataService.GetNProductFromCategory("Bikes", 2);
             Assert.AreEqual(2, products.Count);
             Assert.AreEqual("Bikes", products[0].ProductSubcategory.ProductCategory.Name);
         }
 
+        [TestMethod]
+        public void GetProductVendorByProductNameTest()
+        {
+            string vendorName = DataService.GetProductVendorByProductName("Bearing Ball");
+            Assert.AreEqual("Wood Fitness", vendorName);
+        }
+
+        [TestMethod]
+        public void GetNRecentlyReviewedProductsTest()
+        {
+            List<Product> products = DataService.GetNRecentlyReviewedProducts(4);
+            Assert.AreEqual(3, products.Count);
+        }
+
+        [TestMethod]
+        public void GetTotalStandardCostByCategoryTest()
+        {
+            decimal cost = DataService.GetTotalStandardCostByCategory("Bikes");
+            Assert.AreEqual(92092.8230m, cost);
+        }
     }
 }
