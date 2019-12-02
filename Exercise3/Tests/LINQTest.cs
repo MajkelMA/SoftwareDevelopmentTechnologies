@@ -28,6 +28,15 @@ namespace Tests
         }
 
         [TestMethod]
+        public void GetProductNamesByVendorNameTest()
+        {
+            List<string> products = DataService.GetProductNamesByVendorName("Comfort Road Bicycles");
+            List<string> products2 = DataService.GetProductNamesByVendorName("");
+            Assert.AreEqual(2, products.Count);
+            Assert.AreEqual(0, products2.Count);
+        }
+
+        [TestMethod]
         public void GetProductsWithNRecentReviewsTest()
         {
             List<Product> products = DataService.GetProductsWithNRecentReviews(4);
@@ -35,5 +44,14 @@ namespace Tests
             Assert.AreEqual(3, products.Count);
             Assert.AreEqual(0, products2.Count);
         }
+
+        [TestMethod]
+        public void GetNProductFromCategorytest()
+        {
+            List<Product> products = DataService.GetNProductFromCategory("Bikes", 2);
+            Assert.AreEqual(2, products.Count);
+            Assert.AreEqual("Bikes", products[0].ProductSubcategory.ProductCategory.Name);
+        }
+
     }
 }
