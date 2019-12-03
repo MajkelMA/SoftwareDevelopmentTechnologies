@@ -19,7 +19,6 @@ namespace LINQ
             return products.Where(product => product.ProductSubcategory == null).ToList();
         }
 
-
         public static string GetProductNameAndSuppliers_QuerySyntax(this List<Product> products, List<ProductVendor> productVendors)
         {
             string result = "";
@@ -32,6 +31,7 @@ namespace LINQ
             {
                 result += item.productName + " - " + item.productVendorName + "\n";
             }
+
             return result;
         }
     }

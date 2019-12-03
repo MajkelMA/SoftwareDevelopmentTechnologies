@@ -7,6 +7,7 @@ namespace LINQ
     public class DataService
     {
         private static TablesDataContext DataContext = new TablesDataContext();
+
         public static List<Product> GetProductsByName(string namePart)
         {
             Table<Product> products = DataContext.GetTable<Product>();
@@ -91,6 +92,23 @@ namespace LINQ
             decimal result = (from product in products
                               where product.ProductSubcategory.ProductCategory.Name.Equals(category)
                               select product.StandardCost).Sum();
+            return result;
+        }
+
+        public static Product GetProductByName(string productName)
+        {
+            Table<Product> products = DataContext.GetTable<Product>();
+            Product result = (from product in products
+                              where product.Name.Equals(productName)
+                              select product).Single();
+            return result;
+        }
+
+        public static List<ProductVendor> GetAllProductVendors()
+        {
+            Table<ProductVendor> productVendors = DataContext.GetTable<ProductVendor>();
+            List<ProductVendor> result = (from productVendor in productVendors
+                                          select productVendor).ToList();
             return result;
         }
 

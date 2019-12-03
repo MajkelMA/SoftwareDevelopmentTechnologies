@@ -1,6 +1,7 @@
 ﻿using LINQ;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Data.Linq;
 
 namespace Tests
 {
@@ -72,6 +73,16 @@ namespace Tests
         {
             decimal cost = DataService.GetTotalStandardCostByCategory("Bikes");
             Assert.AreEqual(92092.8230m, cost);
+        }
+
+        [TestMethod]
+        public void GetProductNameAndSuppliers_QuerySyntaxTest()
+        {
+            List<Product> products = new List<Product>() { DataService.GetProductByName("LL Crankarm") };
+            List <ProductVendor> productVendors = DataService.GetAllProductVendors();
+            string description = products.GetProductNameAndSuppliers_QuerySyntax(productVendors);
+            Assert.AreEqual(description, "LL Crankarm - Vision Cycles, Inc." + "\n"
+                                       + "LL Crankarm - Proseware, Inc." + "\n");
         }
     }
 }
