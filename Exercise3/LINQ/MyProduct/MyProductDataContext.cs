@@ -23,7 +23,7 @@ namespace LINQ.MyProduct
         public bool Delete(int id)
         {
             return myProducts.Remove((from product in myProducts
-                                      where product.productID.Equals(id)
+                                      where product.ProductID.Equals(id)
                                       select product).Single());
         }
 
@@ -35,7 +35,7 @@ namespace LINQ.MyProduct
         public bool Update(MyProduct item)
         {
             MyProduct myProduct = (from product in myProducts
-                                   where product.productID.Equals(item.productID)
+                                   where product.ProductID.Equals(item.ProductID)
                                    select product).Single();
             if (myProduct != null)
             {

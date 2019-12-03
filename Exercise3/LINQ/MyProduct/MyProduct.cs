@@ -1,20 +1,23 @@
 ﻿using System.ComponentModel;
+using System.Data.Linq;
 
 namespace LINQ.MyProduct
 {
-    public class MyProduct : INotifyPropertyChanging, INotifyPropertyChanged
+    public class MyProduct : Product
     {
-        public int productID { get; set; }
+        //public int productID { get; set; }
 
-        public string name { get; set; }
+        //public string name { get; set; }
 
-        public string productNumber { get; set; }
+        //public string productNumber { get; set; }
 
         public MyProduct(Product product)
         {
-            productID = product.ProductID;
-            name = product.Name;
-            productNumber = product.ProductNumber;
+            this.ProductID = product.ProductID;
+            this.Name = product.Name;
+            this.ProductNumber = product.ProductNumber;
+            this.ProductReviews = product.ProductReviews;
+            this.ProductSubcategory = product.ProductSubcategory;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
