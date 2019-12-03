@@ -1,6 +1,8 @@
 ﻿using LINQ;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 using System.Collections.Generic;
+using System.Data.Linq;
 
 namespace Tests
 {
@@ -73,5 +75,42 @@ namespace Tests
             decimal cost = DataService.GetTotalStandardCostByCategory("Bikes");
             Assert.AreEqual(92092.8230m, cost);
         }
+
+        [TestMethod]
+        public void GetProductWithoutCategory_QuerySyntaxTest()
+        {
+            TablesDataContext dataContext = new TablesDataContext();
+            Table<Product> table = dataContext.GetTable<Product>();
+            List<Product> products = table.ToList();
+            products = products.GetProductsWithoutCategory_QuerySyntax();
+            Assert.AreEqual(209, products.Count);
+
+        }
+
+        [TestMethod]
+        public void GetProductWithoutCategory_MethodSyntaxTest()
+        {
+            TablesDataContext dataContext = new TablesDataContext();
+            Table<Product> table = dataContext.GetTable<Product>();
+            List<Product> products = table.ToList();
+            products = products.GetProductsWithoutCategory_MethodSyntax();
+            Assert.AreEqual(209, products.Count);
+
+        }
+
+        [TestMethod]
+        public void PaginateTest()
+        {
+            TablesDataContext dataContext = new TablesDataContext();
+            Table<Product> table = dataContext.GetTable<Product>();
+            List<Product> products = table.ToList();
+
+            List<Product> products2 = products.Paginate(10, 0);
+            Assert.AreEqual(10, products2.Count);
+            for(int i = 0; i < 10; i++)
+            {
+                Assert.AreEqual(products[i], products2[i]);
+            }
+        } 
     }
 }
