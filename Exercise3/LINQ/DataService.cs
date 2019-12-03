@@ -112,5 +112,12 @@ namespace LINQ
             return result;
         }
 
+        public static List<Product> GetAllProduct()
+        {
+            Table<Product> products = DataContext.GetTable<Product>();
+            List<Product> result = (from product in products
+                                    select product).ToList();
+            return result;
+        }
     }
 }

@@ -20,6 +20,12 @@ namespace LINQ.MyProduct
             this.ProductSubcategory = product.ProductSubcategory;
         }
 
+        public override bool Equals(object obj)
+        {
+            MyProduct product = (MyProduct)obj;
+            return this.ProductID.Equals(product.ProductID);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public event PropertyChangingEventHandler PropertyChanging;
     }

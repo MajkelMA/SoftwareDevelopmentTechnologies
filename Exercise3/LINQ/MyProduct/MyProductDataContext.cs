@@ -39,10 +39,26 @@ namespace LINQ.MyProduct
                                    select product).Single();
             if (myProduct != null)
             {
-                myProduct = item;
+                myProduct.Name = item.Name;
+                myProduct.ProductNumber = item.ProductNumber;
+                myProduct.ProductReviews = item.ProductReviews;
+                myProduct.ProductSubcategory = item.ProductSubcategory;
                 return true;
             }
             return false;
+        }
+
+        public void Add(List<MyProduct> list)
+        {
+            myProducts.AddRange(list);
+        }
+
+        public MyProduct Get(int id)
+        {
+            MyProduct myProduct = (from product in myProducts
+                                   where product.ProductID.Equals(id)
+                                   select product).Single();
+            return myProduct;
         }
     }
 }

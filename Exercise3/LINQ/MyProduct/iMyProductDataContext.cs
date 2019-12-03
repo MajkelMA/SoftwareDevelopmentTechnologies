@@ -10,7 +10,11 @@ namespace LINQ.MyProduct
     {
         void Add(T item);
 
+        void Add(List<T> list);
+
         bool Delete(int id);
+
+        T Get(int id);
 
         List<T> GetAll();
 
