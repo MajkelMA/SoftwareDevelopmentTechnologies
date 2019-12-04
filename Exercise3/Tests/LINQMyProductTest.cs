@@ -81,19 +81,29 @@ namespace Tests
         [TestMethod]
         public void GetTotalStandardCostByCategoryStringTest()
         {
-
+            MyProductDataContext myProductDataContext = new MyProductDataContext();
+            MyProductRepository myProductRepository = new MyProductRepository(myProductDataContext);
+            decimal cost = myProductRepository.GetTotalStandardCostByCategory("bikes");
+            Assert.AreEqual(92092.8230m, cost);
         }
 
         [TestMethod]
         public void GetTotalStandardCostByCategoryTest()
         {
-
+            //Czemu z obiektem :'(
         }
 
         [TestMethod]
         public void GetProductsByName()
         {
-
+            MyProductDataContext myProductDataContext = new MyProductDataContext();
+            MyProductRepository myProductRepository = new MyProductRepository(myProductDataContext);
+            List<MyProduct> products = myProductRepository.GetProductsByName("Women's");
+            List<MyProduct> products2 = myProductRepository.GetProductsByName("Touring-3000 Yellow, 50");
+            List<MyProduct> products3 = myProductRepository.GetProductsByName("test");
+            Assert.AreEqual(6, products.Count);
+            Assert.AreEqual(1, products2.Count);
+            Assert.AreEqual(0, products3.Count);
         }
     }
 }
