@@ -13,18 +13,24 @@ namespace LINQ.MyProduct
             this.myProductDataContext = myProductDataContext;
         }
 
+        public List<MyProduct> GetMyProducts()
+        {
+            return myProductDataContext.GetAll();
+        }
+
         public List<MyProduct> GetProductsByName(string productName)
         {
             List<MyProduct> result = (from product in myProductDataContext.GetAll()
-                                      where product.Name.Equals(productName)
+                                      where product.Name.Contains(productName)
                                       select product).ToList();
+
             return result;
         }
 
         public List<MyProduct> GetNMyProductFromCategory(string categoryName, int n)
         {
             List<MyProduct> result = (from product in myProductDataContext.GetAll()
-                                      where product.ProductSubcategory.ProductCategory.Name.Equals(categoryName)
+                                      where product.ProductSubcategory != null && product.ProductSubcategory.ProductCategory.Name.Equals(categoryName)
                                       select product).Take(n).ToList();
             return result;
         }
@@ -32,7 +38,7 @@ namespace LINQ.MyProduct
         public decimal GetTotalStandardCostByCategory(ProductCategory category)
         {
             decimal result = (from product in myProductDataContext.GetAll()
-                              where product.ProductSubcategory.ProductCategory.Equals(category)
+                              where product.ProductSubcategory != null && product.ProductSubcategory.ProductCategory.Equals(category)
                               select product.StandardCost).Sum();
             return result;
         }
@@ -40,7 +46,7 @@ namespace LINQ.MyProduct
         public decimal GetTotalStandardCostByCategory(string category)
         {
             decimal result = (from product in myProductDataContext.GetAll()
-                              where product.ProductSubcategory.ProductCategory.Name.Equals(category)
+                              where product.ProductSubcategory != null && product.ProductSubcategory.ProductCategory.Name.Contains(category)
                               select product.StandardCost).Sum();
             return result;
         }

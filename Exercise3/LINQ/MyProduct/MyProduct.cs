@@ -3,21 +3,25 @@ using System.Data.Linq;
 
 namespace LINQ.MyProduct
 {
-    public class MyProduct : Product
+    public class MyProduct
     {
-        //public int productID { get; set; }
+        public int ProductID { get; set; }
+        public string Name { get; set; }
+        public string ProductNumber { get; set; }
+        public EntitySet<ProductReview> ProductReviews { get; set; }
+        public int? ProductSubcategoryID { get; set; }
+        public ProductSubcategory ProductSubcategory { get; set; }
+        public decimal StandardCost { get; set; }
 
-        //public string name { get; set; }
-
-        //public string productNumber { get; set; }
-
-        public MyProduct(Product product)
+        public MyProduct(Product product) 
         {
             this.ProductID = product.ProductID;
             this.Name = product.Name;
             this.ProductNumber = product.ProductNumber;
             this.ProductReviews = product.ProductReviews;
+             this.ProductSubcategoryID = product.ProductSubcategoryID;
             this.ProductSubcategory = product.ProductSubcategory;
+            this.StandardCost = product.StandardCost;
         }
 
         public override bool Equals(object obj)
@@ -26,7 +30,7 @@ namespace LINQ.MyProduct
             return this.ProductID.Equals(product.ProductID);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event PropertyChangingEventHandler PropertyChanging;
+
+
     }
 }

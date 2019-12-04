@@ -9,29 +9,35 @@ namespace Tests
     [TestClass]
     public class LINQMyProductTest
     {
-        private List<MyProduct> insertProductsFromBase(int number)
+        private List<MyProduct> insertProductsFromBase()
         {
-            return (from product in DataService.GetAllProduct()
-                    orderby product.Name ascending
-                    select new MyProduct(product)).Take(number).ToList();
+            var test = (from product in DataService.GetAllProduct()
+                    select new MyProduct(product)).ToList();
+
+
+            return test;
+
+            //return (from product in DataService.GetAllProduct()
+            //        orderby product.Name ascending
+            //        select new MyProduct(product)).Take(number).ToList();
         }
 
         [TestMethod]
         public void DataContextDeleteTest()
         {
             MyProductDataContext myProductDataContext = new MyProductDataContext();
-            myProductDataContext.Add(insertProductsFromBase(100));
-            Assert.AreEqual(myProductDataContext.GetAll().Count, 100);
+            myProductDataContext.Add(insertProductsFromBase());
+            Assert.AreEqual(myProductDataContext.GetAll().Count, 504);
 
             myProductDataContext.Delete((new MyProduct(DataService.GetProductByName("Adjustable Race")).ProductID));
-            Assert.AreEqual(myProductDataContext.GetAll().Count, 99);
+            Assert.AreEqual(myProductDataContext.GetAll().Count, 503);
         }
 
         [TestMethod]
         public void DataContextUpdateTest()
         {
             MyProductDataContext myProductDataContext = new MyProductDataContext();
-            myProductDataContext.Add(insertProductsFromBase(100));
+            myProductDataContext.Add(insertProductsFromBase());
 
             MyProduct myProduct = new MyProduct(DataService.GetProductByName("Adjustable Race"));
 
@@ -57,46 +63,62 @@ namespace Tests
         public void DataContextAddRangeTest()
         {
             MyProductDataContext myProductDataContext = new MyProductDataContext();
-            myProductDataContext.Add(insertProductsFromBase(100));
-            Assert.AreEqual(myProductDataContext.GetAll().Count, 100);
+            myProductDataContext.Add(insertProductsFromBase());
+            Assert.AreEqual(myProductDataContext.GetAll().Count, 504);
         }
 
         [TestMethod]
         public void DataContextGetAllTest()
         {
             MyProductDataContext myProductDataContext = new MyProductDataContext();
-            myProductDataContext.Add(insertProductsFromBase(100));
-            Assert.AreEqual(myProductDataContext.GetAll().Count, 100);
+            myProductDataContext.Add(insertProductsFromBase());
+            Assert.AreEqual(myProductDataContext.GetAll().Count, 504);
         }
 
         [TestMethod]
         public void GetNMyProductFromCategoryTest()
         {
             MyProductDataContext myProductDataContext = new MyProductDataContext();
-            myProductDataContext.Add(insertProductsFromBase(100));
-            Assert.AreEqual(myProductDataContext.GetAll().Count, 100);
+            myProductDataContext.Add(insertProductsFromBase());
             MyProductRepository myProductRepository = new MyProductRepository(myProductDataContext);
+
+            List<MyProduct> list = myProductRepository.GetNMyProductFromCategory("Bikes", 3);
+            Assert.AreEqual(list.Count, 3);
+            Assert.AreEqual(list[0].ProductSubcategory.ProductCategory.Name, "Bikes");
+            Assert.AreEqual(list[1].ProductSubcategory.ProductCategory.Name, "Bikes");
+            Assert.AreEqual(list[2].ProductSubcategory.ProductCategory.Name, "Bikes");
         }
 
         [TestMethod]
         public void GetTotalStandardCostByCategoryStringTest()
         {
             MyProductDataContext myProductDataContext = new MyProductDataContext();
+            myProductDataContext.Add(insertProductsFromBase());
             MyProductRepository myProductRepository = new MyProductRepository(myProductDataContext);
-            decimal cost = myProductRepository.GetTotalStandardCostByCategory("bikes");
+
+            decimal cost = myProductRepository.GetTotalStandardCostByCategory("Bikes");
             Assert.AreEqual(92092.8230m, cost);
         }
 
         [TestMethod]
         public void GetTotalStandardCostByCategoryTest()
         {
-            //Czemu z obiektem :'(
+            MyProductDataContext myProductDataContext = new MyProductDataContext();
+            myProductDataContext.Add(insertProductsFromBase());
+            MyProductRepository myProductRepository = new MyProductRepository(myProductDataContext);
+
+            List<MyProduct> list = myProductRepository.GetNMyProductFromCategory("Bikes", 1);
+            ProductCategory productCategory = list[0].ProductSubcategory.ProductCategory;
+
+            decimal cost = myProductRepository.GetTotalStandardCostByCategory(productCategory);
+            Assert.AreEqual(92092.8230m, cost);
         }
 
         [TestMethod]
         public void GetProductsByName()
         {
             MyProductDataContext myProductDataContext = new MyProductDataContext();
+            myProductDataContext.Add(insertProductsFromBase());
             MyProductRepository myProductRepository = new MyProductRepository(myProductDataContext);
             List<MyProduct> products = myProductRepository.GetProductsByName("Women's");
             List<MyProduct> products2 = myProductRepository.GetProductsByName("Touring-3000 Yellow, 50");
