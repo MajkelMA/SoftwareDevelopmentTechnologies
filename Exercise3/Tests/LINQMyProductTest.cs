@@ -11,15 +11,8 @@ namespace Tests
     {
         private List<MyProduct> insertProductsFromBase()
         {
-            var test = (from product in DataService.GetAllProduct()
+            return (from product in DataService.GetAllProduct()
                     select new MyProduct(product)).ToList();
-
-
-            return test;
-
-            //return (from product in DataService.GetAllProduct()
-            //        orderby product.Name ascending
-            //        select new MyProduct(product)).Take(number).ToList();
         }
 
         [TestMethod]
