@@ -5,10 +5,7 @@ namespace View.Interfaces
 {
     public class MainView : IWindow
     {
-        
-
-
-        public void show()
+        public void Show()
         {
             AddProductWindow addProductWindow = new AddProductWindow();
             addProductWindow.Show();

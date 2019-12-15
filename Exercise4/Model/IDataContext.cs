@@ -10,6 +10,7 @@ namespace Model
     interface IDataContext<T>
     {
         IQueryable<T> GetItems();
+        IQueryable<P> GetItems<P>() where P : class;
         bool Add(T item);
         bool Delete(T item);
         bool Update(T item);

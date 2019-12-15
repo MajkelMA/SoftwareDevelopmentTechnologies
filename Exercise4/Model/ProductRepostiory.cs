@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    class ProductRepostiory : IRepository<Product>
+    public class ProductRepostiory : IRepository<Product>
     {
         private IDataContext<Product> productsDataContext;
 
-        public ProductRepostiory(IDataContext<Product> dataContext)
+        //public ProductRepostiory(IDataContext<Product> dataContext)
+        //{
+        //    productsDataContext = dataContext;
+        //}
+
+        public ProductRepostiory()
         {
-            productsDataContext = dataContext;
+            productsDataContext = new DataContext();
         }
 
         public bool Add(Product item)
@@ -44,7 +49,7 @@ namespace Model
         public List<Product> GetProductsByName(string namePart)
         {
 
-            List<Product> result = (from product in GetAll() 
+            List<Product> result = (from product in GetAll()
                                     where product.Name.Contains(namePart)
                                     select product).ToList();
             return result;
@@ -52,7 +57,7 @@ namespace Model
 
         public List<Product> GetProductByVendorName(string vendorName)
         {
- 
+
             List<Product> result = (from productVendor in productsDataContext.GetItems<ProductVendor>()
                                     where productVendor.Vendor.Name.Equals(vendorName)
                                     select productVendor.Product).ToList();
@@ -63,7 +68,7 @@ namespace Model
         public List<string> GetProductNamesByVendorName(string vendorName)
         {
 
-       
+
             List<string> result = (from productVendor in productsDataContext.GetItems<ProductVendor>()
                                    where productVendor.Vendor.Name.Equals(vendorName)
                                    select productVendor.Product.Name).ToList();
@@ -72,7 +77,7 @@ namespace Model
         }
 
         public string GetProductVendorByProductName(string productName)
-        { 
+        {
             string result = (from productVendor in productsDataContext.GetItems<ProductVendor>()
                              where productVendor.Product.Name.Equals(productName)
                              select productVendor.Vendor.Name).Single();

@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    class DataContext : IDataContext<Product>
+    public class DataContext : IDataContext<Product>
     {
         private readonly TablesDataContext tables;
 
-        public DataContext(TablesDataContext tables)
+        //public DataContext(TablesDataContext tables)
+        //{
+        //    this.tables = tables;
+        //}
+
+        public DataContext()
         {
-            this.tables = tables;
+            this.tables = new TablesDataContext();
         }
 
         public bool Add(Product item)
@@ -49,10 +54,25 @@ namespace Model
                     select product).First();
         }
 
-        public IQueryable<TTable> GetItems<TTable>() where TTable : class
+        public IQueryable<Product> GetItems()
         {
-            return tables.GetTable<TTable>();
+            throw new NotImplementedException();
         }
+
+        public IQueryable<P> GetItems<P>() where P : class
+        {
+            return tables.GetTable<P>();
+        }
+
+        //public IQueryable GetItems<T>()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public IQueryable GetItems<P>() where P : class
+        //{
+        //    return tables.GetTable<P>();
+        //}
 
         public bool Update(Product item)
         {

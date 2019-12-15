@@ -8,7 +8,7 @@ namespace ViewModel
 {
     public interface IWindow
     {
-        void show();
+        void Show();
 
     }
 }
