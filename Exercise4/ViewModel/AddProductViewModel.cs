@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 
 namespace ViewModel
 {
@@ -9,7 +10,9 @@ namespace ViewModel
     {
         #region Properties
 
-        public Action CloseWindow { get; set; }
+        public ICommand BackToMainWindowCommand { get; private set; }
+        public ICommand AddProductCommand { get; private set; }
+        public Action CloseWindow{ get; set; }
         private ProductRepostiory productRepository;
 
         public List<bool> Flags { get; set; }
@@ -25,7 +28,7 @@ namespace ViewModel
         public string Name { get; set; }
         public string ProductNumber { get; set; }
         public bool MakeFlag { get; set; }
-        public string FinishedGoodsFlag { get; set; }
+        public bool FinishedGoodsFlag { get; set; }
         public string Color { get; set; }
         public string SafetyStockLevel { get; set; }
         public string ReorderPoint { get; set; }
@@ -39,8 +42,8 @@ namespace ViewModel
         public string ProductLine { get; set; }
         public string Class { get; set; }
         public string Style { get; set; }
-        public string ProductSubcategoryID { get; set; }
-        public string ProductModelID { get; set; }
+        public string ProductSubcategory { get; set; }
+        public string ProductModel { get; set; }
         public DateTime SellStartDate { get; set; }
         public DateTime SellEndDate { get; set; }
         public DateTime DiscontinuedDate { get; set; }
@@ -49,11 +52,82 @@ namespace ViewModel
 
         public AddProductViewModel()
         {
-            this.productRepository = new ProductRepostiory();
-            this.Flags = new List<bool> { true, false };
+            productRepository = new ProductRepostiory();
+            AddProductCommand = new RelayCommand(AddProduct);
+            BackToMainWindowCommand = new RelayCommand(BackToMainWindow);
+            initDates();
+            initComboBox();
+        }
+
+        #region Private
+        private void AddProduct()
+        {
+            Product product = new Product();
+            product.Name = Name;
+            product.ProductNumber = ProductNumber;
+            product.MakeFlag = MakeFlag;
+            product.FinishedGoodsFlag = FinishedGoodsFlag;
+            product.Color = Color;
+            product.SafetyStockLevel = Int16.Parse(SafetyStockLevel);
+            product.ReorderPoint = Int16.Parse(ReorderPoint);
+            product.StandardCost = decimal.Parse(StandardCost);
+            product.ListPrice = decimal.Parse(ListPrice);
+            product.Size = Size;
+            product.SizeUnitMeasureCode = SizeUnitMeasureCode;
+            product.WeightUnitMeasureCode = WeightUnitMeasureCode;
+            product.Weight = decimal.Parse(Weight);
+            product.DaysToManufacture = int.Parse(DaysToManufacture);
+            product.ProductLine = ProductLine;
+            product.Class = Class;
+            product.Style = Style;
+            product.ProductSubcategoryID = GetProductSubcategoryID(ProductSubcategory);
+            product.ProductModelID = GetProductModelID(ProductModel);
+            product.SellStartDate = SellStartDate;
+            product.SellEndDate = SellEndDate;
+            product.DiscontinuedDate = DiscontinuedDate;
+            product.ModifiedDate = ModifiedDate;
+
+            if (productRepository.Add(product))
+            {
+                CloseWindow();
+            }
+        }
+
+        private int GetProductSubcategoryID(string productSubcategoryName)
+        {
             List<Product> products = this.productRepository.GetAllProduct();
+            return (from product in products
+                    where product.ProductSubcategoryID != null &&  product.ProductSubcategory.Name.Equals(productSubcategoryName)
+                    select product.ProductSubcategory.ProductSubcategoryID).First();
+        }
+
+        private int GetProductModelID(string productModelName)
+        {
+            List<Product> products = this.productRepository.GetAllProduct();
+            return (from product in products
+                    where product.ProductModelID != null && product.ProductModel.Name.Equals(productModelName)
+                    select product.ProductModel.ProductModelID).First();
+        }
+
+        private void BackToMainWindow()
+        {
+            CloseWindow();
+        }
+
+        private void initDates()
+        {
+            this.SellStartDate = DateTime.Now;
+            this.SellEndDate = DateTime.Now;
+            this.DiscontinuedDate = DateTime.Now;
+            this.ModifiedDate = DateTime.Now;
+        }
+
+        private void initComboBox()
+        {
+            List<Product> products = this.productRepository.GetAllProduct();
+            this.Flags = new List<bool> { true, false };
             this.Colors = (from product in products
-                          select product.Color).Distinct().ToList();
+                           select product.Color).Distinct().ToList();
 
             this.SizeUnitMeasureCodes = (from product in products
                                          where product.SizeUnitMeasureCode != null
@@ -83,6 +157,7 @@ namespace ViewModel
                                   where product.ProductModel != null
                                   select product.ProductModel.Name).Distinct().ToList();
         }
+        #endregion
 
     }
 }

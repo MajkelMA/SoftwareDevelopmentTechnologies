@@ -19,7 +19,6 @@ namespace View
             base.OnInitialized(e);
             MainViewModel _vm = (MainViewModel)DataContext;
             _vm.Window = new AddProductWindow();
-            //_vm.MessageBoxShowDelegate = text => MessageBox.Show(text, "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

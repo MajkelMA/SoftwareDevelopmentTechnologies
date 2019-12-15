@@ -18,6 +18,7 @@ namespace View
         {
             base.OnInitialized(e);
             AddProductViewModel addProductViewModel = (AddProductViewModel)DataContext;
+            addProductViewModel.CloseWindow = () => this.Hide();
         }
     }
 }
