@@ -26,6 +26,7 @@ namespace Model
             try
             {
                 tables.GetTable<Product>().InsertOnSubmit(item);
+                tables.SubmitChanges();
                 return true;
             }
             catch
