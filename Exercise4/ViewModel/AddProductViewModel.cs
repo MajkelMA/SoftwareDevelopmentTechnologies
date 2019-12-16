@@ -12,7 +12,7 @@ namespace ViewModel
 
         public ICommand BackToMainWindowCommand { get; private set; }
         public ICommand AddProductCommand { get; private set; }
-        public Action CloseWindow{ get; set; }
+        public Action CloseWindow { get; set; }
         private ProductRepostiory productRepository;
 
         public List<bool> Flags { get; set; }
@@ -97,7 +97,7 @@ namespace ViewModel
         {
             List<Product> products = this.productRepository.GetAllProduct();
             return (from product in products
-                    where product.ProductSubcategoryID != null &&  product.ProductSubcategory.Name.Equals(productSubcategoryName)
+                    where product.ProductSubcategoryID != null && product.ProductSubcategory.Name.Equals(productSubcategoryName)
                     select product.ProductSubcategory.ProductSubcategoryID).First();
         }
 

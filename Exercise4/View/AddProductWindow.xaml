@@ -78,24 +78,48 @@
         <ComboBox Name="Color" VerticalAlignment="Center" Grid.Column="2" Grid.Row="4" Margin="5" ItemsSource="{Binding Colors}" SelectedItem="{Binding Color}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5">Safety stock level:</Label>
-        <TextBox Name="SafetyStockLevel" VerticalAlignment="Center" Grid.Column="2" Grid.Row="5" Margin="5" Text="{Binding SafetyStockLevel}"/>
+        <TextBox Name="SafetyStockLevel" VerticalAlignment="Center" Grid.Column="2" Grid.Row="5" Margin="5" Style="{StaticResource CustomErrorControlOnErrorStyle}">
+            <TextBox.Text>
+                <Binding Path="SafetyStockLevel" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <valid:ShortGreaterThanZero ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="6" Margin="5">Reorder point:</Label>
-        <TextBox Name="ReorderPoint" VerticalAlignment="Center" Grid.Column="2" Grid.Row="6" Margin="5" Text="{Binding ReorderPoint}"/>
+        <TextBox Name="ReorderPoint" VerticalAlignment="Center" Grid.Column="2" Grid.Row="6" Margin="5" Style="{StaticResource CustomErrorControlOnErrorStyle}">
+            <TextBox.Text>
+                <Binding Path="ReorderPoint" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <valid:ShortGreaterThanZero ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="7" Margin="5">Standard cost:</Label>
         <TextBox Name="StandardCost" VerticalAlignment="Center" Grid.Column="2" Grid.Row="7" Margin="5" Style="{StaticResource CustomErrorControlOnErrorStyle}">
             <TextBox.Text>
                 <Binding Path="StandardCost" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <valid:StandardCostValidationRule ValidationStep="RawProposedValue"/>
+                        <valid:DecimalGreaterThanZero ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="8" Margin="5">List price:</Label>
-        <TextBox Name="ListPrice" VerticalAlignment="Center" Grid.Column="2" Grid.Row="8" Margin="5" Text="{Binding ListPrice}"/>
+        <TextBox Name="ListPrice" VerticalAlignment="Center" Grid.Column="2" Grid.Row="8" Margin="5" Style="{StaticResource CustomErrorControlOnErrorStyle}">
+            <TextBox.Text>
+                <Binding Path="ListPrice" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <valid:DecimalGreaterOrEqualZero ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="9" Margin="5">Size:</Label>
         <TextBox Name="Size" VerticalAlignment="Center" Grid.Column="2" Grid.Row="9" Margin="5" Text="{Binding Size}"/>
@@ -111,14 +135,22 @@
             <TextBox.Text>
                 <Binding Path="Weight" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <valid:WeightValidationRule ValidationStep="RawProposedValue"/>
+                        <valid:DecimalGreaterThanZero ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="13" Margin="5">Days to manufacture:</Label>
-        <TextBox Name="DaysToManufacture" VerticalAlignment="Center" Grid.Column="2" Grid.Row="13" Margin="5" Text="{Binding DaysToManufacture}"/>
+        <TextBox Name="DaysToManufacture" VerticalAlignment="Center" Grid.Column="2" Grid.Row="13" Margin="5" Style="{StaticResource CustomErrorControlOnErrorStyle}">
+            <TextBox.Text>
+                <Binding Path="DaysToManufacture" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <valid:IntGreaterOrEqualZero ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="14" Margin="5">Product line:</Label>
         <ComboBox Name="ProductLine" VerticalAlignment="Center" Grid.Column="2" Grid.Row="14" Margin="5" ItemsSource="{Binding ProductLines}" SelectedItem="{Binding ProductLine}"/>

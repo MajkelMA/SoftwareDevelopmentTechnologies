@@ -3,23 +3,23 @@ using System.Windows.Controls;
 
 namespace ViewModel.Validators
 {
-    public class WeightValidationRule : ValidationRule
+    public class DecimalGreaterOrEqualZero : ValidationRule
     {
         public string Error { get; set; }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (int.TryParse(value.ToString(), out int i))
+            if (decimal.TryParse(value.ToString(), out decimal i))
             {
-                if(i >= 0)
-                    return new  ValidationResult(true, null);
+                if (i >= 0)
+                    return new ValidationResult(true, null);
                 else
                 {
-                    Error = "Weight has to be greater than 0";
+                    Error = "Value has to be greater than 0";
                     return new ValidationResult(false, Error);
                 }
             }
-            Error = "Weight has to be a number";
+            Error = "Value has to be a correct number";
             return new ValidationResult(false, Error);
         }
     }
