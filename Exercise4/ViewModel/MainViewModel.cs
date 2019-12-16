@@ -20,6 +20,18 @@ namespace ViewModel
 
         public ProductRepostiory ProductRepostiory { get; set; }
         private List<Product> products;
+
+        private Product product;
+        public Product Product
+        {
+            get { return product; }
+            set
+            {
+                product = value;
+                RaisePropertyChanged("Product");
+            }
+        }
+
         public List<Product> Products
         {
             get { return products; }
@@ -29,12 +41,11 @@ namespace ViewModel
             }
         }
 
-
         #endregion
 
         public MainViewModel()
         {
-            AddProductCommand = new RelayCommand(ShowAddProductWindow);
+            AddProductCommand = new MyCommand(ShowAddProductWindow);
             this.ProductRepostiory = new ProductRepostiory();
             this.Products = ProductRepostiory.GetAllProduct();
         }
