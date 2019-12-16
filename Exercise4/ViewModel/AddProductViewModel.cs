@@ -53,8 +53,8 @@ namespace ViewModel
         public AddProductViewModel()
         {
             productRepository = new ProductRepostiory();
-            AddProductCommand = new RelayCommand(AddProduct);
-            BackToMainWindowCommand = new RelayCommand(BackToMainWindow);
+            AddProductCommand = new MyCommand(AddProduct);
+            BackToMainWindowCommand = new MyCommand(BackToMainWindow);
             initDates();
             initComboBox();
         }

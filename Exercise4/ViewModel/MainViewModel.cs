@@ -27,7 +27,7 @@ namespace ViewModel
 
         public MainViewModel()
         {
-            AddProductCommand = new RelayCommand(ShowAddProductWindow);
+            AddProductCommand = new MyCommand(ShowAddProductWindow);
         }
 
         #region Private
