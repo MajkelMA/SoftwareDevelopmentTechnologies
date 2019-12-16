@@ -5,13 +5,97 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="980" Width="1680">
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate x:Key="productDetails">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Margin="5">Name:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5">Product number:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5">Make flag:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5">Finished goods flag:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Margin="5">Color:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5">Safety stock level:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="6" Margin="5">Reorder point:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="7" Margin="5">Standard cost:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="8" Margin="5">List price:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="9" Margin="5">Size:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="10" Margin="5">Size unit measure code:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="11" Margin="5">Weight unit measure code:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="12" Margin="5">Weight:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="13" Margin="5">Days to manufacture:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="14" Margin="5">Product line:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="15" Margin="5">Class:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="16" Margin="5">Style:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="17" Margin="5">Product subcategory:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="18" Margin="5">Product model:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="19" Margin="5">Sell start date:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="20" Margin="5">Sell end date:</Label>
+                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="21" Margin="5">Discontinued date:</Label>
+
+                <TextBlock Name="Name" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Margin="5" Text="{Binding Name}"/>
+                <TextBlock Name="ProductNumber" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Margin="5" Text="{Binding ProductNumber}"/>
+                <TextBlock Name="MakeFlag" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Margin="5"  Text="{Binding MakeFlag}"/>
+                <TextBlock Name="FinishedGoodsFlag" VerticalAlignment="Center" Grid.Column="2" Grid.Row="3" Margin="5"  Text="{Binding FinishedGoodsFlag}"/>
+                <TextBlock Name="Color" VerticalAlignment="Center" Grid.Column="2" Grid.Row="4" Margin="5"  Text="{Binding Color}"/>
+                <TextBlock Name="SafetyStockLevel" VerticalAlignment="Center" Grid.Column="2" Grid.Row="5" Margin="5" Text="{Binding SafetyStockLevel}"/>
+                <TextBlock Name="ReorderPoint" VerticalAlignment="Center" Grid.Column="2" Grid.Row="6" Margin="5" Text="{Binding ReorderPoint}"/>
+                <TextBlock Name="StandardCost" VerticalAlignment="Center" Grid.Column="2" Grid.Row="7" Margin="5" Text="{Binding StandardCost}"/>
+                <TextBlock Name="ListPrice" VerticalAlignment="Center" Grid.Column="2" Grid.Row="8" Margin="5" Text="{Binding ListPrice}"/>
+                <TextBlock Name="Size" VerticalAlignment="Center" Grid.Column="2" Grid.Row="9" Margin="5" Text="{Binding Size}"/>
+                <TextBlock Name="SizeUnitMeasureCode" VerticalAlignment="Center" Grid.Column="2" Grid.Row="10" Margin="5" Text="{Binding SizeUnitMeasureCode}"/>
+                <TextBlock Name="WeightUnitMeasureCode" VerticalAlignment="Center" Grid.Column="2" Grid.Row="11" Margin="5" Text="{Binding WeightUnitMeasureCode}"/>
+                <TextBlock Name="Weight" VerticalAlignment="Center" Grid.Column="2" Grid.Row="12" Margin="5" Text="{Binding Weight}"/>
+                <TextBlock Name="DaysToManufacture" VerticalAlignment="Center" Grid.Column="2" Grid.Row="13" Margin="5" Text="{Binding DaysToManufacture}"/>
+                <TextBlock Name="ProductLine" VerticalAlignment="Center" Grid.Column="2" Grid.Row="14" Margin="5" Text="{Binding ProductLine}"/>
+                <TextBlock Name="Class" VerticalAlignment="Center" Grid.Column="2" Grid.Row="15" Margin="5" Text="{Binding Class}"/>
+                <TextBlock Name="Style" VerticalAlignment="Center" Grid.Column="2" Grid.Row="16" Margin="5" Text="{Binding Style}"/>
+                <TextBlock Name="ProductSubcategory" VerticalAlignment="Center" Grid.Column="2" Grid.Row="17" Margin="5" Text="{Binding ProductSubcategory}"/>
+                <TextBlock Name="ProductModel" VerticalAlignment="Center" Grid.Column="2" Grid.Row="18" Margin="5" Text="{Binding ProductModel}"/>
+                <TextBlock Name="SellStartDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="19" Margin="5" Text="{Binding SellStartDate}"/>
+                <TextBlock Name="SellEndDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="20" Margin="5" Text="{Binding SellEndDate}"/>
+                <TextBlock Name="DiscontinuedDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="21" Margin="5" Text="{Binding DiscontinuedDate}"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
@@ -20,13 +104,14 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-
-        <ListView Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="3" ItemsSource="{Binding Products}" Margin="0,5,5,5">
+        <ContentControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Content="{Binding Product}"
+                        ContentTemplate="{StaticResource productDetails}"/>
+        <ListView Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="9" Margin="0,5,5,5" ItemsSource="{Binding Products}" SelectedItem="{Binding Product}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding ProductID}"/>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="200"/>
-                    <GridViewColumn Header="Number" DisplayMemberBinding="{Binding ProductNumber}" Width="200"/>
+                    <GridViewColumn Header="Number" DisplayMemberBinding="{Binding ProductNumber}" Width="150"/>
                     <GridViewColumn Header="Standatd Cost" DisplayMemberBinding="{Binding StandardCost}"/>
                     <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Size}" Width="115"/>
                 </GridView>
