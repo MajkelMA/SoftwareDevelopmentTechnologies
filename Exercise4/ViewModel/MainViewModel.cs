@@ -34,7 +34,7 @@ namespace ViewModel
 
         public MainViewModel()
         {
-            AddProductCommand = new RelayCommand(ShowAddProductWindow);
+            AddProductCommand = new MyCommand(ShowAddProductWindow);
             this.ProductRepostiory = new ProductRepostiory();
             this.Products = ProductRepostiory.GetAllProduct();
         }
