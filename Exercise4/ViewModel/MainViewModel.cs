@@ -1,4 +1,5 @@
 ﻿using Model;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -8,6 +9,8 @@ namespace ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+
+
         #region Properties
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -15,23 +18,28 @@ namespace ViewModel
 
         public Window Window { get; set; }
 
-        public DataContext DataContext
+        public ProductRepostiory ProductRepostiory { get; set; }
+        private List<Product> products;
+        public List<Product> Products
         {
-            get => _dataContext;
+            get { return products; }
             set
             {
-                _dataContext = value;
+                products = value;
             }
         }
+
+
         #endregion
 
         public MainViewModel()
         {
-            AddProductCommand = new MyCommand(ShowAddProductWindow);
+            AddProductCommand = new RelayCommand(ShowAddProductWindow);
+            this.ProductRepostiory = new ProductRepostiory();
+            this.Products = ProductRepostiory.GetAllProduct();
         }
 
         #region Private
-        private DataContext _dataContext;
         private void ShowAddProductWindow()
         {
             Window.Show();
