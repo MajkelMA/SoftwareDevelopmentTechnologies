@@ -30,15 +30,15 @@ namespace ViewModel
         public bool MakeFlag { get; set; }
         public bool FinishedGoodsFlag { get; set; }
         public string Color { get; set; }
-        public string SafetyStockLevel { get; set; }
-        public string ReorderPoint { get; set; }
-        public string StandardCost { get; set; }
-        public string ListPrice { get; set; }
+        public Int16 SafetyStockLevel { get; set; }
+        public Int16 ReorderPoint { get; set; }
+        public decimal StandardCost { get; set; }
+        public decimal ListPrice { get; set; }
         public string Size { get; set; }
         public string SizeUnitMeasureCode { get; set; }
         public string WeightUnitMeasureCode { get; set; }
-        public string Weight { get; set; }
-        public string DaysToManufacture { get; set; }
+        public decimal Weight { get; set; }
+        public int DaysToManufacture { get; set; }
         public string ProductLine { get; set; }
         public string Class { get; set; }
         public string Style { get; set; }
@@ -68,15 +68,15 @@ namespace ViewModel
             product.MakeFlag = MakeFlag;
             product.FinishedGoodsFlag = FinishedGoodsFlag;
             product.Color = Color;
-            product.SafetyStockLevel = Int16.Parse(SafetyStockLevel);
-            product.ReorderPoint = Int16.Parse(ReorderPoint);
-            product.StandardCost = decimal.Parse(StandardCost);
-            product.ListPrice = decimal.Parse(ListPrice);
+            product.SafetyStockLevel = SafetyStockLevel;
+            product.ReorderPoint = ReorderPoint;
+            product.StandardCost = StandardCost;
+            product.ListPrice = ListPrice;
             product.Size = Size;
             product.SizeUnitMeasureCode = SizeUnitMeasureCode;
             product.WeightUnitMeasureCode = WeightUnitMeasureCode;
-            product.Weight = decimal.Parse(Weight);
-            product.DaysToManufacture = int.Parse(DaysToManufacture);
+            product.Weight = Weight;
+            product.DaysToManufacture = DaysToManufacture;
             product.ProductLine = ProductLine;
             product.Class = Class;
             product.Style = Style;
@@ -158,6 +158,5 @@ namespace ViewModel
                                   select product.ProductModel.Name).Distinct().ToList();
         }
         #endregion
-
     }
 }
