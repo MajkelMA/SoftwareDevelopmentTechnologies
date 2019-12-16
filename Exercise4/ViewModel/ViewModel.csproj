@@ -49,8 +49,11 @@
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MyCommand.cs" />
-    <Compile Include="Validators\StandardCostValidationRule.cs" />
-    <Compile Include="Validators\WeightValidationRule.cs" />
+    <Compile Include="Validators\DecimalGreaterOrEqualZero.cs" />
+    <Compile Include="Validators\IntGreaterOrEqualZero.cs" />
+    <Compile Include="Validators\ShortGreaterThanZero.cs" />
+    <Compile Include="Validators\DecimalGreaterThanZero.cs" />
+    <Compile Include="Validators\IntGreaterThanZero.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

@@ -9,8 +9,6 @@ namespace ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-
-
         #region Properties
         public event PropertyChangedEventHandler PropertyChanged;
 
