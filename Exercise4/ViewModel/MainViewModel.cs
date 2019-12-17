@@ -40,6 +40,8 @@ namespace ViewModel
             set
             {
                 products = value;
+                RaisePropertyChanged("Products");
+
             }
         }
         #endregion
@@ -49,8 +51,16 @@ namespace ViewModel
             AddProductCommand = new MyCommand(ShowAddProductWindow);
             ModifyProductCommand = new MyCommand(ShowModifyProductWindow);
             this.ProductRepostiory = new ProductRepostiory();
+            this.ProductRepostiory.ChangeInCollection += OnProductsChanged;
             this.Products = ProductRepostiory.GetAllProduct();
         }
+
+        public void OnProductsChanged()
+        {
+            MessageBox.Show("Hello, world!");
+            this.Products = ProductRepostiory.GetAllProduct();
+        }
+
 
         #region Private
         private void ShowAddProductWindow()
@@ -60,6 +70,7 @@ namespace ViewModel
 
         private void ShowModifyProductWindow()
         {
+            ProductRepostiory.Add(ProductRepostiory.Get(1));
             ModifyProductWindow.Show();
         }
         #endregion

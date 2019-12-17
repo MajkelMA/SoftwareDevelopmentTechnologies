@@ -9,6 +9,9 @@ namespace Model
 {
     public class ProductRepostiory : IRepository<Product>
     {
+
+        public delegate void OwnHandler();
+        public event OwnHandler ChangeInCollection;
         private IDataContext<Product> productsDataContext;
 
         //public ProductRepostiory(IDataContext<Product> dataContext)
@@ -23,12 +26,16 @@ namespace Model
 
         public bool Add(Product item)
         {
-            return productsDataContext.Add(item);
+            bool result = productsDataContext.Add(item);
+            ChangeInCollection?.Invoke();
+            return result;
         }
 
         public bool Delete(Product item)
         {
-            return productsDataContext.Delete(item);
+            bool result = productsDataContext.Delete(item);
+            ChangeInCollection?.Invoke();
+            return result;
         }
 
         public Product Get(int id)
@@ -43,7 +50,9 @@ namespace Model
 
         public bool Update(Product item)
         {
-            return productsDataContext.Update(item);
+            bool result = productsDataContext.Update(item);
+            ChangeInCollection?.Invoke();
+            return result;
         }
 
         public List<Product> GetProductsByName(string namePart)
