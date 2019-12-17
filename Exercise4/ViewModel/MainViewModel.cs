@@ -14,7 +14,11 @@ namespace ViewModel
 
         public ICommand AddProductCommand { get; private set; }
 
-        public Window Window { get; set; }
+        public ICommand ModifyProductCommand { get; private set; }
+
+        public Window AddProductWindow { get; set; }
+
+        public Window ModifyProductWindow { get; set; }
 
         public ProductRepostiory ProductRepostiory { get; set; }
         private List<Product> products;
@@ -38,12 +42,12 @@ namespace ViewModel
                 products = value;
             }
         }
-
         #endregion
 
         public MainViewModel()
         {
             AddProductCommand = new MyCommand(ShowAddProductWindow);
+            ModifyProductCommand = new MyCommand(ShowModifyProductWindow);
             this.ProductRepostiory = new ProductRepostiory();
             this.Products = ProductRepostiory.GetAllProduct();
         }
@@ -51,7 +55,12 @@ namespace ViewModel
         #region Private
         private void ShowAddProductWindow()
         {
-            Window.Show();
+            AddProductWindow.Show();
+        }
+
+        private void ShowModifyProductWindow()
+        {
+            ModifyProductWindow.Show();
         }
         #endregion
 

@@ -7,8 +7,8 @@ namespace View.Interfaces
     {
         public void Show()
         {
-            AddProductWindow addProductWindow = new AddProductWindow();
-            addProductWindow.Show();
+            //AddProductWindow addProductWindow = new AddProductWindow();
+            //addProductWindow.Show();
         }
     }
 }

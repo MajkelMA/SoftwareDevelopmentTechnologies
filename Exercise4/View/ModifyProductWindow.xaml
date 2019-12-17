@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="ModifyProductWindow" Height="900" Width="800">
     <Window.DataContext>
-        <local:AddProductViewModel/>
+        <local:ModifyProductViewModel/>
     </Window.DataContext>
     <Window.Resources>
         <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
@@ -177,6 +177,6 @@
         <DatePicker Name="DiscontinuedDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="21" Margin="5" SelectedDate="{Binding DiscontinuedDate}"/>
 
         <Button Grid.Column="0" Grid.Row="22" Margin="5" Command="{Binding BackToMainWindowCommand}">Back</Button>
-        <Button Grid.Column="3" Grid.Row="22" Margin="5" Command="{Binding AddProductCommand}">Submit</Button>
+        <Button Grid.Column="3" Grid.Row="22" Margin="5" Command="{Binding ModifyProductCommand}">Submit</Button>
     </Grid>
 </Window>

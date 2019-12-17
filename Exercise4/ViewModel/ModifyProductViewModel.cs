@@ -1,17 +1,18 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 
 namespace ViewModel
 {
-    public class AddProductViewModel
+    public class ModifyProductViewModel
     {
         #region Properties
 
+        public ICommand ModifyProductCommand { get; private set; }
         public ICommand BackToMainWindowCommand { get; private set; }
-        public ICommand AddProductCommand { get; private set; }
         public Action CloseWindow { get; set; }
         private ProductRepostiory productRepository;
 
@@ -50,48 +51,50 @@ namespace ViewModel
         public DateTime ModifiedDate { get; set; }
         #endregion
 
-        public AddProductViewModel()
+        public ModifyProductViewModel()
         {
             productRepository = new ProductRepostiory();
-            AddProductCommand = new MyCommand(AddProduct);
+            ModifyProductCommand = new MyCommand(ModifyProduct);
             BackToMainWindowCommand = new MyCommand(BackToMainWindow);
             initDates();
             initComboBox();
         }
 
         #region Private
-        private void AddProduct()
+        private void ModifyProduct()
         {
-            Product product = new Product();
-            product.Name = Name;
-            product.ProductNumber = ProductNumber;
-            product.MakeFlag = MakeFlag;
-            product.FinishedGoodsFlag = FinishedGoodsFlag;
-            product.Color = Color;
-            product.SafetyStockLevel = SafetyStockLevel;
-            product.ReorderPoint = ReorderPoint;
-            product.StandardCost = StandardCost;
-            product.ListPrice = ListPrice;
-            product.Size = Size;
-            product.SizeUnitMeasureCode = SizeUnitMeasureCode;
-            product.WeightUnitMeasureCode = WeightUnitMeasureCode;
-            product.Weight = Weight;
-            product.DaysToManufacture = DaysToManufacture;
-            product.ProductLine = ProductLine;
-            product.Class = Class;
-            product.Style = Style;
-            product.ProductSubcategoryID = GetProductSubcategoryID(ProductSubcategory);
-            product.ProductModelID = GetProductModelID(ProductModel);
-            product.SellStartDate = SellStartDate;
-            product.SellEndDate = SellEndDate;
-            product.DiscontinuedDate = DiscontinuedDate;
-            product.ModifiedDate = ModifiedDate;
-            product.rowguid = Guid.NewGuid();
+            //TODO
 
-            if (productRepository.Add(product))
-            {
-                CloseWindow();
-            }
+            //Product product = new Product();
+            //product.Name = Name;
+            //product.ProductNumber = ProductNumber;
+            //product.MakeFlag = MakeFlag;
+            //product.FinishedGoodsFlag = FinishedGoodsFlag;
+            //product.Color = Color;
+            //product.SafetyStockLevel = SafetyStockLevel;
+            //product.ReorderPoint = ReorderPoint;
+            //product.StandardCost = StandardCost;
+            //product.ListPrice = ListPrice;
+            //product.Size = Size;
+            //product.SizeUnitMeasureCode = SizeUnitMeasureCode;
+            //product.WeightUnitMeasureCode = WeightUnitMeasureCode;
+            //product.Weight = Weight;
+            //product.DaysToManufacture = DaysToManufacture;
+            //product.ProductLine = ProductLine;
+            //product.Class = Class;
+            //product.Style = Style;
+            //product.ProductSubcategoryID = GetProductSubcategoryID(ProductSubcategory);
+            //product.ProductModelID = GetProductModelID(ProductModel);
+            //product.SellStartDate = SellStartDate;
+            //product.SellEndDate = SellEndDate;
+            //product.DiscontinuedDate = DiscontinuedDate;
+            //product.ModifiedDate = ModifiedDate;
+            //product.rowguid = Guid.NewGuid();
+
+            //if (productRepository.Add(product))
+            //{
+            //    CloseWindow();
+            //}
         }
 
         private int GetProductSubcategoryID(string productSubcategoryName)

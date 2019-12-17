@@ -17,8 +17,9 @@ namespace View
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            MainViewModel _vm = (MainViewModel)DataContext;
-            _vm.Window = new AddProductWindow();
+            MainViewModel mainViewModel = (MainViewModel)DataContext;
+            mainViewModel.AddProductWindow = new AddProductWindow();
+            mainViewModel.ModifyProductWindow = new ModifyProductWindow();
         }
     }
 }
