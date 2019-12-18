@@ -61,7 +61,6 @@ namespace ViewModel
             this.Products = ProductRepostiory.GetAllProduct();
         }
 
-
         #region Private
         private void ShowAddProductWindow()
         {
