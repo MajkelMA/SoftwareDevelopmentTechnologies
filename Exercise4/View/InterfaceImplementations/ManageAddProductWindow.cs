@@ -4,35 +4,35 @@ using ViewModel.Interfaces;
 
 namespace View.InterfaceImplementations
 {
-    class ManageModifyProductWindow : IManageWindow, IMyPopup
+    class ManageAddProductWindow : IManageWindow, IMyPopup
     {
         public event MyHandler OnClose;
-        private ModifyProductWindow _modifyProductWindow;
+        private AddProductWindow _addProductWindow;
 
-        public ManageModifyProductWindow()
+        public ManageAddProductWindow()
         {
-            _modifyProductWindow = new ModifyProductWindow();
+            _addProductWindow = new AddProductWindow();
         }
 
         public IManageWindow GetWindow()
         {
-            return new ManageModifyProductWindow();
+            return new ManageAddProductWindow();
         }
 
         public void SetViewModel<T>(T viewModel) where T : IViewModel
         {
-            _modifyProductWindow.DataContext = viewModel;
+            _addProductWindow.DataContext = viewModel;
             viewModel.CloseWindow = () =>
             {
                 if (OnClose != null)
                     OnClose.Invoke();
-                _modifyProductWindow.Close();
+                _addProductWindow.Close();
             };
         }
 
         public void Show()
         {
-            _modifyProductWindow.Show();
+            _addProductWindow.Show();
         }
 
         public void ShowPopup(string message)

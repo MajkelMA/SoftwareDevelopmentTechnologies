@@ -11,19 +11,19 @@ namespace ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        #region Main Properties
+        #region Properties
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand AddProductCommand { get; private set; }
         public ICommand ModifyProductCommand { get; private set; }
-        public Window AddProductWindow { get; set; }
-        public Window ModifyProductWindow { get; set; }
+        public IManageWindow ManageAddWindow { get; set; }
         public IManageWindow ManageModifyWindow { get; set; }
 
         public ProductRepostiory ProductRepostiory { get; set; }
-        private List<Product> products;
 
+        private List<Product> products;
         private Product product = new Product();
+
         public Product Product
         {
             get { return product; }
@@ -64,16 +64,17 @@ namespace ViewModel
         #region Private
         private void ShowAddProductWindow()
         {
-            AddProductWindow.Show();
+            AddProductViewModel addProductViewModel = new AddProductViewModel();
+            IManageWindow addProductWindow = ManageAddWindow.GetWindow();
+            addProductWindow.SetViewModel(addProductViewModel);
+            addProductWindow.Show();
         }
 
         private void ShowModifyProductWindow()
         {
             ModifyProductViewModel modifyProductViewModel = new ModifyProductViewModel(Product);
-
             IManageWindow modifyProductWindow = ManageModifyWindow.GetWindow();
             modifyProductWindow.SetViewModel(modifyProductViewModel);
-
             modifyProductWindow.Show();
         }
         #endregion

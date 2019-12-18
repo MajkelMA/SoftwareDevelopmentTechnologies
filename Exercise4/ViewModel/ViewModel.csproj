@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddProductViewModel.cs" />
+    <Compile Include="Interfaces\IMyPopup.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
     <Compile Include="Interfaces\IManageWindow.cs" />
     <Compile Include="MainViewModel.cs" />

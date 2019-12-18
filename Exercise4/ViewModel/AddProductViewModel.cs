@@ -2,17 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using ViewModel.Interfaces;
 
 namespace ViewModel
 {
-    public class AddProductViewModel
+    public class AddProductViewModel : IViewModel
     {
         #region Properties
-
         public ICommand BackToMainWindowCommand { get; private set; }
         public ICommand AddProductCommand { get; private set; }
         public Action CloseWindow { get; set; }
+        public IMyPopup ValidatorPopup { get; set; }
         private ProductRepostiory productRepository;
 
         public List<bool> Flags { get; set; }
@@ -24,7 +27,9 @@ namespace ViewModel
         public List<string> Styles { get; set; }
         public List<string> ProductSubcategories { get; set; }
         public List<string> ProductModels { get; set; }
+        #endregion
 
+        #region Field Properties
         public string Name { get; set; }
         public string ProductNumber { get; set; }
         public bool MakeFlag { get; set; }
@@ -50,21 +55,38 @@ namespace ViewModel
         public DateTime ModifiedDate { get; set; }
         #endregion
 
+        #region CheckBox
+        public bool ColorCheck { get; set; }
+        public bool SizeCheck { get; set; }
+        public bool SizeUnitMeasureCodeCheck { get; set; }
+        public bool WeightUnitMeasureCodeCheck { get; set; }
+        public bool WeightCheck { get; set; }
+        public bool ProductLineCheck { get; set; }
+        public bool ClassCheck { get; set; }
+        public bool StyleCheck { get; set; }
+        public bool ProductSubcategoryCheck { get; set; }
+        public bool ProductModelCheck { get; set; }
+        #endregion
+
         public AddProductViewModel()
         {
             productRepository = new ProductRepostiory();
             AddProductCommand = new MyCommand(AddProduct);
             BackToMainWindowCommand = new MyCommand(BackToMainWindow);
-            initDates();
-            initComboBox();
+            InitDates();
+            InitComboBox();
         }
 
         #region Private
         private void AddProduct()
         {
+            string message = "";
+
             Product product = new Product();
             if (Name != null)
                 product.Name = Name;
+            else
+                message += "Name is empty\n";
             if (ProductNumber != null)
                 product.ProductNumber = ProductNumber;
             product.MakeFlag = MakeFlag;
@@ -100,13 +122,21 @@ namespace ViewModel
             if (ProductModel != null)
                 product.ProductModelID = GetProductModelID(ProductModel);
             product.SellStartDate = SellStartDate;
-            product.SellEndDate = SellEndDate;
+            if (SellEndDate < SellStartDate)
+                product.SellEndDate = SellEndDate;
+            else
+                message += "Sell end date is after sell start date\n";
             product.DiscontinuedDate = DiscontinuedDate;
             product.ModifiedDate = ModifiedDate;
             product.rowguid = Guid.NewGuid();
 
-            if (productRepository.Add(product))
+            if (message != "")
             {
+                ValidatorPopup.ShowPopup(message);
+            }
+            else if (productRepository.Add(product))
+            {
+                ValidatorPopup.ShowPopup("Product added succefully!");
                 CloseWindow();
             }
         }
@@ -131,8 +161,10 @@ namespace ViewModel
         {
             CloseWindow();
         }
+        #endregion
 
-        private void initDates()
+        #region Init
+        private void InitDates()
         {
             this.SellStartDate = DateTime.Now;
             this.SellEndDate = DateTime.Now;
@@ -140,7 +172,7 @@ namespace ViewModel
             this.ModifiedDate = DateTime.Now;
         }
 
-        private void initComboBox()
+        private void InitComboBox()
         {
             List<Product> products = this.productRepository.GetAllProduct();
             this.Flags = new List<bool> { true, false };

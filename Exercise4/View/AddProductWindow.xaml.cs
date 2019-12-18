@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using ViewModel;
+﻿using System.Windows;
 
 namespace View
 {
@@ -14,11 +12,10 @@ namespace View
             InitializeComponent();
         }
 
-        protected override void OnInitialized(EventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            base.OnInitialized(e);
-            AddProductViewModel addProductViewModel = (AddProductViewModel)DataContext;
-            addProductViewModel.CloseWindow = () => this.Hide();
+            e.Cancel = true;
+            this.Hide();
         }
     }
 }

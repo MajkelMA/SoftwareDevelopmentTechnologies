@@ -20,7 +20,7 @@ namespace View
         {
             base.OnInitialized(e);
             MainViewModel mainViewModel = (MainViewModel)DataContext;
-            mainViewModel.AddProductWindow = new AddProductWindow();
+            mainViewModel.ManageAddWindow = new ManageAddProductWindow();
             mainViewModel.ManageModifyWindow = new ManageModifyProductWindow();
         }
 

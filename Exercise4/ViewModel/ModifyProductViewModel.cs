@@ -15,6 +15,7 @@ namespace ViewModel
         public ICommand BackToMainWindowCommand { get; private set; }
         public Action CloseWindow { get; set; }
         public Product Product { get; set; }
+        public IMyPopup ValidatorPopup { get; set; }
         private ProductRepostiory productRepository;
 
         public List<bool> Flags { get; set; }

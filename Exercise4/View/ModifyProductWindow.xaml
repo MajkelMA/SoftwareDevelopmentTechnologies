@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ViewModel;assembly=ViewModel"
         xmlns:valid="clr-namespace:ViewModel.Validators;assembly=ViewModel"
         mc:Ignorable="d"
-        Title="ModifyProductWindow" Height="900" Width="800">
+        Title="ModifyProductWindow" Height="900" Width="800"
+        Closing="Window_Closing">
     <Window.DataContext>
         <local:ModifyProductViewModel/>
     </Window.DataContext>
@@ -177,6 +178,26 @@
         <DatePicker Name="DiscontinuedDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="21" Margin="5" SelectedDate="{Binding DiscontinuedDate}"/>
 
         <Button Grid.Column="0" Grid.Row="22" Margin="5" Command="{Binding BackToMainWindowCommand}">Back</Button>
-        <Button Grid.Column="3" Grid.Row="22" Margin="5" Command="{Binding ModifyProductCommand}">Submit</Button>
+        <Button Grid.Column="3" Grid.Row="22" Margin="5" Command="{Binding ModifyProductCommand}" Content="Submit">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ProductNumber}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=SafetyStockLevel}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=StandardCost}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ReorderPoint}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ListPrice}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Weight}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=DaysToManufacture}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>
