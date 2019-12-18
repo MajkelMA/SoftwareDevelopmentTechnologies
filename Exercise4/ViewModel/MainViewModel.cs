@@ -1,6 +1,8 @@
 ﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
@@ -9,21 +11,19 @@ namespace ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        #region Properties
+        #region Main Properties
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand AddProductCommand { get; private set; }
-
         public ICommand ModifyProductCommand { get; private set; }
-
         public Window AddProductWindow { get; set; }
-
         public Window ModifyProductWindow { get; set; }
+        public IManageWindow ManageModifyWindow { get; set; }
 
         public ProductRepostiory ProductRepostiory { get; set; }
         private List<Product> products;
 
-        private Product product;
+        private Product product = new Product();
         public Product Product
         {
             get { return product; }
@@ -60,7 +60,12 @@ namespace ViewModel
 
         private void ShowModifyProductWindow()
         {
-            ModifyProductWindow.Show();
+            ModifyProductViewModel modifyProductViewModel = new ModifyProductViewModel(Product);
+
+            IManageWindow modifyProductWindow = ManageModifyWindow.GetWindow();
+            modifyProductWindow.SetViewModel(modifyProductViewModel);
+
+            modifyProductWindow.Show();
         }
         #endregion
 

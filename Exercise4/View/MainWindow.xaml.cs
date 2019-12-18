@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
+using View.InterfaceImplementations;
 using ViewModel;
 
 namespace View
@@ -19,7 +21,12 @@ namespace View
             base.OnInitialized(e);
             MainViewModel mainViewModel = (MainViewModel)DataContext;
             mainViewModel.AddProductWindow = new AddProductWindow();
-            mainViewModel.ModifyProductWindow = new ModifyProductWindow();
+            mainViewModel.ManageModifyWindow = new ManageModifyProductWindow();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainViewModel)DataContext).ModifyProductCommand.Execute(null);
         }
     }
 }

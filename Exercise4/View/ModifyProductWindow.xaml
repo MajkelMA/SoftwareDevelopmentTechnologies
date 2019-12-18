@@ -177,6 +177,6 @@
         <DatePicker Name="DiscontinuedDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="21" Margin="5" SelectedDate="{Binding DiscontinuedDate}"/>
 
         <Button Grid.Column="0" Grid.Row="22" Margin="5" Command="{Binding BackToMainWindowCommand}">Back</Button>
-        <Button Grid.Column="3" Grid.Row="22" Margin="5" Command="{Binding ModifyProductCommand}">Submit</Button>
+        <Button Grid.Column="3" Grid.Row="22" Margin="5" Command="{Binding SubmitModifyProductCommand}">Submit</Button>
     </Grid>
 </Window>

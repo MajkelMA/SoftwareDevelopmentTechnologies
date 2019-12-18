@@ -1,19 +1,20 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using ViewModel.Interfaces;
 
 namespace ViewModel
 {
-    public class ModifyProductViewModel
+    public class ModifyProductViewModel : IViewModel
     {
         #region Properties
 
         public ICommand ModifyProductCommand { get; private set; }
         public ICommand BackToMainWindowCommand { get; private set; }
         public Action CloseWindow { get; set; }
+        public Product Product { get; set; }
         private ProductRepostiory productRepository;
 
         public List<bool> Flags { get; set; }
@@ -60,7 +61,39 @@ namespace ViewModel
             initComboBox();
         }
 
+        public ModifyProductViewModel(Product product) : this()
+        {
+            Product = product;
+            InitModifyProduct();
+        }
+
         #region Private
+        private void InitModifyProduct()
+        {
+            Name = Product.Name;
+            ProductNumber = Product.ProductNumber;
+            MakeFlag = Product.MakeFlag;
+            FinishedGoodsFlag = Product.FinishedGoodsFlag;
+            Color = Product.Color;
+            //SafetyStockLevel = Product.SafetyStockLevel;
+            //ReorderPoint = Product.ReorderPoint;
+            //StandardCost = Product.StandardCost;
+            //ListPrice = Product.ListPrice;
+            //Size = Product.Size;
+            //SizeUnitMeasureCode = Product.SizeUnitMeasureCode;
+            //WeightUnitMeasureCode = Product.WeightUnitMeasureCode;
+            //Weight = Product.Weight.Value;
+            //DaysToManufacture = Product.DaysToManufacture;
+            //ProductLine = Product.ProductLine;
+            //Class = Product.Class;
+            //Style = Product.Style;
+            //ProductSubcategory = GetProductSubcategoryName(Product.ProductSubcategoryID.Value);
+            //ProductModel = GetProductModelName(Product.ProductModelID.Value);
+            //SellStartDate = Product.SellStartDate;
+            //SellEndDate = Product.SellEndDate.Value;
+            //DiscontinuedDate = Product.DiscontinuedDate.Value;
+        }
+
         private void ModifyProduct()
         {
             //TODO
@@ -105,12 +138,28 @@ namespace ViewModel
                     select product.ProductSubcategory.ProductSubcategoryID).First();
         }
 
+        private string GetProductSubcategoryName(int index)
+        {
+            List<Product> products = this.productRepository.GetAllProduct();
+            return (from product in products
+                    where product.ProductSubcategoryID != null && product.ProductSubcategoryID == index
+                    select product.ProductSubcategory.Name).First();
+        }
+
         private int GetProductModelID(string productModelName)
         {
             List<Product> products = this.productRepository.GetAllProduct();
             return (from product in products
                     where product.ProductModelID != null && product.ProductModel.Name.Equals(productModelName)
                     select product.ProductModel.ProductModelID).First();
+        }
+
+        private string GetProductModelName(int index)
+        {
+            List<Product> products = this.productRepository.GetAllProduct();
+            return (from product in products
+                    where product.ProductModelID != null && product.ProductModelID == index
+                    select product.ProductModel.Name).First();
         }
 
         private void BackToMainWindow()

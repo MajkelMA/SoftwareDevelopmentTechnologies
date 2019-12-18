@@ -118,7 +118,7 @@
             </ListView.View>
         </ListView>
         <Button Grid.Column="0" Grid.Row="0" Margin="5" Command="{Binding AddProductCommand}">Add Product</Button>
-        <Button Grid.Column="0" Grid.Row="1" Margin="5" Command="{Binding ModifyProductCommand}">Modify Product</Button>
+        <Button Grid.Column="0" Grid.Row="1" Margin="5" Click="Button_Click">Modify Product</Button>
         <Button Grid.Column="0" Grid.Row="9" Margin="5">Delete Product</Button>
     </Grid>
 </Window>

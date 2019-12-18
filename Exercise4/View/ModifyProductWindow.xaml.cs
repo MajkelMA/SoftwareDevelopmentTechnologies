@@ -14,11 +14,11 @@ namespace View
             InitializeComponent();
         }
 
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-            ModifyProductViewModel modifyProductViewModel = (ModifyProductViewModel)DataContext;
-            modifyProductViewModel.CloseWindow = () => this.Hide();
-        }
+        //protected override void OnInitialized(EventArgs e)
+        //{
+        //    base.OnInitialized(e);
+        //    ModifyProductViewModel modifyProductViewModel = (ModifyProductViewModel)DataContext;
+        //    modifyProductViewModel.CloseWindow = () => this.Hide();
+        //}
     }
 }
