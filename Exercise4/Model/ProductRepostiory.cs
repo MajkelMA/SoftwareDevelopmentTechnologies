@@ -57,7 +57,7 @@ namespace Model
 
         public bool Update(Product item)
         {
-            if (GetProductsByProductNumber(item.ProductNumber).Count(0) == 0)
+            if (GetProductsByProductNumber(item.ProductNumber).Count() == 0)
             {
                 bool result = productsDataContext.Update(item);
                 ChangeInCollection?.Invoke();

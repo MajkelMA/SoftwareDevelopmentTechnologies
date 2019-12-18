@@ -106,6 +106,21 @@ namespace Test
             modifyProductViewModel.ModifyProductCommand.Execute(null);
             Assert.IsNotNull(myMessage.Message);
         }
+
+        [TestMethod]
+        public void ModifyProductSuccessTest()
+        {
+            MyMessage myMessage = new MyMessage();
+            MainViewModel vm = new MainViewModel();
+            vm.Product = vm.Products.Last();
+            ModifyProductViewModel modifyProductViewModel = new ModifyProductViewModel(vm.Product, myMessage);
+            modifyProductViewModel.Product.Weight = 101;
+            modifyProductViewModel.ClassCheck = false;
+            modifyProductViewModel.ColorCheck = false;
+          
+            modifyProductViewModel.BackToMainWindowCommand.Execute(null);
+
+        }
         [TestMethod]
         public void DeleteProductTest()
         {
