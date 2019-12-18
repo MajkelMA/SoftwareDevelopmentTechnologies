@@ -6,19 +6,22 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using ViewModel.Interfaces;
 
 namespace ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged, IViewModel
     {
         #region Properties
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public Action CloseWindow { get; set; }
         public ICommand AddProductCommand { get; private set; }
         public ICommand ModifyProductCommand { get; private set; }
         public ICommand DeleteProductCommand { get; private set; }
         public IManageWindow ManageAddWindow { get; set; }
         public IManageWindow ManageModifyWindow { get; set; }
+        public IMyPopup ValidatorPopup { get; set; }
 
         public ProductRepostiory ProductRepostiory { get; set; }
 
@@ -57,6 +60,11 @@ namespace ViewModel
             this.Products = ProductRepostiory.GetAllProduct();
         }
 
+        public MainViewModel(IMyPopup window)
+        {
+            ValidatorPopup = window;
+        }
+
         public void OnProductsChanged()
         {
             this.Products = ProductRepostiory.GetAllProduct();
@@ -81,7 +89,14 @@ namespace ViewModel
 
         private void DeleteProduct()
         {
-            this.ProductRepostiory.Delete(product.ProductID);
+            if (ProductRepostiory.Delete(product.ProductID))
+            {
+                ValidatorPopup.ShowPopup("Delete success!");
+            }
+            else
+            {
+                ValidatorPopup.ShowPopup("Delete failed!");
+            }
         }
         #endregion
 
