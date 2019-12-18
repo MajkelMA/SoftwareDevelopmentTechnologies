@@ -9,7 +9,7 @@ using ViewModel.Interfaces;
 
 namespace View.InterfaceImplementations
 {
-    class ManageAddProductWindow : IManageWindow, IMyPopup
+    class ManageAddProductWindow : IManageWindow
     {
         public event MyHandler OnClose;
         private AddProductWindow _addProductWindow;

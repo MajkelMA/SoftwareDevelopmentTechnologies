@@ -221,10 +221,18 @@
         <DatePicker Name="SellStartDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="19" Margin="5" SelectedDate="{Binding SellStartDate}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="20" Margin="5">Sell end date:</Label>
-        <DatePicker Name="SellEndDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="20" Margin="5" SelectedDate="{Binding SellEndDate}"/>
+        <DatePicker Name="SellEndDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="20" Margin="5" 
+                    SelectedDate="{Binding SellEndDate}"
+                    IsEnabled="{Binding SellEndDateCheck}"/>
+        <CheckBox Name="SellEndDateCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="20" Margin="5" Content="Null"
+                  IsChecked="{Binding SellEndDateCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="21" Margin="5">Discontinued date:</Label>
-        <DatePicker Name="DiscontinuedDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="21" Margin="5" SelectedDate="{Binding DiscontinuedDate}"/>
+        <DatePicker Name="DiscontinuedDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="21" Margin="5" 
+                    SelectedDate="{Binding DiscontinuedDate}"
+                    IsEnabled="{Binding DiscontinuedDateCheck}"/>
+        <CheckBox Name="DiscontinuedDateCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="21" Margin="5" Content="Null"
+                  IsChecked="{Binding DiscontinuedDateCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Button Grid.Column="0" Grid.Row="22" Margin="5" Command="{Binding BackToMainWindowCommand}" Content="Back"/>
         <Button Grid.Column="3" Grid.Row="22" Margin="5" Command="{Binding AddProductCommand}" Content="Submit">

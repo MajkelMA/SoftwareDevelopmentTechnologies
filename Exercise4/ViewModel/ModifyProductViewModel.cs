@@ -62,8 +62,9 @@ namespace ViewModel
             InitComboBox();
         }
 
-        public ModifyProductViewModel(Product product) : this()
+        public ModifyProductViewModel(Product product, IMyPopup myPopup) : this()
         {
+            ValidatorPopup = myPopup;
             Product = product;
             InitModifyProduct();
         }

@@ -4,7 +4,7 @@ using ViewModel.Interfaces;
 
 namespace View.InterfaceImplementations
 {
-    class ManageModifyProductWindow : IManageWindow, IMyPopup
+    class ManageModifyProductWindow : IManageWindow
     {
         public event MyHandler OnClose;
         private ModifyProductWindow _modifyProductWindow;

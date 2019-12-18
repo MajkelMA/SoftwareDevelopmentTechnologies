@@ -65,7 +65,7 @@ namespace ViewModel
         #region Private
         private void ShowAddProductWindow()
         {
-            AddProductViewModel addProductViewModel = new AddProductViewModel(ProductRepostiory);
+            AddProductViewModel addProductViewModel = new AddProductViewModel(ProductRepostiory, ManageAddWindow);
             IManageWindow addProductWindow = ManageAddWindow.GetWindow();
             addProductWindow.SetViewModel(addProductViewModel);
             addProductWindow.Show();
@@ -73,7 +73,7 @@ namespace ViewModel
 
         private void ShowModifyProductWindow()
         {
-            ModifyProductViewModel modifyProductViewModel = new ModifyProductViewModel(Product);
+            ModifyProductViewModel modifyProductViewModel = new ModifyProductViewModel(Product, ManageModifyWindow);
             IManageWindow modifyProductWindow = ManageModifyWindow.GetWindow();
             modifyProductWindow.SetViewModel(modifyProductViewModel);
             modifyProductWindow.Show();

@@ -67,6 +67,8 @@ namespace ViewModel
         public bool StyleCheck { get; set; }
         public bool ProductSubcategoryCheck { get; set; }
         public bool ProductModelCheck { get; set; }
+        public bool SellEndDateCheck { get; set; }
+        public bool DiscontinuedDateCheck { get; set; }
         #endregion
 
         public AddProductViewModel()
@@ -75,9 +77,10 @@ namespace ViewModel
             BackToMainWindowCommand = new MyCommand(BackToMainWindow);
         }
 
-        public AddProductViewModel(ProductRepostiory productRepostiory) : this()
+        public AddProductViewModel(ProductRepostiory productRepostiory, IMyPopup myPopup) : this()
         {
             this.productRepository = productRepostiory;
+            ValidatorPopup = myPopup;
             InitDates();
             InitComboBox();
         }
@@ -92,45 +95,55 @@ namespace ViewModel
                 product.Name = Name;
             else
                 message += "Name is empty\n";
+
             if (ProductNumber != null)
                 product.ProductNumber = ProductNumber;
+            else
+                message += "Product number is empty\n";
+
             product.MakeFlag = MakeFlag;
             product.FinishedGoodsFlag = FinishedGoodsFlag;
-            if (Color != null)
-                product.Color = Color;
+
             if (SafetyStockLevel != null)
                 product.SafetyStockLevel = SafetyStockLevel;
+            else
+                message += "Safety stock level is empty\n";
+
             if (ReorderPoint != null)
                 product.ReorderPoint = ReorderPoint;
+            else
+                message += "Reorder point is empty\n";
+
             if (StandardCost != null)
                 product.StandardCost = StandardCost;
+            else
+                message += "Standard cost is empty\n";
+
             if (ListPrice != null)
                 product.ListPrice = ListPrice;
-            if (Size != null)
-                product.Size = Size;
-            if (SizeUnitMeasureCode != null)
-                product.SizeUnitMeasureCode = SizeUnitMeasureCode;
-            if (WeightUnitMeasureCode != null)
-                product.WeightUnitMeasureCode = WeightUnitMeasureCode;
-            if (Weight != null)
-                product.Weight = Weight;
+            else
+                message += "List price is empty\n";
+
             if (DaysToManufacture != null)
                 product.DaysToManufacture = DaysToManufacture;
-            if (ProductLine != null)
-                product.ProductLine = ProductLine;
-            if (Class != null)
-                product.Class = Class;
-            if (Style != null)
-                product.Style = Style;
-            if (ProductSubcategory != null)
-                product.ProductSubcategoryID = GetProductSubcategoryID(ProductSubcategory);
-            if (ProductModel != null)
-                product.ProductModelID = GetProductModelID(ProductModel);
-            product.SellStartDate = SellStartDate;
-            if (SellEndDate < SellStartDate)
-                product.SellEndDate = SellEndDate;
             else
-                message += "Sell end date is after sell start date\n";
+                message += "Days to manufacture is empty\n";
+
+            product.SellStartDate = SellStartDate;
+
+            if (SellEndDateCheck == true)
+            {
+                if (SellEndDate > SellStartDate)
+                    product.SellEndDate = SellEndDate;
+                else
+                    message += "Sell end date is after sell start date\n";
+            }
+
+            if(DiscontinuedDateCheck == true)
+            {
+                product.DiscontinuedDate = DiscontinuedDate;
+            }
+
             product.DiscontinuedDate = DiscontinuedDate;
             product.ModifiedDate = ModifiedDate;
             product.rowguid = Guid.NewGuid();
@@ -144,6 +157,44 @@ namespace ViewModel
                 ValidatorPopup.ShowPopup("Product added succefully!");
                 CloseWindow();
             }
+        }
+
+        private void CheckCheckBox(Product product)
+        {
+            if (ColorCheck == false)
+                product.Color = null;
+            else
+                product.Color = Color;
+
+            if (SizeCheck == false)
+                product.Size = null;
+            else
+                product.Size = Size;
+
+            if (ProductLineCheck == false)
+                product.ProductLine = null;
+            else
+                product.ProductLine = ProductLine;
+
+            if (ClassCheck == false)
+                product.Class = null;
+            else
+                product.Class = Class;
+
+            if (StyleCheck == false)
+                product.Style = null;
+            else
+                product.Style = Style;
+
+            if (ProductSubcategoryCheck == false)
+                ProductSubcategory = null;
+            else
+                product.ProductSubcategoryID = GetProductSubcategoryID(ProductSubcategory);
+
+            if (ProductModelCheck == false)
+                ProductModel = null;
+            else
+                product.ProductModelID = GetProductModelID(ProductModel);
         }
 
         private int GetProductSubcategoryID(string productSubcategoryName)
