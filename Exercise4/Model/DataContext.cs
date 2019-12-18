@@ -58,7 +58,7 @@ namespace Model
 
         public IQueryable<Product> GetItems()
         {
-            throw new NotImplementedException();
+            return tables.GetTable<Product>();
         }
 
         public IQueryable<P> GetItems<P>() where P : class
