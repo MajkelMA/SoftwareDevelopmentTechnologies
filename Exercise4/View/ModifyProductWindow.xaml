@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViewModel;assembly=ViewModel"
         xmlns:valid="clr-namespace:ViewModel.Validators;assembly=ViewModel"
+        xmlns:view="clr-namespace:View"
         mc:Ignorable="d"
         Title="ModifyProductWindow" Height="900" Width="800"
         Closing="Window_Closing">
@@ -12,6 +13,7 @@
         <local:ModifyProductViewModel/>
     </Window.DataContext>
     <Window.Resources>
+        <view:InverseBooleanConverter x:Key="InverseBoolean"/>
         <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
             <Setter Property="Margin" Value="5" />
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -76,7 +78,12 @@
         <ComboBox Name="FinishedGoodsFlag" VerticalAlignment="Center" Grid.Column="2" Grid.Row="3" Margin="5" ItemsSource="{Binding Flags}" SelectedItem="{Binding FinishedGoodsFlag}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Margin="5">Color:</Label>
-        <ComboBox Name="Color" VerticalAlignment="Center" Grid.Column="2" Grid.Row="4" Margin="5" ItemsSource="{Binding Colors}" SelectedItem="{Binding Color}"/>
+        <ComboBox Name="Color" VerticalAlignment="Center" Grid.Column="2" Grid.Row="4" Margin="5" 
+                  ItemsSource="{Binding Colors}" 
+                  SelectedItem="{Binding Color}"
+                  IsEnabled="{Binding ColorCheck}"/>
+        <CheckBox Name="ColorCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="4" Margin="5" Content="Null" 
+                     IsChecked="{Binding ColorCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5">Safety stock level:</Label>
         <TextBox Name="SafetyStockLevel" VerticalAlignment="Center" Grid.Column="2" Grid.Row="5" Margin="5" Style="{StaticResource CustomErrorControlOnErrorStyle}">
@@ -123,16 +130,31 @@
         </TextBox>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="9" Margin="5">Size:</Label>
-        <TextBox Name="Size" VerticalAlignment="Center" Grid.Column="2" Grid.Row="9" Margin="5" Text="{Binding Size}"/>
+        <TextBox Name="Size" VerticalAlignment="Center" Grid.Column="2" Grid.Row="9" Margin="5" Text="{Binding Size}"
+                  IsEnabled="{Binding SizeCheck}"/>
+        <CheckBox Name="SizeCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="9" Margin="5" Content="Null" 
+                     IsChecked="{Binding SizeCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="10" Margin="5">Size unit measure code:</Label>
-        <ComboBox Name="SizeUnitMeasureCode" VerticalAlignment="Center" Grid.Column="2" Grid.Row="10" Margin="5" ItemsSource="{Binding SizeUnitMeasureCodes}" SelectedItem="{Binding SizeUnitMeasureCode}"/>
+        <ComboBox Name="SizeUnitMeasureCode" VerticalAlignment="Center" Grid.Column="2" Grid.Row="10" Margin="5" 
+                  ItemsSource="{Binding SizeUnitMeasureCodes}" 
+                  SelectedItem="{Binding SizeUnitMeasureCode}"
+                  IsEnabled="{Binding SizeUnitMeasureCodeCheck}"/>
+        <CheckBox Name="SizeUnitMeasureCodeCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="10" Margin="5" Content="Null" 
+                     IsChecked="{Binding SizeUnitMeasureCodeCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="11" Margin="5">Weight unit measure code:</Label>
-        <ComboBox Name="WeightUnitMeasureCode" VerticalAlignment="Center" Grid.Column="2" Grid.Row="11" Margin="5" ItemsSource="{Binding WeightUnitMeasureCodes}" SelectedItem="{Binding WeightUnitMeasureCode}"/>
+        <ComboBox Name="WeightUnitMeasureCode" VerticalAlignment="Center" Grid.Column="2" Grid.Row="11" Margin="5" 
+                  ItemsSource="{Binding WeightUnitMeasureCodes}" 
+                  SelectedItem="{Binding WeightUnitMeasureCode}"
+                  IsEnabled="{Binding WeightUnitMeasureCodeCheck}"/>
+        <CheckBox Name="WeightUnitMeasureCodeCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="11" Margin="5" Content="Null" 
+                     IsChecked="{Binding WeightUnitMeasureCodeCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="12" Margin="5">Weight:</Label>
-        <TextBox Name="Weight" VerticalAlignment="Center" Grid.Column="2" Grid.Row="12" Margin="5" Style="{StaticResource CustomErrorControlOnErrorStyle}">
+        <TextBox Name="Weight" VerticalAlignment="Center" Grid.Column="2" Grid.Row="12" Margin="5" 
+                 Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                  IsEnabled="{Binding WeightCheck}">
             <TextBox.Text>
                 <Binding Path="Weight" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -141,6 +163,8 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
+        <CheckBox Name="WeightCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="12" Margin="5" Content="Null" 
+                     IsChecked="{Binding WeightCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="13" Margin="5">Days to manufacture:</Label>
         <TextBox Name="DaysToManufacture" VerticalAlignment="Center" Grid.Column="2" Grid.Row="13" Margin="5" Style="{StaticResource CustomErrorControlOnErrorStyle}">
@@ -154,29 +178,61 @@
         </TextBox>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="14" Margin="5">Product line:</Label>
-        <ComboBox Name="ProductLine" VerticalAlignment="Center" Grid.Column="2" Grid.Row="14" Margin="5" ItemsSource="{Binding ProductLines}" SelectedItem="{Binding ProductLine}"/>
+        <ComboBox Name="ProductLine" VerticalAlignment="Center" Grid.Column="2" Grid.Row="14" Margin="5" 
+                  ItemsSource="{Binding ProductLines}" 
+                  SelectedItem="{Binding ProductLine}"
+                  IsEnabled="{Binding ProductLineCheck}"/>
+        <CheckBox Name="ProductLineCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="14" Margin="5" Content="Null" 
+                     IsChecked="{Binding ProductLineCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="15" Margin="5">Class:</Label>
-        <ComboBox Name="Class" VerticalAlignment="Center" Grid.Column="2" Grid.Row="15" Margin="5" ItemsSource="{Binding Classes}" SelectedItem="{Binding Class}"/>
+        <ComboBox Name="Class" VerticalAlignment="Center" Grid.Column="2" Grid.Row="15" Margin="5" 
+                  ItemsSource="{Binding Classes}" 
+                  SelectedItem="{Binding Class}"
+                  IsEnabled="{Binding ClassCheck}"/>
+        <CheckBox Name="ClassCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="15" Margin="5" Content="Null"
+                     IsChecked="{Binding ClassCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="16" Margin="5">Style:</Label>
-        <ComboBox Name="Style" VerticalAlignment="Center" Grid.Column="2" Grid.Row="16" Margin="5" ItemsSource="{Binding Styles}" SelectedItem="{Binding Style}"/>
+        <ComboBox Name="Style" VerticalAlignment="Center" Grid.Column="2" Grid.Row="16" Margin="5" 
+                  ItemsSource="{Binding Styles}" 
+                  SelectedItem="{Binding Style}"
+                  IsEnabled="{Binding StyleCheck}"/>
+        <CheckBox Name="StyleCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="16" Margin="5" Content="Null"
+                     IsChecked="{Binding StyleCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="17" Margin="5">Product subcategory:</Label>
-        <ComboBox Name="ProductSubcategory" VerticalAlignment="Center" Grid.Column="2" Grid.Row="17" Margin="5" ItemsSource="{Binding ProductSubcategories}" SelectedItem="{Binding ProductSubcategory}"/>
+        <ComboBox Name="ProductSubcategory" VerticalAlignment="Center" Grid.Column="2" Grid.Row="17" Margin="5" 
+                  ItemsSource="{Binding ProductSubcategories}" 
+                  SelectedItem="{Binding ProductSubcategory}"
+                  IsEnabled="{Binding ProductSubcategoryCheck}"/>
+        <CheckBox Name="ProductSubcategoryCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="17" Margin="5" Content="Null"
+                     IsChecked="{Binding ProductSubcategoryCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="18" Margin="5">Product model:</Label>
-        <ComboBox Name="ProductModel" VerticalAlignment="Center" Grid.Column="2" Grid.Row="18" Margin="5" ItemsSource="{Binding ProductModels}" SelectedItem="{Binding ProductModel}"/>
+        <ComboBox Name="ProductModel" VerticalAlignment="Center" Grid.Column="2" Grid.Row="18" Margin="5" 
+                  ItemsSource="{Binding ProductModels}" 
+                  SelectedItem="{Binding ProductModel}"
+                  IsEnabled="{Binding ProductModelCheck}"/>
+        <CheckBox Name="ProductModelCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="18" Margin="5" Content="Null"
+                  IsChecked="{Binding ProductModelCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="19" Margin="5">Sell start date:</Label>
         <DatePicker Name="SellStartDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="19" Margin="5" SelectedDate="{Binding SellStartDate}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="20" Margin="5">Sell end date:</Label>
-        <DatePicker Name="SellEndDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="20" Margin="5" SelectedDate="{Binding SellEndDate}"/>
+        <DatePicker Name="SellEndDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="20" Margin="5" 
+                    SelectedDate="{Binding SellEndDate}"
+                    IsEnabled="{Binding SellEndDateCheck}"/>
+        <CheckBox Name="SellEndDateCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="20" Margin="5" Content="Null"
+                  IsChecked="{Binding SellEndDateCheck, Converter={StaticResource InverseBoolean}}"/>
 
         <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="21" Margin="5">Discontinued date:</Label>
-        <DatePicker Name="DiscontinuedDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="21" Margin="5" SelectedDate="{Binding DiscontinuedDate}"/>
-
+        <DatePicker Name="DiscontinuedDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="21" Margin="5" 
+                    SelectedDate="{Binding DiscontinuedDate}"
+                    IsEnabled="{Binding DiscontinuedDateCheck}"/>
+        <CheckBox Name="DiscontinuedDateCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="21" Margin="5" Content="Null"
+                  IsChecked="{Binding DiscontinuedDateCheck, Converter={StaticResource InverseBoolean}}"/>
         <Button Grid.Column="0" Grid.Row="22" Margin="5" Command="{Binding BackToMainWindowCommand}">Back</Button>
         <Button Grid.Column="3" Grid.Row="22" Margin="5" Command="{Binding ModifyProductCommand}" Content="Submit">
             <Button.Style>
