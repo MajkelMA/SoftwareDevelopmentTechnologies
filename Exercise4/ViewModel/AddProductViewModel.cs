@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using ViewModel.Interfaces;
 
@@ -110,10 +111,8 @@ namespace ViewModel
             product.ModifiedDate = ModifiedDate;
             product.rowguid = Guid.NewGuid();
 
-            if (productRepostiory.Add(product))
-            {
-                CloseWindow();
-            }
+            Task.Run(() => { productRepostiory.Add(product); });
+    
         }
 
         private int GetProductSubcategoryID(string productSubcategoryName)

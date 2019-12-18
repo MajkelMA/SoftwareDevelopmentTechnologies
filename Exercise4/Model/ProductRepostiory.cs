@@ -31,9 +31,10 @@ namespace Model
             return result;
         }
 
-        public bool Delete(Product item)
+        public bool Delete(int id)
         {
-            bool result = productsDataContext.Delete(item);
+            Product product = Get(id);
+            bool result = productsDataContext.Delete(product);
             ChangeInCollection?.Invoke();
             return result;
         }

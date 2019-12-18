@@ -33,5 +33,10 @@ namespace View
         {
             ((MainViewModel)DataContext).AddProductCommand.Execute(null);
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            ((MainViewModel)DataContext).DeleteProductCommand.Execute(null);
+        }
     }
 }
