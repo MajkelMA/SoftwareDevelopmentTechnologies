@@ -91,7 +91,9 @@ namespace ViewModel
             string message = "";
 
             Product product = new Product();
-            if (Name != null)
+            CheckCheckBox(product);
+
+            if (Name != null && Name != "")
                 product.Name = Name;
             else
                 message += "Name is empty\n";
@@ -103,31 +105,11 @@ namespace ViewModel
 
             product.MakeFlag = MakeFlag;
             product.FinishedGoodsFlag = FinishedGoodsFlag;
-
-            if (SafetyStockLevel != null)
-                product.SafetyStockLevel = SafetyStockLevel;
-            else
-                message += "Safety stock level is empty\n";
-
-            if (ReorderPoint != null)
-                product.ReorderPoint = ReorderPoint;
-            else
-                message += "Reorder point is empty\n";
-
-            if (StandardCost != null)
-                product.StandardCost = StandardCost;
-            else
-                message += "Standard cost is empty\n";
-
-            if (ListPrice != null)
-                product.ListPrice = ListPrice;
-            else
-                message += "List price is empty\n";
-
-            if (DaysToManufacture != null)
-                product.DaysToManufacture = DaysToManufacture;
-            else
-                message += "Days to manufacture is empty\n";
+            product.SafetyStockLevel = SafetyStockLevel;
+            product.ReorderPoint = ReorderPoint;
+            product.StandardCost = StandardCost;
+            product.ListPrice = ListPrice;
+            product.DaysToManufacture = DaysToManufacture;
 
             product.SellStartDate = SellStartDate;
 
@@ -139,12 +121,11 @@ namespace ViewModel
                     message += "Sell end date is after sell start date\n";
             }
 
-            if(DiscontinuedDateCheck == true)
+            if (DiscontinuedDateCheck == true)
             {
                 product.DiscontinuedDate = DiscontinuedDate;
             }
 
-            product.DiscontinuedDate = DiscontinuedDate;
             product.ModifiedDate = ModifiedDate;
             product.rowguid = Guid.NewGuid();
 
