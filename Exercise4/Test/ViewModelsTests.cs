@@ -114,11 +114,35 @@ namespace Test
             MainViewModel vm = new MainViewModel();
             vm.Product = vm.Products.Last();
             ModifyProductViewModel modifyProductViewModel = new ModifyProductViewModel(vm.Product, myMessage);
+            modifyProductViewModel.CloseWindow = () => { };
             modifyProductViewModel.Product.Weight = 101;
+
             modifyProductViewModel.ClassCheck = false;
+            modifyProductViewModel.SizeCheck = false;
             modifyProductViewModel.ColorCheck = false;
-          
-            modifyProductViewModel.BackToMainWindowCommand.Execute(null);
+            modifyProductViewModel.SizeUnitMeasureCodeCheck = false;
+            modifyProductViewModel.WeightUnitMeasureCodeCheck = false;
+            modifyProductViewModel.WeightCheck = false;
+            modifyProductViewModel.ProductLineCheck = false;
+            modifyProductViewModel.StyleCheck = false;
+            modifyProductViewModel.ProductSubcategoryCheck = false;
+            modifyProductViewModel.ProductModelCheck = false;
+            modifyProductViewModel.SellEndDateCheck = false;
+            modifyProductViewModel.DiscontinuedDateCheck = false;
+
+            modifyProductViewModel.MakeFlag = vm.Product.MakeFlag;
+            modifyProductViewModel.FinishedGoodsFlag = vm.Product.FinishedGoodsFlag;
+            modifyProductViewModel.SafetyStockLevel = vm.Product.SafetyStockLevel;
+            modifyProductViewModel.ReorderPoint = vm.Product.ReorderPoint;
+            modifyProductViewModel.StandardCost = vm.Product.StandardCost;
+            modifyProductViewModel.ListPrice = vm.Product.ListPrice;
+            modifyProductViewModel.DaysToManufacture = vm.Product.DaysToManufacture;
+            modifyProductViewModel.Name = vm.Product.Name;
+            modifyProductViewModel.ProductNumber = vm.Product.ProductNumber;
+            modifyProductViewModel.Weight = vm.Product.Weight;
+            modifyProductViewModel.ModifyProductCommand.Execute(null);
+
+            Assert.AreEqual("Product modified succefully!", myMessage.Message);
 
         }
         [TestMethod]
