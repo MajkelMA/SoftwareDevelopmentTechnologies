@@ -26,15 +26,9 @@ namespace Model
 
         public bool Add(Product item)
         {
-            if (GetProductsByProductNumber(item.ProductNumber).Count() == 0)
-            {
-                bool result = productsDataContext.Add(item);
-                ChangeInCollection?.Invoke();
-                return result;
-            }
+            bool result = productsDataContext.Add(item);
             ChangeInCollection?.Invoke();
-            return false;
-
+            return result;
         }
 
         public bool Delete(int id)
@@ -57,14 +51,9 @@ namespace Model
 
         public bool Update(Product item)
         {
-            if (GetProductsByProductNumber(item.ProductNumber).Count() == 0)
-            {
-                bool result = productsDataContext.Update(item);
-                ChangeInCollection?.Invoke();
-                return result;
-            }
-            ChangeInCollection?.Invoke();
-            return false;
+           bool result = productsDataContext.Update(item);
+           ChangeInCollection?.Invoke();
+           return result;
         }
 
         public List<Product> GetProductsByName(string namePart)
@@ -175,14 +164,6 @@ namespace Model
         public List<Product> GetAllProduct()
         {
             List<Product> result = (from product in GetAll()
-                                    select product).ToList();
-            return result;
-        }
-
-        private List<Product> GetProductsByProductNumber(string number)
-        {
-            List<Product> result = (from product in GetAll()
-                                    where product.ProductNumber == number
                                     select product).ToList();
             return result;
         }
