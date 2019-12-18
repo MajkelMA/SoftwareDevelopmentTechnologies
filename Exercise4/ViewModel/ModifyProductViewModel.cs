@@ -57,8 +57,8 @@ namespace ViewModel
             productRepository = new ProductRepostiory();
             ModifyProductCommand = new MyCommand(ModifyProduct);
             BackToMainWindowCommand = new MyCommand(BackToMainWindow);
-            initDates();
-            initComboBox();
+            InitDates();
+            InitComboBox();
         }
 
         public ModifyProductViewModel(Product product) : this()
@@ -70,64 +70,97 @@ namespace ViewModel
         #region Private
         private void InitModifyProduct()
         {
-            Name = Product.Name;
-            ProductNumber = Product.ProductNumber;
+            if (Product.Name != null)
+                Name = Product.Name;
+            if (Product.ProductNumber != null)
+                ProductNumber = Product.ProductNumber;
             MakeFlag = Product.MakeFlag;
             FinishedGoodsFlag = Product.FinishedGoodsFlag;
-            Color = Product.Color;
-            //SafetyStockLevel = Product.SafetyStockLevel;
-            //ReorderPoint = Product.ReorderPoint;
-            //StandardCost = Product.StandardCost;
-            //ListPrice = Product.ListPrice;
-            //Size = Product.Size;
-            //SizeUnitMeasureCode = Product.SizeUnitMeasureCode;
-            //WeightUnitMeasureCode = Product.WeightUnitMeasureCode;
-            //Weight = Product.Weight.Value;
-            //DaysToManufacture = Product.DaysToManufacture;
-            //ProductLine = Product.ProductLine;
-            //Class = Product.Class;
-            //Style = Product.Style;
-            //ProductSubcategory = GetProductSubcategoryName(Product.ProductSubcategoryID.Value);
-            //ProductModel = GetProductModelName(Product.ProductModelID.Value);
-            //SellStartDate = Product.SellStartDate;
-            //SellEndDate = Product.SellEndDate.Value;
-            //DiscontinuedDate = Product.DiscontinuedDate.Value;
+            if (Product.Color != null)
+                Color = Product.Color;
+            if (Product.SafetyStockLevel != null)
+                SafetyStockLevel = Product.SafetyStockLevel;
+            if (Product.ReorderPoint != null)
+                ReorderPoint = Product.ReorderPoint;
+            if (Product.StandardCost != null)
+                StandardCost = Product.StandardCost;
+            if (Product.ListPrice != null)
+                ListPrice = Product.ListPrice;
+            if (Product.Size != null)
+                Size = Product.Size;
+            if (Product.SizeUnitMeasureCode != null)
+                SizeUnitMeasureCode = Product.SizeUnitMeasureCode;
+            if (Product.WeightUnitMeasureCode != null)
+                WeightUnitMeasureCode = Product.WeightUnitMeasureCode;
+            if (Product.Weight != null)
+                Weight = Product.Weight.Value;
+            if (Product.DaysToManufacture != null)
+                DaysToManufacture = Product.DaysToManufacture;
+            if (Product.ProductLine != null)
+                ProductLine = Product.ProductLine;
+            if (Product.Class != null)
+                Class = Product.Class;
+            if (Product.Style != null)
+                Style = Product.Style;
+            if (Product.ProductSubcategoryID != null)
+                ProductSubcategory = GetProductSubcategoryName(Product.ProductSubcategoryID.Value);
+            if (Product.ProductModelID != null)
+                ProductModel = GetProductModelName(Product.ProductModelID.Value);
+            if (Product.SellStartDate != null)
+                SellStartDate = Product.SellStartDate;
+            if (Product.SellEndDate != null)
+                SellEndDate = Product.SellEndDate.Value;
+            if (Product.DiscontinuedDate != null)
+                DiscontinuedDate = Product.DiscontinuedDate.Value;
         }
 
         private void ModifyProduct()
         {
-            //TODO
+            if (Name != null)
+                Product.Name = Name;
+            if (ProductNumber != null)
+                Product.ProductNumber = ProductNumber;
+            Product.MakeFlag = MakeFlag;
+            Product.FinishedGoodsFlag = FinishedGoodsFlag;
+            if (Color != null)
+                Product.Color = Color;
+            if (SafetyStockLevel != null)
+                Product.SafetyStockLevel = SafetyStockLevel;
+            if (ReorderPoint != null)
+                Product.ReorderPoint = ReorderPoint;
+            if (StandardCost != null)
+                Product.StandardCost = StandardCost;
+            if (ListPrice != null)
+                Product.ListPrice = ListPrice;
+            if (Size != null)
+                Product.Size = Size;
+            if (SizeUnitMeasureCode != null)
+                Product.SizeUnitMeasureCode = SizeUnitMeasureCode;
+            if (WeightUnitMeasureCode != null)
+                Product.WeightUnitMeasureCode = WeightUnitMeasureCode;
+            if (Weight != null)
+                Product.Weight = Weight;
+            if (DaysToManufacture != null)
+                Product.DaysToManufacture = DaysToManufacture;
+            if (ProductLine != null)
+                Product.ProductLine = ProductLine;
+            if (Class != null)
+                Product.Class = Class;
+            if (Style != null)
+                Product.Style = Style;
+            if (ProductSubcategory != null)
+                Product.ProductSubcategoryID = GetProductSubcategoryID(ProductSubcategory);
+            if (ProductModel != null)
+                Product.ProductModelID = GetProductModelID(ProductModel);
+            Product.SellStartDate = SellStartDate;
+            Product.SellEndDate = SellEndDate;
+            Product.DiscontinuedDate = DiscontinuedDate;
+            Product.ModifiedDate = ModifiedDate;
 
-            //Product product = new Product();
-            //product.Name = Name;
-            //product.ProductNumber = ProductNumber;
-            //product.MakeFlag = MakeFlag;
-            //product.FinishedGoodsFlag = FinishedGoodsFlag;
-            //product.Color = Color;
-            //product.SafetyStockLevel = SafetyStockLevel;
-            //product.ReorderPoint = ReorderPoint;
-            //product.StandardCost = StandardCost;
-            //product.ListPrice = ListPrice;
-            //product.Size = Size;
-            //product.SizeUnitMeasureCode = SizeUnitMeasureCode;
-            //product.WeightUnitMeasureCode = WeightUnitMeasureCode;
-            //product.Weight = Weight;
-            //product.DaysToManufacture = DaysToManufacture;
-            //product.ProductLine = ProductLine;
-            //product.Class = Class;
-            //product.Style = Style;
-            //product.ProductSubcategoryID = GetProductSubcategoryID(ProductSubcategory);
-            //product.ProductModelID = GetProductModelID(ProductModel);
-            //product.SellStartDate = SellStartDate;
-            //product.SellEndDate = SellEndDate;
-            //product.DiscontinuedDate = DiscontinuedDate;
-            //product.ModifiedDate = ModifiedDate;
-            //product.rowguid = Guid.NewGuid();
-
-            //if (productRepository.Add(product))
-            //{
-            //    CloseWindow();
-            //}
+            if (productRepository.Update(Product))
+            {
+                CloseWindow();
+            }
         }
 
         private int GetProductSubcategoryID(string productSubcategoryName)
@@ -167,7 +200,7 @@ namespace ViewModel
             CloseWindow();
         }
 
-        private void initDates()
+        private void InitDates()
         {
             this.SellStartDate = DateTime.Now;
             this.SellEndDate = DateTime.Now;
@@ -175,7 +208,7 @@ namespace ViewModel
             this.ModifiedDate = DateTime.Now;
         }
 
-        private void initComboBox()
+        private void InitComboBox()
         {
             List<Product> products = this.productRepository.GetAllProduct();
             this.Flags = new List<bool> { true, false };
