@@ -77,9 +77,9 @@ namespace ViewModel
 
         public AddProductViewModel(ProductRepostiory productRepostiory) : this()
         {
-            this.productRepostiory = productRepostiory;
-            initDates();
-            initComboBox();
+            this.productRepository = productRepostiory;
+            InitDates();
+            InitComboBox();
         }
 
         #region Private
@@ -148,7 +148,7 @@ namespace ViewModel
 
         private int GetProductSubcategoryID(string productSubcategoryName)
         {
-            List<Product> products = this.productRepostiory.GetAllProduct();
+            List<Product> products = this.productRepository.GetAllProduct();
             return (from product in products
                     where product.ProductSubcategoryID != null && product.ProductSubcategory.Name.Equals(productSubcategoryName)
                     select product.ProductSubcategory.ProductSubcategoryID).First();
@@ -156,7 +156,7 @@ namespace ViewModel
 
         private int GetProductModelID(string productModelName)
         {
-            List<Product> products = this.productRepostiory.GetAllProduct();
+            List<Product> products = this.productRepository.GetAllProduct();
             return (from product in products
                     where product.ProductModelID != null && product.ProductModel.Name.Equals(productModelName)
                     select product.ProductModel.ProductModelID).First();
@@ -179,7 +179,7 @@ namespace ViewModel
 
         private void InitComboBox()
         {
-            List<Product> products = this.productRepostiory.GetAllProduct();
+            List<Product> products = this.productRepository.GetAllProduct();
             this.Flags = new List<bool> { true, false };
             this.Colors = (from product in products
                            select product.Color).Distinct().ToList();
