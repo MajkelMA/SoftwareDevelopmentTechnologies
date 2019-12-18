@@ -1,6 +1,7 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Input;
 using ViewModel.Interfaces;
@@ -88,7 +89,7 @@ namespace ViewModel
         private void ModifyProduct()
         {
             string message = "";
-            
+
             CheckCheckBox(Product);
 
             if (Name != null && Name != "")
@@ -134,6 +135,11 @@ namespace ViewModel
                 ValidatorPopup.ShowPopup("Product modified succefully!");
                 CloseWindow();
             }
+            else
+            {
+                ValidatorPopup.ShowPopup("Product modify failed!");
+            }
+
         }
 
         private void CheckCheckBox(Product product)

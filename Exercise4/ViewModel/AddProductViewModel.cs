@@ -138,6 +138,10 @@ namespace ViewModel
                 ValidatorPopup.ShowPopup("Product added succefully!");
                 CloseWindow();
             }
+            else
+            {
+                ValidatorPopup.ShowPopup("Product add failed!");
+            }
         }
 
         private void CheckCheckBox(Product product)
