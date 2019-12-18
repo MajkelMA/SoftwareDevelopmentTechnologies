@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using View.InterfaceImplementations;
 using ViewModel;
 
 namespace View
@@ -8,11 +9,6 @@ namespace View
     /// </summary>
     public partial class App : Application
     {
-        void App_Startup(object sender, StartupEventArgs e)
-        {
-            //MainWindow window = new MainWindow();
-            //MainViewModel mainViewModel = new MainViewModel(window);
-            //window.Show();
-        }
+
     }
 }

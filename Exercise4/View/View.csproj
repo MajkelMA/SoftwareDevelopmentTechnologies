@@ -71,7 +71,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="InterfaceImplementations\ManageAddProductWindow.cs" />
-    <Compile Include="InterfaceImplementations\ManageMainWindow.cs" />
     <Compile Include="InterfaceImplementations\ManageModifyProductWindow.cs" />
     <Compile Include="InverseBooleanConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">

@@ -10,8 +10,10 @@ namespace View
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IMyPopup
+    public partial class MainWindow : Window, IManageWindow
     {
+        public event MyHandler OnClose;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -43,6 +45,22 @@ namespace View
         public void ShowPopup(string message)
         {
             MessageBox.Show(message);
+        }
+
+        public void SetViewModel<T>(T viewModel) where T : IViewModel
+        {
+            this.DataContext = viewModel;
+            viewModel.CloseWindow = () =>
+            {
+                if (OnClose != null)
+                    OnClose.Invoke();
+                this.Close();
+            };
+        }
+
+        public IManageWindow GetWindow()
+        {
+            return this;
         }
     }
 }
