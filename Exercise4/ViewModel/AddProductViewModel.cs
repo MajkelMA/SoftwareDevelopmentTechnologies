@@ -3,17 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using ViewModel.Interfaces;
 
 namespace ViewModel
 {
-    public class AddProductViewModel
+    public class AddProductViewModel : IViewModel
     {
         #region Properties
 
         public ICommand BackToMainWindowCommand { get; private set; }
         public ICommand AddProductCommand { get; private set; }
         public Action CloseWindow { get; set; }
-        private ProductRepostiory productRepository;
+        private ProductRepostiory productRepostiory;
 
         public List<bool> Flags { get; set; }
         public List<string> Colors { get; set; }
@@ -52,9 +53,13 @@ namespace ViewModel
 
         public AddProductViewModel()
         {
-            productRepository = new ProductRepostiory();
             AddProductCommand = new MyCommand(AddProduct);
             BackToMainWindowCommand = new MyCommand(BackToMainWindow);
+        }
+
+        public AddProductViewModel(ProductRepostiory productRepostiory) : this()
+        {
+            this.productRepostiory = productRepostiory;
             initDates();
             initComboBox();
         }
@@ -88,7 +93,7 @@ namespace ViewModel
             product.ModifiedDate = ModifiedDate;
             product.rowguid = Guid.NewGuid();
 
-            if (productRepository.Add(product))
+            if (productRepostiory.Add(product))
             {
                 CloseWindow();
             }
@@ -96,7 +101,7 @@ namespace ViewModel
 
         private int GetProductSubcategoryID(string productSubcategoryName)
         {
-            List<Product> products = this.productRepository.GetAllProduct();
+            List<Product> products = this.productRepostiory.GetAllProduct();
             return (from product in products
                     where product.ProductSubcategoryID != null && product.ProductSubcategory.Name.Equals(productSubcategoryName)
                     select product.ProductSubcategory.ProductSubcategoryID).First();
@@ -104,7 +109,7 @@ namespace ViewModel
 
         private int GetProductModelID(string productModelName)
         {
-            List<Product> products = this.productRepository.GetAllProduct();
+            List<Product> products = this.productRepostiory.GetAllProduct();
             return (from product in products
                     where product.ProductModelID != null && product.ProductModel.Name.Equals(productModelName)
                     select product.ProductModel.ProductModelID).First();
@@ -125,7 +130,7 @@ namespace ViewModel
 
         private void initComboBox()
         {
-            List<Product> products = this.productRepository.GetAllProduct();
+            List<Product> products = this.productRepostiory.GetAllProduct();
             this.Flags = new List<bool> { true, false };
             this.Colors = (from product in products
                            select product.Color).Distinct().ToList();

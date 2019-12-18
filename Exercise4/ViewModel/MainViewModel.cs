@@ -19,6 +19,7 @@ namespace ViewModel
         public Window AddProductWindow { get; set; }
         public Window ModifyProductWindow { get; set; }
         public IManageWindow ManageModifyWindow { get; set; }
+        public IManageWindow ManagerAddWindow { get; set; }
 
         public ProductRepostiory ProductRepostiory { get; set; }
         private List<Product> products;
@@ -57,7 +58,6 @@ namespace ViewModel
 
         public void OnProductsChanged()
         {
-            MessageBox.Show("Hello, world!");
             this.Products = ProductRepostiory.GetAllProduct();
         }
 
@@ -65,7 +65,10 @@ namespace ViewModel
         #region Private
         private void ShowAddProductWindow()
         {
-            AddProductWindow.Show();
+            AddProductViewModel addProductViewModel = new AddProductViewModel(this.ProductRepostiory);
+            IManageWindow addProductWindow = ManagerAddWindow.GetWindow();
+            addProductWindow.SetViewModel(addProductViewModel);
+            addProductWindow.Show();
         }
 
         private void ShowModifyProductWindow()
