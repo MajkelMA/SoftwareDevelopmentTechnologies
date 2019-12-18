@@ -44,6 +44,18 @@ namespace Test
         }
 
         [TestMethod]
+        public void ModifyProductViewModelTest()
+        {
+            MyMessage myMessage = new MyMessage();
+            MainViewModel vm = new MainViewModel();
+            vm.Product = vm.Products.Last();
+            ModifyProductViewModel modifyProductViewModel = new ModifyProductViewModel(vm.Product, myMessage);
+            Assert.IsNotNull(modifyProductViewModel.ValidatorPopup);
+            Assert.IsNotNull(modifyProductViewModel.BackToMainWindowCommand);
+            Assert.IsNotNull(modifyProductViewModel.ModifyProductCommand);
+        }
+
+        [TestMethod]
         public void AddProductFailTest()
         {
             MyMessage myMessage = new MyMessage();
@@ -84,7 +96,15 @@ namespace Test
             addProductViewModel.ModifiedDate = DateTime.Today;
             addProductViewModel.AddProductCommand.Execute("Product added succefully!");
             Assert.AreEqual("Product added succefully!", myMessage.Message);
+        }
 
+        [TestMethod]
+        public void ModifyProductFailTest()
+        {
+            MyMessage myMessage = new MyMessage();
+            ModifyProductViewModel modifyProductViewModel = new ModifyProductViewModel(new Model.Product(), myMessage);
+            modifyProductViewModel.ModifyProductCommand.Execute(null);
+            Assert.IsNotNull(myMessage.Message);
         }
         [TestMethod]
         public void DeleteProductTest()
