@@ -17,5 +17,6 @@ namespace View
             e.Cancel = true;
             this.Hide();
         }
+
     }
 }

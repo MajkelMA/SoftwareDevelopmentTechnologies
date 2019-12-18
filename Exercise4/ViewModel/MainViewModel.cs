@@ -16,6 +16,7 @@ namespace ViewModel
 
         public ICommand AddProductCommand { get; private set; }
         public ICommand ModifyProductCommand { get; private set; }
+        public ICommand DeleteProductCommand { get; private set; }
         public IManageWindow ManageAddWindow { get; set; }
         public IManageWindow ManageModifyWindow { get; set; }
 
@@ -50,6 +51,7 @@ namespace ViewModel
         {
             AddProductCommand = new MyCommand(ShowAddProductWindow);
             ModifyProductCommand = new MyCommand(ShowModifyProductWindow);
+            DeleteProductCommand = new MyCommand(DeleteProduct);
             this.ProductRepostiory = new ProductRepostiory();
             this.ProductRepostiory.ChangeInCollection += OnProductsChanged;
             this.Products = ProductRepostiory.GetAllProduct();
@@ -57,7 +59,6 @@ namespace ViewModel
 
         public void OnProductsChanged()
         {
-            MessageBox.Show("Hello, world!");
             this.Products = ProductRepostiory.GetAllProduct();
         }
 
@@ -76,6 +77,11 @@ namespace ViewModel
             IManageWindow modifyProductWindow = ManageModifyWindow.GetWindow();
             modifyProductWindow.SetViewModel(modifyProductViewModel);
             modifyProductWindow.Show();
+        }
+
+        private void DeleteProduct()
+        {
+            this.ProductRepostiory.Delete(product.ProductID);
         }
         #endregion
 

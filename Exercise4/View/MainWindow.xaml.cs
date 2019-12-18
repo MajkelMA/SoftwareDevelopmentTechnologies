@@ -28,5 +28,15 @@ namespace View
         {
             ((MainViewModel)DataContext).ModifyProductCommand.Execute(null);
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ((MainViewModel)DataContext).AddProductCommand.Execute(null);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            ((MainViewModel)DataContext).DeleteProductCommand.Execute(null);
+        }
     }
 }

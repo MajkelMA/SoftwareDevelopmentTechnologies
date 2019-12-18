@@ -40,6 +40,7 @@ namespace Model
             try
             {
                 tables.GetTable<Product>().DeleteOnSubmit(item);
+                tables.SubmitChanges(ConflictMode.ContinueOnConflict);
                 return true;
             }
             catch
