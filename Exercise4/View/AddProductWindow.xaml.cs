@@ -18,5 +18,9 @@ namespace View
             this.Hide();
         }
 
+        private void ProductModelCheck_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
