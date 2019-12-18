@@ -86,5 +86,14 @@ namespace Test
             Assert.AreEqual("Product added succefully!", myMessage.Message);
 
         }
+        [TestMethod]
+        public void DeleteProductTest()
+        {
+            MainViewModel vm = new MainViewModel();
+            int size = vm.Products.Count();
+            vm.Product = vm.Products.Last();
+            vm.DeleteProductCommand.Execute(null);
+            Assert.AreEqual(size - 1, vm.Products.Count());
+        }
     }
 }
