@@ -3,13 +3,14 @@ using System.Windows;
 using System.Windows.Input;
 using View.InterfaceImplementations;
 using ViewModel;
+using ViewModel.Interfaces;
 
 namespace View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IMyPopup
     {
         public MainWindow()
         {
@@ -37,6 +38,11 @@ namespace View
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             ((MainViewModel)DataContext).DeleteProductCommand.Execute(null);
+        }
+
+        public void ShowPopup(string message)
+        {
+            MessageBox.Show(message);
         }
     }
 }
