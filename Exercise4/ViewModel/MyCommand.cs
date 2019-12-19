@@ -19,11 +19,6 @@ namespace ViewModel
 
         public bool CanExecute(object parameter)
         {
-            //if (this._canExecute == null)
-            //    return true;
-            //if (parameter == null)
-            //    return this._canExecute();
-            //return this._canExecute();
             return true;
         }
 
@@ -31,16 +26,6 @@ namespace ViewModel
         {
             this._execute();
         }
-
-
-        //public bool CanExecute(object parameter)
-        //{
-        //    if (this.m_CanExecute == null)
-        //        return true;
-        //    if (parameter == null)
-        //        return this.m_CanExecute();
-        //    return this.m_CanExecute();
-        //}
     }
 }
 
