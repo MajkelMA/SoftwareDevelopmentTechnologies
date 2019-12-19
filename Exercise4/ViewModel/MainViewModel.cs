@@ -21,7 +21,6 @@ namespace ViewModel
         public ICommand DeleteProductCommand { get; private set; }
         public IManageWindow ManageAddWindow { get; set; }
         public IManageWindow ManageModifyWindow { get; set; }
-        public IMyPopup ValidatorPopup { get; set; }
 
         public ProductRepostiory ProductRepostiory { get; set; }
 
@@ -60,11 +59,6 @@ namespace ViewModel
             this.Products = ProductRepostiory.GetAllProduct();
         }
 
-        public MainViewModel(IMyPopup window)
-        {
-            ValidatorPopup = window;
-        }
-
         public void OnProductsChanged()
         {
             this.Products = ProductRepostiory.GetAllProduct();
@@ -89,14 +83,7 @@ namespace ViewModel
 
         private void DeleteProduct()
         {
-            if (ProductRepostiory.Delete(product.ProductID))
-            {
-                ValidatorPopup.ShowPopup("Delete success!");
-            }
-            else
-            {
-                ValidatorPopup.ShowPopup("Delete failed!");
-            }
+            ProductRepostiory.Delete(product.ProductID);
         }
         #endregion
 
