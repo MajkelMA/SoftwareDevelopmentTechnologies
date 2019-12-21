@@ -1,15 +1,15 @@
 ﻿using System.Globalization;
 using System.Windows.Controls;
 
-namespace ViewModel.Validators
+namespace View.Validators
 {
-    public class IntGreaterOrEqualZero : ValidationRule
+    public class DecimalGreaterOrEqualZero : ValidationRule
     {
         public string Error { get; set; }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (int.TryParse(value.ToString(), out int i))
+            if (decimal.TryParse(value.ToString(), out decimal i))
             {
                 if (i >= 0)
                     return new ValidationResult(true, null);

@@ -2,23 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
-using System.Windows.Controls.Primitives;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using ViewModel.Interfaces;
 
 namespace ViewModel
 {
-    public class AddProductViewModel : IViewModel
+    public class AddProductViewModel
     {
         #region Properties
+        public ProductRepostiory ProductRepository { get; set; }
         public ICommand BackToMainWindowCommand { get; private set; }
         public ICommand AddProductCommand { get; private set; }
-        public Action CloseWindow { get; set; }
-        public IMyPopup ValidatorPopup { get; set; }
-        private ProductRepostiory productRepository;
-
+        public IWindow AddWindow { get; set; }
         public List<bool> Flags { get; set; }
         public List<string> Colors { get; set; }
         public List<string> SizeUnitMeasureCodes { get; set; }
@@ -73,14 +68,9 @@ namespace ViewModel
 
         public AddProductViewModel()
         {
+            ProductRepository = new ProductRepostiory();
             AddProductCommand = new MyCommand(AddProduct);
             BackToMainWindowCommand = new MyCommand(BackToMainWindow);
-        }
-
-        public AddProductViewModel(ProductRepostiory productRepostiory, IMyPopup myPopup) : this()
-        {
-            this.productRepository = productRepostiory;
-            ValidatorPopup = myPopup;
             InitDates();
             InitComboBox();
         }
@@ -131,16 +121,16 @@ namespace ViewModel
 
             if (message != "")
             {
-                ValidatorPopup.ShowPopup(message);
+                AddWindow.ShowPopup(message);
             }
-            else if (productRepository.Add(product))
+            else if (ProductRepository.Add(product))
             {
-                ValidatorPopup.ShowPopup("Product added succefully!");
-                CloseWindow();
+                AddWindow.ShowPopup("Product added succefully!");
+                AddWindow.Close();
             }
             else
             {
-                ValidatorPopup.ShowPopup("Product add failed!");
+                AddWindow.ShowPopup("Product add failed!");
             }
         }
 
@@ -184,7 +174,7 @@ namespace ViewModel
 
         private int GetProductSubcategoryID(string productSubcategoryName)
         {
-            List<Product> products = this.productRepository.GetAllProduct();
+            List<Product> products = this.ProductRepository.GetAllProduct();
             return (from product in products
                     where product.ProductSubcategoryID != null && product.ProductSubcategory.Name.Equals(productSubcategoryName)
                     select product.ProductSubcategory.ProductSubcategoryID).First();
@@ -192,7 +182,7 @@ namespace ViewModel
 
         private int GetProductModelID(string productModelName)
         {
-            List<Product> products = this.productRepository.GetAllProduct();
+            List<Product> products = this.ProductRepository.GetAllProduct();
             return (from product in products
                     where product.ProductModelID != null && product.ProductModel.Name.Equals(productModelName)
                     select product.ProductModel.ProductModelID).First();
@@ -200,7 +190,7 @@ namespace ViewModel
 
         private void BackToMainWindow()
         {
-            CloseWindow();
+            AddWindow.Close();
         }
         #endregion
 
@@ -215,7 +205,7 @@ namespace ViewModel
 
         private void InitComboBox()
         {
-            List<Product> products = this.productRepository.GetAllProduct();
+            List<Product> products = this.ProductRepository.GetAllProduct();
             this.Flags = new List<bool> { true, false };
             this.Colors = (from product in products
                            select product.Color).Distinct().ToList();

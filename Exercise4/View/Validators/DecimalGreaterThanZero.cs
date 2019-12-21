@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Controls;
 
-namespace ViewModel.Validators
+namespace View.Validators
 {
     public class DecimalGreaterThanZero : ValidationRule
     {

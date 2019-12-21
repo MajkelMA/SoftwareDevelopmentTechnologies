@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:view="clr-namespace:View"
         xmlns:local="clr-namespace:ViewModel;assembly=ViewModel"
-        xmlns:valid="clr-namespace:ViewModel.Validators;assembly=ViewModel"
+        xmlns:valid="clr-namespace:View.Validators"
         mc:Ignorable="d"
         Title="AddProductWindow" Height="900" Width="800"
         Closing="Window_Closing">

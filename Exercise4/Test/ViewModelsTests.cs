@@ -30,14 +30,14 @@ namespace Test
             Assert.IsNotNull(vm.DeleteProductCommand);
             Assert.IsNotNull(vm.ModifyProductCommand);
             Assert.IsNotNull(vm.AddProductCommand);
-            Assert.IsNotNull(vm.ProductRepostiory);
+            Assert.IsNotNull(vm.ProductRepository);
         }
 
         [TestMethod]
         public void AddProductViewModelTest()
         {
             MainViewModel vm = new MainViewModel();
-            AddProductViewModel addProductViewModel = new AddProductViewModel(vm.ProductRepostiory, new MyMessage());
+            AddProductViewModel addProductViewModel = new AddProductViewModel(vm.ProductRepository, new MyMessage());
             Assert.IsNotNull(addProductViewModel.ValidatorPopup);
             Assert.IsNotNull(addProductViewModel.AddProductCommand);
             Assert.IsNotNull(addProductViewModel.BackToMainWindowCommand);          
@@ -60,7 +60,7 @@ namespace Test
         {
             MyMessage myMessage = new MyMessage();
             MainViewModel vm = new MainViewModel();
-            AddProductViewModel addProductViewModel = new AddProductViewModel(vm.ProductRepostiory, myMessage);
+            AddProductViewModel addProductViewModel = new AddProductViewModel(vm.ProductRepository, myMessage);
             addProductViewModel.AddProductCommand.Execute(null);
             Assert.IsNotNull(myMessage.Message);
         }
@@ -70,7 +70,7 @@ namespace Test
         {
             MyMessage myMessage = new MyMessage();
             MainViewModel vm = new MainViewModel();
-            AddProductViewModel addProductViewModel = new AddProductViewModel(vm.ProductRepostiory, myMessage);
+            AddProductViewModel addProductViewModel = new AddProductViewModel(vm.ProductRepository, myMessage);
             addProductViewModel.CloseWindow = () => { };
             addProductViewModel.Name = "Testowy";
             addProductViewModel.ProductNumber = "TX-1111";

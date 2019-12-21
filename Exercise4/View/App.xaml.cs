@@ -1,6 +1,4 @@
 ﻿using System.Windows;
-using View.InterfaceImplementations;
-using ViewModel;
 
 namespace View
 {

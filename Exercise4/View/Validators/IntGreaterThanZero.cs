@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Controls;
 
-namespace ViewModel.Validators
+namespace View.Validators
 {
     public class IntGreaterThanZero : ValidationRule
     {
@@ -11,8 +11,8 @@ namespace ViewModel.Validators
         {
             if (int.TryParse(value.ToString(), out int i))
             {
-                if(i > 0)
-                    return new  ValidationResult(true, null);
+                if (i > 0)
+                    return new ValidationResult(true, null);
                 else
                 {
                     Error = "Value has to be greater than 0";

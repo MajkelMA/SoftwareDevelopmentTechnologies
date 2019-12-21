@@ -5,120 +5,272 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="980" Width="1680">
+        xmlns:valid="clr-namespace:View.Validators"
+        xmlns:view="clr-namespace:View"
+        Title="MainWindow" Height="980" Width="1260">
+
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
+
     <Window.Resources>
-        <DataTemplate x:Key="productDetails">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Margin="5">Name:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5">Product number:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5">Make flag:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5">Finished goods flag:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Margin="5">Color:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5">Safety stock level:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="6" Margin="5">Reorder point:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="7" Margin="5">Standard cost:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="8" Margin="5">List price:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="9" Margin="5">Size:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="10" Margin="5">Size unit measure code:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="11" Margin="5">Weight unit measure code:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="12" Margin="5">Weight:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="13" Margin="5">Days to manufacture:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="14" Margin="5">Product line:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="15" Margin="5">Class:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="16" Margin="5">Style:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="17" Margin="5">Product subcategory:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="18" Margin="5">Product model:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="19" Margin="5">Sell start date:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="20" Margin="5">Sell end date:</Label>
-                <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="21" Margin="5">Discontinued date:</Label>
-
-                <TextBlock Name="Name" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Margin="5" Text="{Binding Name}"/>
-                <TextBlock Name="ProductNumber" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Margin="5" Text="{Binding ProductNumber}"/>
-                <TextBlock Name="MakeFlag" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Margin="5"  Text="{Binding MakeFlag}"/>
-                <TextBlock Name="FinishedGoodsFlag" VerticalAlignment="Center" Grid.Column="2" Grid.Row="3" Margin="5"  Text="{Binding FinishedGoodsFlag}"/>
-                <TextBlock Name="Color" VerticalAlignment="Center" Grid.Column="2" Grid.Row="4" Margin="5"  Text="{Binding Color}"/>
-                <TextBlock Name="SafetyStockLevel" VerticalAlignment="Center" Grid.Column="2" Grid.Row="5" Margin="5" Text="{Binding SafetyStockLevel}"/>
-                <TextBlock Name="ReorderPoint" VerticalAlignment="Center" Grid.Column="2" Grid.Row="6" Margin="5" Text="{Binding ReorderPoint}"/>
-                <TextBlock Name="StandardCost" VerticalAlignment="Center" Grid.Column="2" Grid.Row="7" Margin="5" Text="{Binding StandardCost}"/>
-                <TextBlock Name="ListPrice" VerticalAlignment="Center" Grid.Column="2" Grid.Row="8" Margin="5" Text="{Binding ListPrice}"/>
-                <TextBlock Name="Size" VerticalAlignment="Center" Grid.Column="2" Grid.Row="9" Margin="5" Text="{Binding Size}"/>
-                <TextBlock Name="SizeUnitMeasureCode" VerticalAlignment="Center" Grid.Column="2" Grid.Row="10" Margin="5" Text="{Binding SizeUnitMeasureCode}"/>
-                <TextBlock Name="WeightUnitMeasureCode" VerticalAlignment="Center" Grid.Column="2" Grid.Row="11" Margin="5" Text="{Binding WeightUnitMeasureCode}"/>
-                <TextBlock Name="Weight" VerticalAlignment="Center" Grid.Column="2" Grid.Row="12" Margin="5" Text="{Binding Weight}"/>
-                <TextBlock Name="DaysToManufacture" VerticalAlignment="Center" Grid.Column="2" Grid.Row="13" Margin="5" Text="{Binding DaysToManufacture}"/>
-                <TextBlock Name="ProductLine" VerticalAlignment="Center" Grid.Column="2" Grid.Row="14" Margin="5" Text="{Binding ProductLine}"/>
-                <TextBlock Name="Class" VerticalAlignment="Center" Grid.Column="2" Grid.Row="15" Margin="5" Text="{Binding Class}"/>
-                <TextBlock Name="Style" VerticalAlignment="Center" Grid.Column="2" Grid.Row="16" Margin="5" Text="{Binding Style}"/>
-                <TextBlock Name="ProductSubcategory" VerticalAlignment="Center" Grid.Column="2" Grid.Row="17" Margin="5" Text="{Binding ProductSubcategory}"/>
-                <TextBlock Name="ProductModel" VerticalAlignment="Center" Grid.Column="2" Grid.Row="18" Margin="5" Text="{Binding ProductModel}"/>
-                <TextBlock Name="SellStartDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="19" Margin="5" Text="{Binding SellStartDate}"/>
-                <TextBlock Name="SellEndDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="20" Margin="5" Text="{Binding SellEndDate}"/>
-                <TextBlock Name="DiscontinuedDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="21" Margin="5" Text="{Binding DiscontinuedDate}"/>
-            </Grid>
-        </DataTemplate>
+        <view:InverseBooleanConverter x:Key="InverseBoolean"/>
+        <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="CustomErrorControlOnErrorStyle" TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder x:Name="placeholder" />
+                            <TextBlock FontSize="11" FontStyle="Italic" Foreground="Red"
+                                       Text="{Binding ElementName=placeholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="300*"/>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="600*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <ContentControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Content="{Binding Product}"
-                        ContentTemplate="{StaticResource productDetails}"/>
-        <ListView Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="9" Margin="0,5,5,5" ItemsSource="{Binding Products}" SelectedItem="{Binding Product}">
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Margin="5,9,5,8" Height="26">Name:</Label>
+        <TextBox Name="Name" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Margin="5,13,5,12" Text="{Binding Name}" Height="18" />
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="5,8,5,9" Height="26">Product number:</Label>
+        <TextBox Name="ProductNumber" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Margin="5,12,5,13" Text="{Binding ProductNumber}" Height="18" />
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="5,9" Height="26">Make flag:</Label>
+        <ComboBox Name="MakeFlag" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Margin="5,11" ItemsSource="{Binding Flags}" SelectedItem="{Binding MakeFlag}" Height="22" />
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="5,9,5,8" Height="26">Finished goods flag:</Label>
+        <ComboBox Name="FinishedGoodsFlag" VerticalAlignment="Center" Grid.Column="2" Grid.Row="3" Margin="5,11,5,10" ItemsSource="{Binding Flags}" SelectedItem="{Binding FinishedGoodsFlag}" Height="22" />
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Margin="5,9" Height="26">Color:</Label>
+        <ComboBox Name="Color" VerticalAlignment="Center" Grid.Column="2" Grid.Row="4" Margin="5,11" 
+                  ItemsSource="{Binding Colors}" 
+                  SelectedItem="{Binding Color}"
+                  IsEnabled="{Binding ColorCheck}"/>
+        <CheckBox Name="ColorCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="4" Margin="5,14" Content="Null" 
+                     IsChecked="{Binding ColorCheck, Converter={StaticResource InverseBoolean}}"/>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="5,8,5,9" Height="26">Safety stock level:</Label>
+        <TextBox Name="SafetyStockLevel" VerticalAlignment="Center" Grid.Column="2" Grid.Row="5" Margin="5,12,5,13" Style="{StaticResource CustomErrorControlOnErrorStyle}" Height="18" >
+            <TextBox.Text>
+                <Binding Path="SafetyStockLevel" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <valid:ShortGreaterThanZero ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="6" Margin="5,8,5,9" Height="26">Reorder point:</Label>
+        <TextBox Name="ReorderPoint" VerticalAlignment="Center" Grid.Column="2" Grid.Row="6" Margin="5,12,5,13" Style="{StaticResource CustomErrorControlOnErrorStyle}" Height="18" >
+            <TextBox.Text>
+                <Binding Path="ReorderPoint" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <valid:ShortGreaterThanZero ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="7" Margin="5,9,5,8" Height="26">Standard cost:</Label>
+        <TextBox Name="StandardCost" VerticalAlignment="Center" Grid.Column="2" Grid.Row="7" Margin="5,13,5,12" Style="{StaticResource CustomErrorControlOnErrorStyle}" Height="18" >
+            <TextBox.Text>
+                <Binding Path="StandardCost" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <valid:DecimalGreaterThanZero ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="8" Margin="5,8,5,9" Height="26">List price:</Label>
+        <TextBox Name="ListPrice" VerticalAlignment="Center" Grid.Column="2" Grid.Row="8" Margin="5,12,5,13" Style="{StaticResource CustomErrorControlOnErrorStyle}" Height="18" >
+            <TextBox.Text>
+                <Binding Path="ListPrice" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <valid:DecimalGreaterOrEqualZero ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="9" Margin="5,8,5,9" Height="26">Size:</Label>
+        <TextBox Name="Size" VerticalAlignment="Center" Grid.Column="2" Grid.Row="9" Margin="5,12,5,13" Text="{Binding Size}"
+                  IsEnabled="{Binding SizeCheck}" Height="18" />
+        <CheckBox Name="SizeCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="9" Margin="5,14" Content="Null" 
+                     IsChecked="{Binding SizeCheck, Converter={StaticResource InverseBoolean}}" Height="15"/>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="10" Margin="5,8,5,9" Height="26">Size unit measure code:</Label>
+        <ComboBox Name="SizeUnitMeasureCode" VerticalAlignment="Center" Grid.Column="2" Grid.Row="10" Margin="5,10,5,11" 
+                  ItemsSource="{Binding SizeUnitMeasureCodes}" 
+                  SelectedItem="{Binding SizeUnitMeasureCode}"
+                  IsEnabled="{Binding SizeUnitMeasureCodeCheck}" Height="22" />
+        <CheckBox Name="SizeUnitMeasureCodeCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="10" Margin="5,14,5,15" Content="Null" 
+                     IsChecked="{Binding SizeUnitMeasureCodeCheck, Converter={StaticResource InverseBoolean}}" Height="14"/>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="11" Margin="5,9,5,8" Height="26">Weight unit measure code:</Label>
+        <ComboBox Name="WeightUnitMeasureCode" VerticalAlignment="Center" Grid.Column="2" Grid.Row="11" Margin="5,11,5,10" 
+                  ItemsSource="{Binding WeightUnitMeasureCodes}" 
+                  SelectedItem="{Binding WeightUnitMeasureCode}"
+                  IsEnabled="{Binding WeightUnitMeasureCodeCheck}" Height="22" />
+        <CheckBox Name="WeightUnitMeasureCodeCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="11" Margin="5,15,5,14" Content="Null" 
+                     IsChecked="{Binding WeightUnitMeasureCodeCheck, Converter={StaticResource InverseBoolean}}" Height="14"/>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="12" Margin="5,9,5,8" Height="26">Weight:</Label>
+        <TextBox Name="Weight" VerticalAlignment="Center" Grid.Column="2" Grid.Row="12" Margin="5,13,5,12" 
+                 Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                  IsEnabled="{Binding WeightCheck}" Height="18" >
+            <TextBox.Text>
+                <Binding Path="Weight" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <valid:DecimalGreaterThanZero ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <CheckBox Name="WeightCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="12" Margin="5,14" Content="Null" 
+                     IsChecked="{Binding WeightCheck, Converter={StaticResource InverseBoolean}}" Height="15"/>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="13" Margin="5,8,5,9" Height="26">Days to manufacture:</Label>
+        <TextBox Name="DaysToManufacture" VerticalAlignment="Center" Grid.Column="2" Grid.Row="13" Margin="5,12,5,13" Style="{StaticResource CustomErrorControlOnErrorStyle}" Height="18" >
+            <TextBox.Text>
+                <Binding Path="DaysToManufacture" Mode="TwoWay" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <valid:IntGreaterOrEqualZero ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="14" Margin="5,9,5,8" Height="26">Product line:</Label>
+        <ComboBox Name="ProductLine" VerticalAlignment="Center" Grid.Column="2" Grid.Row="14" Margin="5,11,5,10" 
+                  ItemsSource="{Binding ProductLines}" 
+                  SelectedItem="{Binding ProductLine}"
+                  IsEnabled="{Binding ProductLineCheck}" Height="22" />
+        <CheckBox Name="ProductLineCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="14" Margin="5,14" Content="Null" 
+                     IsChecked="{Binding ProductLineCheck, Converter={StaticResource InverseBoolean}}" Height="15"/>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="15" Margin="5,8,5,9" Height="26">Class:</Label>
+        <ComboBox Name="Class" VerticalAlignment="Center" Grid.Column="2" Grid.Row="15" Margin="5,10,5,11" 
+                  ItemsSource="{Binding Classes}" 
+                  SelectedItem="{Binding Class}"
+                  IsEnabled="{Binding ClassCheck}" Height="22" />
+        <CheckBox Name="ClassCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="15" Margin="5,14" Content="Null"
+                     IsChecked="{Binding ClassCheck, Converter={StaticResource InverseBoolean}}" Height="15"/>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="16" Margin="5,9,5,8" Height="26">Style:</Label>
+        <ComboBox Name="Style" VerticalAlignment="Center" Grid.Column="2" Grid.Row="16" Margin="5,11,5,10" 
+                  ItemsSource="{Binding Styles}" 
+                  SelectedItem="{Binding Style}"
+                  IsEnabled="{Binding StyleCheck}" Height="22" />
+        <CheckBox Name="StyleCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="16" Margin="5,14" Content="Null"
+                     IsChecked="{Binding StyleCheck, Converter={StaticResource InverseBoolean}}" Height="15"/>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="17" Margin="5,8,5,9" Height="26">Product subcategory:</Label>
+        <ComboBox Name="ProductSubcategory" VerticalAlignment="Center" Grid.Column="2" Grid.Row="17" Margin="5,10,5,11" 
+                  ItemsSource="{Binding ProductSubcategories}" 
+                  SelectedItem="{Binding ProductSubcategory}"
+                  IsEnabled="{Binding ProductSubcategoryCheck}" Height="22" />
+        <CheckBox Name="ProductSubcategoryCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="17" Margin="5,14" Content="Null"
+                     IsChecked="{Binding ProductSubcategoryCheck, Converter={StaticResource InverseBoolean}}" Height="15"/>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="18" Margin="5,9,5,8" Height="26">Product model:</Label>
+        <ComboBox Name="ProductModel" VerticalAlignment="Center" Grid.Column="2" Grid.Row="18" Margin="5,11,5,10" 
+                  ItemsSource="{Binding ProductModels}" 
+                  SelectedItem="{Binding ProductModel}"
+                  IsEnabled="{Binding ProductModelCheck}" Height="22" />
+        <CheckBox Name="ProductModelCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="18" Margin="5,14" Content="Null"
+                  IsChecked="{Binding ProductModelCheck, Converter={StaticResource InverseBoolean}}" Height="15"/>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="19" Margin="5,8,5,9" Height="26">Sell start date:</Label>
+        <DatePicker Name="SellStartDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="19" Margin="5,10,5,9" SelectedDate="{Binding SellStartDate}" Height="24" />
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="20" Margin="5,10,5,8" Height="26">Sell end date:</Label>
+        <DatePicker Name="SellEndDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="20" Margin="5,10" 
+                    SelectedDate="{Binding SellEndDate}"
+                    IsEnabled="{Binding SellEndDateCheck}" Height="24" />
+        <CheckBox Name="SellEndDateCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="20" Margin="5,14" Content="Null"
+                  IsChecked="{Binding SellEndDateCheck, Converter={StaticResource InverseBoolean}}" Height="16"/>
+
+        <Label VerticalAlignment="Center" Grid.Column="1" Grid.Row="21" Margin="5,8,5,9" Height="26">Discontinued date:</Label>
+        <DatePicker Name="DiscontinuedDate" VerticalAlignment="Center" Grid.Column="2" Grid.Row="21" Margin="5,10,5,9" 
+                    SelectedDate="{Binding DiscontinuedDate}"
+                    IsEnabled="{Binding DiscontinuedDateCheck}" Height="24" />
+        <CheckBox Name="DiscontinuedDateCheck" VerticalAlignment="Center" Grid.Column="3" Grid.Row="21" Margin="5,14" Content="Null"
+                  IsChecked="{Binding DiscontinuedDateCheck, Converter={StaticResource InverseBoolean}}" Height="15"/>
+
+        <ListView Grid.Column="4" Grid.Row="0" Grid.RowSpan="22" Margin="0,5,5,5" ItemsSource="{Binding Products}" SelectedItem="{Binding Product}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding ProductID}"/>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="200"/>
                     <GridViewColumn Header="Number" DisplayMemberBinding="{Binding ProductNumber}" Width="150"/>
                     <GridViewColumn Header="Standatd Cost" DisplayMemberBinding="{Binding StandardCost}"/>
-                    <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Size}" Width="115"/>
+                    <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Size}" Width="100"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Grid.Column="0" Grid.Row="0" Margin="5" Click="Button_Click_1">Add Product</Button>
-        <Button Grid.Column="0" Grid.Row="1" Margin="5" Click="Button_Click">Modify Product</Button>
-        <Button Grid.Column="0" Grid.Row="9" Margin="5" Click="Button_Click_2">Delete Product</Button>
+
+        <Button Grid.Column="0" Grid.Row="0" Margin="5" Grid.RowSpan="3" Command="{Binding AddProductCommand}">Add Product</Button>
+        <Button Grid.Column="0" Grid.Row="16" Margin="5" Grid.RowSpan="3" Command="{Binding ModifyProductCommand}" Content="Modify Product">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ProductNumber}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=SafetyStockLevel}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=StandardCost}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ReorderPoint}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ListPrice}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Weight}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=DaysToManufacture}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Grid.Column="0" Grid.Row="19" Margin="5" Grid.RowSpan="3" Command="{Binding DeleteProductCommand}">Delete Product</Button>
     </Grid>
+
 </Window>

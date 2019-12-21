@@ -5,6 +5,7 @@ namespace ViewModel
 {
     public class MyCommand : ICommand
     {
+        public event EventHandler CanExecuteChanged;
         private readonly Action _execute;
         private readonly Func<bool> _canExecute;
 
@@ -14,8 +15,6 @@ namespace ViewModel
             this._execute = execute;
             this._canExecute = canExecute;
         }
-
-        public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {

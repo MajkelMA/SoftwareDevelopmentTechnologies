@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace ViewModel.Interfaces
 {
-    public interface IMyPopup
+    public interface IWindow
     {
+        void Show();
+        void Close();
         void ShowPopup(string message);
     }
 }

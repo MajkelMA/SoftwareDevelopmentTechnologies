@@ -1,18 +1,17 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Controls;
 
-namespace ViewModel.Validators
+namespace View.Validators
 {
-    public class ShortGreaterThanZero : ValidationRule
+    public class IntGreaterOrEqualZero : ValidationRule
     {
         public string Error { get; set; }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (Int16.TryParse(value.ToString(), out Int16 i))
+            if (int.TryParse(value.ToString(), out int i))
             {
-                if (i > 0)
+                if (i >= 0)
                     return new ValidationResult(true, null);
                 else
                 {
