@@ -52,9 +52,18 @@ namespace Model
 
         public Product Get(int id)
         {
-            return (from product in tables.GetTable<Product>()
-                    where product.ProductID == id
-                    select product).First();
+
+            IQueryable<Product> products = (from product in tables.GetTable<Product>()
+                                            where product.ProductID == id
+                                            select product);
+            if(products.Count() == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return products.First();
+            }
         }
 
         public IQueryable<Product> GetItems()

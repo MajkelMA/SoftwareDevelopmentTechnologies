@@ -18,7 +18,11 @@ namespace ViewModel
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            if (_canExecute == null)
+                return true;
+            if (parameter == null)
+                return _canExecute();
+            return _canExecute();
         }
 
         public void Execute(object parameter)

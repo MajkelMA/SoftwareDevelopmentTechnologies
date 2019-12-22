@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,29 @@ using ViewModel.Interfaces;
 
 namespace Test
 {
-    public class MyMessage : IMyPopup
+    public class MyMessage : IWindow
     {
         public string Message { get; set; }
+        public bool CloseFlag { get; set; }
+        public bool ShowFlag { get; set; }
+
+        public MyMessage()
+        {
+            Message = "";
+            CloseFlag = false;
+            ShowFlag = false;
+        }
+
+        public void Close()
+        {
+            CloseFlag = true;
+        }
+
+        public void Show()
+        {
+            ShowFlag = true;
+        }
+
         public void ShowPopup(string message)
         {
             Message = message;
@@ -22,7 +43,19 @@ namespace Test
     public class ViewModelsTests
     {
         MainViewModel mainViewModel = new MainViewModel();
-    
+
+        private void SetMainViewModelFlags(MainViewModel vm)
+        {
+            vm.ColorCheck = false;
+            vm.SizeCheck = false;
+            vm.ProductLineCheck = false;
+            vm.ClassCheck = false;
+            vm.StyleCheck = false;
+            vm.ProductSubcategoryCheck = false;
+            vm.ProductModelCheck = false;
+        }
+
+
         [TestMethod]
         public void MainViewModelCreatorTestMethod()
         {
@@ -34,77 +67,52 @@ namespace Test
         }
 
         [TestMethod]
-        public void AddProductViewModelTest()
-        {
-            MainViewModel vm = new MainViewModel();
-            AddProductViewModel addProductViewModel = new AddProductViewModel(vm.ProductRepository, new MyMessage());
-            Assert.IsNotNull(addProductViewModel.ValidatorPopup);
-            Assert.IsNotNull(addProductViewModel.AddProductCommand);
-            Assert.IsNotNull(addProductViewModel.BackToMainWindowCommand);          
-        }
-
-        [TestMethod]
-        public void ModifyProductViewModelTest()
-        {
-            MyMessage myMessage = new MyMessage();
-            MainViewModel vm = new MainViewModel();
-            vm.Product = vm.Products.Last();
-            ModifyProductViewModel modifyProductViewModel = new ModifyProductViewModel(vm.Product, myMessage);
-            Assert.IsNotNull(modifyProductViewModel.ValidatorPopup);
-            Assert.IsNotNull(modifyProductViewModel.BackToMainWindowCommand);
-            Assert.IsNotNull(modifyProductViewModel.ModifyProductCommand);
-        }
-
-        [TestMethod]
         public void AddProductFailTest()
         {
             MyMessage myMessage = new MyMessage();
             MainViewModel vm = new MainViewModel();
-            AddProductViewModel addProductViewModel = new AddProductViewModel(vm.ProductRepository, myMessage);
-            addProductViewModel.AddProductCommand.Execute(null);
+            vm.MainWindow = myMessage;
+            vm.AddProductCommand.Execute(null);
             Assert.IsNotNull(myMessage.Message);
         }
 
         [TestMethod]
         public void AddProductSuccessTest()
         {
+            int changeCounter = 0;
             MyMessage myMessage = new MyMessage();
             MainViewModel vm = new MainViewModel();
-            AddProductViewModel addProductViewModel = new AddProductViewModel(vm.ProductRepository, myMessage);
-            addProductViewModel.CloseWindow = () => { };
-            addProductViewModel.Name = "Testowy";
-            addProductViewModel.ProductNumber = "TX-1111";
-            addProductViewModel.MakeFlag = true;
-            addProductViewModel.FinishedGoodsFlag = true;
-            addProductViewModel.Color = null;
-            addProductViewModel.SafetyStockLevel = 100;
-            addProductViewModel.ReorderPoint = 100;
-            addProductViewModel.StandardCost = 100;
-            addProductViewModel.ListPrice = 100;
-            addProductViewModel.Size = "S";
-            addProductViewModel.SizeUnitMeasureCode = "CM";
-            addProductViewModel.WeightUnitMeasureCode = "LB";
-            addProductViewModel.Weight = 100;
-            addProductViewModel.DaysToManufacture = 100;
-            addProductViewModel.ProductLine = "M";
-            addProductViewModel.Class = "H";
-            addProductViewModel.Style = "M";
-            addProductViewModel.ProductSubcategoryCheck = false;
-            addProductViewModel.ProductModelCheck = false;
-            addProductViewModel.SellStartDate = DateTime.Today;
-            addProductViewModel.SellEndDate = DateTime.Today.AddDays(1);
-            addProductViewModel.ModifiedDate = DateTime.Today;
-            addProductViewModel.AddProductCommand.Execute(null);
-            Assert.AreEqual("Product added succefully!", myMessage.Message);
+            vm.ProductRepository.ChangeInCollection += () => changeCounter++;
+            vm.MainWindow = myMessage;
+            SetMainViewModelFlags(vm);
+            vm.Name = "product test";
+            vm.ProductNumber = "XYZ-123123";
+            vm.MakeFlag = false;
+            vm.FinishedGoodsFlag = false;
+            vm.SafetyStockLevel = 1;
+            vm.ReorderPoint = 2;
+            vm.StandardCost = 12;
+            vm.ListPrice = 12;
+            vm.DaysToManufacture = 2;
+            vm.SellEndDate = DateTime.Now;
+            vm.SellEndDateCheck = false;
+            vm.DiscontinuedDateCheck = false;
+            vm.AddProductCommand.Execute(null);
+            Product addedProduct = vm.Products.Last();
+            Assert.AreEqual("Add success", myMessage.Message);
+            Assert.AreEqual(12, addedProduct.ListPrice);
+            Assert.AreEqual(1, changeCounter);
         }
 
         [TestMethod]
         public void ModifyProductFailTest()
         {
             MyMessage myMessage = new MyMessage();
-            ModifyProductViewModel modifyProductViewModel = new ModifyProductViewModel(new Model.Product(), myMessage);
-            modifyProductViewModel.ModifyProductCommand.Execute(null);
-            Assert.IsNotNull(myMessage.Message);
+            MainViewModel vm = new MainViewModel();
+            vm.MainWindow = myMessage;
+            vm.Product = new Product();
+            vm.ModifyProductCommand.Execute(null);
+            Assert.AreNotEqual("", myMessage.Message);
         }
 
         [TestMethod]
@@ -112,24 +120,48 @@ namespace Test
         {
             MyMessage myMessage = new MyMessage();
             MainViewModel vm = new MainViewModel();
+            vm.MainWindow = myMessage;
             vm.Product = vm.Products.Last();
-            ModifyProductViewModel modifyProductViewModel = new ModifyProductViewModel(vm.Product, myMessage);
-            modifyProductViewModel.CloseWindow = () => { };
-
-            modifyProductViewModel.ProductNumber = "test";
-            modifyProductViewModel.ModifyProductCommand.Execute(null);
+            vm.ProductNumber = "test";
+            vm.ModifyProductCommand.Execute(null);
             Assert.AreEqual("test", vm.Products.Last().ProductNumber);
             Assert.AreEqual("Product modified succefully!", myMessage.Message);
 
         }
+
+
         [TestMethod]
-        public void DeleteProductTest()
+        public void DeleteProducNotSelectedFailTest()
         {
+            MyMessage myMessage = new MyMessage();
             MainViewModel vm = new MainViewModel();
-            int size = vm.Products.Count();
+            vm.MainWindow = myMessage;
+            vm.Product = new Product();
+            vm.DeleteProductCommand.Execute(null);
+            Assert.AreEqual("please, Select a product", myMessage.Message);
+        }
+
+        [TestMethod]
+        public void DeleteProductFailTest()
+        {
+            MyMessage myMessage = new MyMessage();
+            MainViewModel vm = new MainViewModel();
+            vm.MainWindow = myMessage;
+            vm.Product = new Product();
+            vm.Product.ProductID = 9999999;
+            vm.DeleteProductCommand.Execute(null);
+            Assert.AreEqual("Delete failed", myMessage.Message);
+        }
+
+        [TestMethod]
+        public void DeleteProductSuccessTest()
+        {
+            MyMessage myMessage = new MyMessage();
+            MainViewModel vm = new MainViewModel();
+            vm.MainWindow = myMessage;
             vm.Product = vm.Products.Last();
             vm.DeleteProductCommand.Execute(null);
-            Assert.AreEqual(size - 1, vm.Products.Count());
+            Assert.AreEqual("Delete success", myMessage.Message);
         }
     }
 }

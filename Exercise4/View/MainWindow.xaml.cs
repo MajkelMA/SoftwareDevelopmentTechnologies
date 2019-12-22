@@ -25,7 +25,6 @@ namespace View
             base.OnInitialized(e);
             MainViewModel mainViewModel = (MainViewModel)DataContext;
             mainViewModel.MainWindow = this;
-            mainViewModel.AddWindow = new AddProductWindow();
         }
     }
 }

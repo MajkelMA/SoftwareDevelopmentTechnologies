@@ -525,7 +525,7 @@ namespace ViewModel
         {
             Product productToAdd = new Product();
             SaveDataToProduct(productToAdd, out string message);
-            if(message != "")
+            if (message != "")
             {
                 MainWindow.ShowPopup(message);
 
@@ -544,13 +544,20 @@ namespace ViewModel
         #region Delete Product region
         private void DeleteProduct()
         {
-            if (ProductRepository.Delete(Product.ProductID))
+            if (Product.ProductID != 0)
             {
-                MainWindow.ShowPopup("Delete success");
+                if (ProductRepository.Delete(Product.ProductID))
+                {
+                    MainWindow.ShowPopup("Delete success");
+                }
+                else
+                {
+                    MainWindow.ShowPopup("Delete failed");
+                }
             }
             else
             {
-                MainWindow.ShowPopup("Delete failed");
+                MainWindow.ShowPopup("please, Select a product");
             }
         }
         #endregion
@@ -833,7 +840,7 @@ namespace ViewModel
             ReorderPoint = Product.ReorderPoint;
             StandardCost = Product.StandardCost;
             ListPrice = Product.ListPrice;
-            DaysToManufacture = Product.DaysToManufacture;    
+            DaysToManufacture = Product.DaysToManufacture;
             SellStartDate = Product.SellStartDate;
 
         }
