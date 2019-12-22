@@ -504,7 +504,7 @@ namespace ViewModel
 
         public MainViewModel()
         {
-            AddProductCommand = new MyCommand(ShowAddProductWindow);
+            AddProductCommand = new MyCommand(AddProduct);
             ModifyProductCommand = new MyCommand(ModifyProduct);
             DeleteProductCommand = new MyCommand(DeleteProduct);
             ChangeSelectedProduct = new MyCommand(OnProductChanged);
@@ -514,15 +514,30 @@ namespace ViewModel
 
             Products = ProductRepository.GetAllProduct();
             Product = new Product();
+            Product.SellStartDate = DateTime.Now;
             InitComboBox();
             if (Product != null)
                 InitModifyProduct();
         }
 
         #region Add Product region
-        private void ShowAddProductWindow()
+        private void AddProduct()
         {
-            AddWindow.Show();
+            Product productToAdd = new Product();
+            SaveDataToProduct(productToAdd, out string message);
+            if(message != "")
+            {
+                MainWindow.ShowPopup(message);
+
+            }
+            else if (ProductRepository.Add(productToAdd))
+            {
+                MainWindow.ShowPopup("Add success");
+            }
+            else
+            {
+                MainWindow.ShowPopup("Add failed");
+            }
         }
         #endregion
 
@@ -543,44 +558,7 @@ namespace ViewModel
         #region Modify Product methods
         private void ModifyProduct()
         {
-            string message = "";
-
-            CheckCheckBox(Product);
-
-            if (Name != null && Name != "")
-                Product.Name = Name;
-            else
-                message += "Name is empty\n";
-
-            if (ProductNumber != null)
-                Product.ProductNumber = ProductNumber;
-            else
-                message += "Product number is empty\n";
-
-            Product.MakeFlag = MakeFlag;
-            Product.FinishedGoodsFlag = FinishedGoodsFlag;
-            Product.SafetyStockLevel = SafetyStockLevel;
-            Product.ReorderPoint = ReorderPoint;
-            Product.StandardCost = StandardCost;
-            Product.ListPrice = ListPrice;
-            Product.DaysToManufacture = DaysToManufacture;
-            Product.ModifiedDate = DateTime.Now;
-
-            Product.SellStartDate = SellStartDate;
-
-            if (SellEndDateCheck == true)
-            {
-                if (SellEndDate > SellStartDate)
-                    Product.SellEndDate = SellEndDate;
-                else
-                    message += "Sell end date is after sell start date\n";
-            }
-
-            if (DiscontinuedDateCheck == true)
-            {
-                Product.DiscontinuedDate = DiscontinuedDate;
-            }
-
+            SaveDataToProduct(Product, out string message);
             if (message != "")
             {
 
@@ -633,6 +611,48 @@ namespace ViewModel
                 ProductModel = null;
             else
                 product.ProductModelID = GetProductModelID(ProductModel);
+        }
+
+
+        private void SaveDataToProduct(Product product, out string message)
+        {
+            message = "";
+
+            CheckCheckBox(product);
+
+            if (Name != null && Name != "")
+                product.Name = Name;
+            else
+                message += "Name is empty\n";
+
+            if (ProductNumber != null)
+                product.ProductNumber = ProductNumber;
+            else
+                message += "Product number is empty\n";
+
+            product.MakeFlag = MakeFlag;
+            product.FinishedGoodsFlag = FinishedGoodsFlag;
+            product.SafetyStockLevel = SafetyStockLevel;
+            product.ReorderPoint = ReorderPoint;
+            product.StandardCost = StandardCost;
+            product.ListPrice = ListPrice;
+            product.DaysToManufacture = DaysToManufacture;
+            product.ModifiedDate = DateTime.Now;
+
+            product.SellStartDate = SellStartDate;
+
+            if (SellEndDateCheck == true)
+            {
+                if (SellEndDate > SellStartDate)
+                    product.SellEndDate = SellEndDate;
+                else
+                    message += "Sell end date is after sell start date\n";
+            }
+
+            if (DiscontinuedDateCheck == true)
+            {
+                product.DiscontinuedDate = DiscontinuedDate;
+            }
         }
         #endregion
 
@@ -813,8 +833,9 @@ namespace ViewModel
             ReorderPoint = Product.ReorderPoint;
             StandardCost = Product.StandardCost;
             ListPrice = Product.ListPrice;
-            DaysToManufacture = Product.DaysToManufacture;
+            DaysToManufacture = Product.DaysToManufacture;    
             SellStartDate = Product.SellStartDate;
+
         }
 
         private void InitComboBox()
